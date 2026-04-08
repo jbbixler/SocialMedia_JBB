@@ -21,6 +21,7 @@ interface RawData {
 
 function normalizePath(p: string): string {
   if (!p) return ''
+  if (p.startsWith('http://') || p.startsWith('https://')) return p
   return p.startsWith('/') ? p : `/${p}`
 }
 
