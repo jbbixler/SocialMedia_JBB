@@ -1,0 +1,20 @@
+name: James Bradley
+handle: jbradbixler
+website: https://jbradbixler.com/
+color: #1d1d1f
+brand_type: Visionary
+
+description:
+Coming soon
+
+
+services:
+Social Media
+Static Ad Design
+Motion Graphics
+Website Design & Development
+Audio Technology
+Music Production
+Photography
+Editorial
+Management

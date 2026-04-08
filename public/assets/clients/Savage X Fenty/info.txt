@@ -1,0 +1,12 @@
+name: Savage X Fenty
+website: https://savagex.com
+ig_handle: savagexfenty
+color: #1a1a2e
+cta: Shop Now
+brand_type: E-Commerce
+
+description:
+Coming soon.
+
+services:
+Creative Direction

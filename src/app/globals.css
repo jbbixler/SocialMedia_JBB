@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ───────────────────────────────────────────────── */
+html, body {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+}
+
+/* ── Hide scrollbars globally while keeping scroll ─────── */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Aspect ratio helpers ───────────────────────────────── */
+[data-ratio="1:1"]    { aspect-ratio: 1 / 1; }
+[data-ratio="4:5"]    { aspect-ratio: 4 / 5; }
+[data-ratio="9:16"]   { aspect-ratio: 9 / 16; }
+[data-ratio="1.91:1"] { aspect-ratio: 191 / 100; }
+

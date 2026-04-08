@@ -1,0 +1,17 @@
+name: Sunrun
+website: https://sunrun.com
+ig_handle: sunrun
+color: #ff6600
+cta: Learn More
+brand_type: Lead Generation
+
+description:
+Coming soon
+
+services:
+Creative Direction
+Paid Social Strategy & Testing
+Copywriting
+Motion Graphics
+Static Design
+UGC

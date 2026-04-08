@@ -1,0 +1,17 @@
+name: European Wax Center
+website: https://waxcenter.com
+ig_handle: europeanwaxcenter
+color: #6b2d8b
+cta: Book Now
+brand_type: Consumer Services
+
+description:
+Coming soon
+
+services:
+Creative Direction
+Paid Social Strategy & Testing
+Copywriting
+Motion Graphics
+Static Design
+Team Leadership

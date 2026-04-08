@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(python3 generate.py)",
+      "Bash(npx tsc:*)",
+      "Bash(grep -n \"description:\" /Users/jamesbixler/portfolio-next/public/assets/clients/*/info.txt)",
+      "Bash(xargs du:*)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); c=d['clients'][0]; print\\(json.dumps\\(c['ads'][:3], indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/jamesbixler/portfolio-next/data.json'\\)\\); c=d['clients'][0]; print\\(json.dumps\\(c['ads'][:2], indent=2\\)\\)\")",
+      "Bash(python3 -c ':*)"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+name: Wisdom Panel
+website: https://wisdompanel.com
+ig_handle: wisdompanel
+color: #00a878
+cta: Shop Now
+brand_type: E-Commerce
+
+description:
+Coming soon
+
+services:
+Creative Direction
+Paid Social Strategy & Testing
+UGC
+Copywriting
+Motion Graphics
+Static Design

@@ -1,0 +1,84 @@
+# ═══════════════════════════════════════════════════════════════════
+#  HOW TO USE THIS FILE
+# ═══════════════════════════════════════════════════════════════════
+#
+#  1. Copy this file into your client's folder
+#     (e.g. public/assets/clients/Harvard Business School Online/)
+#
+#  2. Open it with any plain text editor:
+#       Mac:     right-click the file → Open With → TextEdit
+#                then in TextEdit: Format menu → Make Plain Text
+#       Better:  open it in VS Code (drag the file onto the VS Code icon)
+#
+#  3. Edit the fields below — rules:
+#       • Type your value directly after the colon and space
+#       • No quote marks needed — just plain text
+#       • Lines starting with # are comments and are ignored
+#       • Leave fields blank if you don't have them yet (e.g. website: )
+#
+#  4. Save the file (Cmd+S)
+#
+#  5. In your terminal, run:  python3 generate.py
+#     Then refresh the browser — changes appear instantly.
+#
+# ═══════════════════════════════════════════════════════════════════
+
+
+# ── YOUR CLIENT'S DISPLAY NAME ─────────────────────────────────────
+# Shown in the logo grid, topbar, and Instagram mockup.
+name: Client Name
+
+
+# ── CLIENT'S WEBSITE ───────────────────────────────────────────────
+# Adds a "Visit Site" button to the client page. Include https://
+# Leave blank if not applicable.
+website: https://example.com
+
+
+# ── INSTAGRAM HANDLE ───────────────────────────────────────────────
+# Shown in the Instagram mockup as the account name (no @ symbol).
+ig_handle: clienthandle
+
+
+# ── ACCENT COLOUR ──────────────────────────────────────────────────
+# Hex colour code — used for the hover glow on the logo card.
+# Pick a colour from the client's brand palette.
+# Default is white (#ffffff) if left blank.
+color: #ffffff
+
+
+# ── DEFAULT ASPECT RATIO ───────────────────────────────────────────
+# What ratio to assume for files that don't have a ratio in the name.
+# Options: 1:1  /  4:5  /  9:16  /  1.91:1
+# You can always override per-file by adding _1x1 / _4x5 / _9x16 / _1.91x1
+# to the filename itself.
+default_ratio: 1:1
+
+
+# ══════════════════════════════════════════════════════════════════
+#  DESCRIPTION  (leave the "description:" line as-is, write below it)
+# ══════════════════════════════════════════════════════════════════
+# This text appears in the sidebar next to the Instagram mockup
+# and at the top of the client page.
+# Write as much as you like — line breaks and blank lines are kept.
+
+description:
+Write your overview of the work here. Describe the campaign,
+your creative approach, results, or anything you'd want a
+potential client to read.
+
+You can write multiple paragraphs by leaving a blank line between them.
+This whole section flows as one block of text in the portfolio.
+
+
+# ══════════════════════════════════════════════════════════════════
+#  SERVICES  (leave the "services:" line as-is, one service per line below)
+# ══════════════════════════════════════════════════════════════════
+# These appear as small tags on the client page and in the sidebar.
+# Add or remove lines freely — no bullet points or dashes needed.
+
+services:
+Static Ad Design
+Motion Graphics
+Story / Reels Ads
+Carousel Design

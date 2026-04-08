@@ -1,0 +1,14 @@
+name: Harvard Business School Online
+cta: Learn More
+website: https://online.hbs.edu
+ig_handle: harvardbusinessschool
+color: #A41034
+brand_type: Lead Generation
+
+description:
+Coming soon
+
+services:
+Static Ad Design
+Motion Graphics
+Video Production

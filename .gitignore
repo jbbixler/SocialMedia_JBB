@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+upload_to_cloudinary.py
+.upload_progress.json
+public/assets/clients/**/*.mp4
+public/assets/clients/**/*.mov
+public/assets/clients/**/*.MP4
+public/assets/clients/**/*.MOV
+public/assets/clients/**/*.webm

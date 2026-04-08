@@ -1,0 +1,17 @@
+name: Pipsticks
+website: https://pipsticks.com
+ig_handle: pipsticks
+color: #e84393
+cta: Shop Now
+brand_type: E-Commerce
+
+description:
+Coming soon
+
+services:
+Creative Direction
+UGC
+Copywriting
+Motion Graphics
+Static Design
+Paid Social Strategy & Testing

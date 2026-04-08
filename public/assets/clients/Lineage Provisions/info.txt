@@ -1,0 +1,16 @@
+name: Lineage Provisions
+website: https://lineageprovisions.com
+ig_handle: lineageprovisions
+color: #2d4a2d
+cta: Shop Now
+brand_type: E-Commerce
+
+description:
+Coming soon
+
+services:
+Creative Direction
+Paid Social Strategy & Testing
+Copywriting
+Motion Graphics
+Static Design

@@ -1,0 +1,1791 @@
+{
+  "clients": [
+    {
+      "id": "european-wax-center",
+      "name": "European Wax Center",
+      "logo": "assets/clients/European Wax Center/Logo/EWC-LOGO_clientpage.png",
+      "igAvatar": "assets/clients/European Wax Center/Logo/91618096_842622809589250_1161635791386968064_n_Instagram.jpg",
+      "color": "#6b2d8b",
+      "igHandle": "europeanwaxcenter",
+      "website": "https://waxcenter.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "Paid Social Strategy & Testing",
+        "Copywriting",
+        "Motion Graphics",
+        "Static Design",
+        "Team Leadership"
+      ],
+      "cta": "Book Now",
+      "brandType": "Consumer Services",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684479/portfolio/assets/clients/European%20Wax%20Center/00f0a8e9-ec69-4b71-aa56-fbff1e2b8960_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684484/portfolio/assets/clients/European%20Wax%20Center/031b2039-f553-41a2-9098-c0e1424e0b6b_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684492/portfolio/assets/clients/European%20Wax%20Center/0687edf3-641d-4ca1-9d93-3a0ebbaa328e_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684496/portfolio/assets/clients/European%20Wax%20Center/06f2430f-c7ca-41b1-af90-74d5d3da4d2e_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684502/portfolio/assets/clients/European%20Wax%20Center/07992278-aa8f-4d89-974b-747b1aae9bc4_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/079ef224-839d-4162-b77c-af9c008efcc3_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/0a8cc439-ca2e-4ed1-aa2b-84c33b26fb84_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/0c372db9-7016-467d-92bd-85769c8ca20b_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/14ce4f3d-ffe9-47d7-b5f9-e0ce7cbfb848_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684507/portfolio/assets/clients/European%20Wax%20Center/174a4b2c-d789-4fe3-a196-949ae71a98d9_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/1ea0b7b7-05be-4ad1-9eed-0005b3186275_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684509/portfolio/assets/clients/European%20Wax%20Center/20eff0fd-b4c7-45f2-ba98-76d914d83a8f_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684514/portfolio/assets/clients/European%20Wax%20Center/28c13108-ff3d-4b52-a39d-4bba9d700358_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684518/portfolio/assets/clients/European%20Wax%20Center/3120cfb2-0c33-4549-9575-7523344f5b5e_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/33443739-faf2-4388-bc32-aab3d4f5ba46_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684523/portfolio/assets/clients/European%20Wax%20Center/35229706-bb76-49b3-8b0c-ced1997855ed_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/37c65949-5c6b-4a03-b32d-ed9dfc74ebce_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/38f97e6f-e9d7-4d2f-b036-539b5a295b9f_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/3e7abc3b-58db-479c-b04c-c58208a408e8_9x16.jpg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/46027df2-21dc-4264-9760-7e09080a6e7b_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/4d7da723-fed5-41fb-8707-b8c5ea63a438_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684532/portfolio/assets/clients/European%20Wax%20Center/53a7b5c0-c609-4a84-9bb2-d963ff87de02_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/57c9310e-6e01-4048-8e2d-bb857a68daab_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684535/portfolio/assets/clients/European%20Wax%20Center/58f59dd1-9221-44f8-93de-278b20d24651_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/628d3f13-b4f7-47b9-95a5-bf220785a455_1x1.jpg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/67c32bb9-d82d-4925-a4e5-e8c28c1407b3_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684540/portfolio/assets/clients/European%20Wax%20Center/697a8e12-a845-4587-a54b-fb0039ca2cec_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684545/portfolio/assets/clients/European%20Wax%20Center/7427aae8-13a2-47a6-b5a1-f0e974bb9ee1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684552/portfolio/assets/clients/European%20Wax%20Center/75b8fb8a-8a93-4c70-bcd4-26a83d979455_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/80c1494a-543f-4c11-bd2d-873da28e15a1_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684556/portfolio/assets/clients/European%20Wax%20Center/8365d3e8-4f3c-424d-8edf-23669532a989_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684557/portfolio/assets/clients/European%20Wax%20Center/838d8ea3-3cb2-4f32-bd95-d1cf05cd9ad4_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684559/portfolio/assets/clients/European%20Wax%20Center/8861b818-7817-4a5a-a935-4e60ec073e2e_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684565/portfolio/assets/clients/European%20Wax%20Center/9054067c-71e6-439b-b0db-bcaf9122902d_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/91b2448c-543a-4c0a-8bc6-61c40085598b_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/929ee877-80ca-4935-9b31-de57f6290060_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/9c942643-850d-419f-862e-9dbf629f2c2a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/9ec7427b-71e6-4e84-9052-f7c0a5406fda_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/a5c54f86-f689-4e58-a778-5ad04d7545fa_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/a8345339-a588-4dea-bdeb-c521822bcc3c_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/a9d1e06b-2d63-4ec9-b1e0-5cc50cacc948_9x16.jpg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684570/portfolio/assets/clients/European%20Wax%20Center/b010d0a7-4c66-4b94-9d9d-8ec9b887d481_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/b159257a-a97a-46d5-a822-3535343bd5ac_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684575/portfolio/assets/clients/European%20Wax%20Center/b3ca5f02-2974-4221-bc7a-b112b0659d73_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684577/portfolio/assets/clients/European%20Wax%20Center/b4637f6b-59fa-47ee-bbd7-0f2300ae6673_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684580/portfolio/assets/clients/European%20Wax%20Center/b86b2e6f-56e5-4331-87cc-27095a275506_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684584/portfolio/assets/clients/European%20Wax%20Center/bb1cd783-5373-47cd-82c4-47cd514aba5e_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/bcc39b87-fd67-44f9-93f4-f534ab852431_9x16.jpg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/c14a5831-c680-43fe-a712-00ea01f896f1_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684588/portfolio/assets/clients/European%20Wax%20Center/c3f0ff13-d859-40f7-998f-609f9c921f69_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/c76c1848-324a-42b4-8b2f-37fc3ca63ed0_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684597/portfolio/assets/clients/European%20Wax%20Center/caa1dde1-a948-42a0-8ce8-8eb7be29deb0_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684603/portfolio/assets/clients/European%20Wax%20Center/d115b38f-aa25-4390-bf2f-01612f7d4603_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/d4c0d892-ad97-45fe-8018-e6040edb347d_1x1.jpg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/d57b9a59-933d-49fa-84a6-e34c5b05d068_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684611/portfolio/assets/clients/European%20Wax%20Center/d7fb109b-4d47-4748-9afd-663b477b0420_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/da092fca-63c3-44f4-ba86-bc58362219e8_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/dc8a3379-5a3d-4305-baef-dca22e7d5316_9x16.jpg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/deb4106f-8e6f-45e9-aead-b8f2946dc8d6_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/e03beab5-3c10-4ea4-b45e-79e4fa3b04ec_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/e7c6b923-4534-4948-8de2-b1d68253d009_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/European Wax Center/e80031d4-1829-479b-b5d6-e1ce771981e7_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684618/portfolio/assets/clients/European%20Wax%20Center/ec692f1f-e912-4ee5-a810-0ac111878644_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684625/portfolio/assets/clients/European%20Wax%20Center/ed69fdd6-7fef-4b35-ae84-41bd3fc9f502_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684630/portfolio/assets/clients/European%20Wax%20Center/f284ab6a-ba84-466d-8052-6e55b8f38835_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684636/portfolio/assets/clients/European%20Wax%20Center/f9dc2489-2727-41a5-8a86-08ee3f04a85e_9x16.mp4",
+          "ratio": "9:16"
+        }
+      ]
+    },
+    {
+      "id": "harvard-business-school-online",
+      "name": "Harvard Business School Online",
+      "logo": "assets/clients/Harvard Business School Online/Logo/HBS-Logo_clientpage.png",
+      "igAvatar": "assets/clients/Harvard Business School Online/Logo/HBS-Logo_Instagram.jpg",
+      "color": "#A41034",
+      "igHandle": "harvardbusinessschool",
+      "website": "https://online.hbs.edu",
+      "description": "Coming soon",
+      "services": [
+        "Static Ad Design",
+        "Motion Graphics",
+        "Video Production"
+      ],
+      "cta": "Learn More",
+      "brandType": "Lead Generation",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683939/portfolio/assets/clients/Harvard%20Business%20School%20Online/01b55ec9-51c1-4103-9418-dc70abec0831_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/044d9e00-c2f5-4794-86ba-f7b93de406e1_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683941/portfolio/assets/clients/Harvard%20Business%20School%20Online/089311ab-15b1-4dce-ae0c-3d972c2efc66_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/0c0bc70e-a772-46f0-a4ba-d8fdbe362765_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683948/portfolio/assets/clients/Harvard%20Business%20School%20Online/1-1_HBSO_PNM%2029_Asset%2001_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683955/portfolio/assets/clients/Harvard%20Business%20School%20Online/1-1_HBSO_PNM%2031_Asset%2003_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683963/portfolio/assets/clients/Harvard%20Business%20School%20Online/1-1_HBSO_PNM%2032_Asset%2002_1_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683972/portfolio/assets/clients/Harvard%20Business%20School%20Online/1-1_HBSO_PNM%2036_A2_1_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/15774331-a26a-4638-91bb-9c2918577288_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/1589a176-f147-4f35-a167-8994946c6f03_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/16e29295-befe-457c-90c1-e2f3183fb6cc_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683977/portfolio/assets/clients/Harvard%20Business%20School%20Online/22078147-303d-4d25-834c-16c6d20b38ea_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/271eb9f7-8070-4f7e-b152-246594a6d226_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683980/portfolio/assets/clients/Harvard%20Business%20School%20Online/3203c008-ed4b-4f48-97cf-eba8889f3147_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683986/portfolio/assets/clients/Harvard%20Business%20School%20Online/4-5_HBSO_PNM%2030_Asset%2001_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683996/portfolio/assets/clients/Harvard%20Business%20School%20Online/4-5_HBSO_PNM%2033_A2_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684003/portfolio/assets/clients/Harvard%20Business%20School%20Online/4-5_HBSO_PNM%2034_A1_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684010/portfolio/assets/clients/Harvard%20Business%20School%20Online/4-5_HBSO_PNM%2035_A1_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/40c07697-3fe9-4c95-b3f5-5b9316b83357_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/48f2330d-e1bc-42b3-94ed-9134538c0984_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/49e7ee56-5e92-40a9-a0fd-d36d9b3f7e7d_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/4ce0d888-736e-43c0-91fb-646075e1b12a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/5342b0b4-a029-4631-90b6-1731d6372a72_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/53e5cbfb-4f97-41ba-a2b7-5f778b6bd565_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684021/portfolio/assets/clients/Harvard%20Business%20School%20Online/5553110a-d622-4e21-ab42-de93c8068e2f_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/55a86ddf-3caf-4983-8013-9e04d1b9e268_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/61fc9e3b-3c10-43ce-97bb-48e63fe9c728_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684029/portfolio/assets/clients/Harvard%20Business%20School%20Online/8b13ee0b-9fc8-4bf5-bfd8-3262cdd03a87_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684039/portfolio/assets/clients/Harvard%20Business%20School%20Online/9-16_HBSO_PNM%2029_Asset%2002_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684049/portfolio/assets/clients/Harvard%20Business%20School%20Online/9-16_HBSO_PNM%2031_Asset%2001_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/9b04147e-33b6-4990-a452-c3e7234160ba_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684053/portfolio/assets/clients/Harvard%20Business%20School%20Online/9ff75122-e248-45bd-bd9a-2416b6027e4d_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684058/portfolio/assets/clients/Harvard%20Business%20School%20Online/A1%20PNM34%204x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684061/portfolio/assets/clients/Harvard%20Business%20School%20Online/HBS%20Online%20PNM34%20Asset1%201-91-1_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684063/portfolio/assets/clients/Harvard%20Business%20School%20Online/PNM24%20Asset%2001%201x1_1_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Harvard Business School Online/baf276e7-d268-42a2-8c09-d16d871a4e5a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684070/portfolio/assets/clients/Harvard%20Business%20School%20Online/bb13eedd-1628-49a0-ace4-74536f81a6d9_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684074/portfolio/assets/clients/Harvard%20Business%20School%20Online/bba0978c-8613-4a42-b7ed-3d0b3e10dc87_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684076/portfolio/assets/clients/Harvard%20Business%20School%20Online/dfdcd764-7e84-4a1b-b0d2-73f0a4d014fb_1.91x1.mp4",
+          "ratio": "1.91:1"
+        }
+      ]
+    },
+    {
+      "id": "lineage-provisions",
+      "name": "Lineage Provisions",
+      "logo": "assets/clients/Lineage Provisions/Logo/Arch Bull_2 Color Blk_clientpage.png",
+      "igAvatar": "assets/clients/Lineage Provisions/Logo/366939762_6151667868271887_1058426924395709793_n_Instagram.jpg",
+      "color": "#2d4a2d",
+      "igHandle": "lineageprovisions",
+      "website": "https://lineageprovisions.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "Paid Social Strategy & Testing",
+        "Copywriting",
+        "Motion Graphics",
+        "Static Design"
+      ],
+      "cta": "Shop Now",
+      "brandType": "E-Commerce",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684799/portfolio/assets/clients/Lineage%20Provisions/02d002f6-b00d-4484-b0eb-23d5d46ac1d4_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684804/portfolio/assets/clients/Lineage%20Provisions/0b961cde-a5b3-4a47-879c-83440fdae1c5_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684807/portfolio/assets/clients/Lineage%20Provisions/11a35b11-afa1-480e-b7bf-c70bac8e9fa0_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/1dcde487-dddc-445a-86cc-bbb0c280f0ea_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/205ac4ae-8c49-48fb-ad27-e052d42e55f9_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/275096ac-ca07-459c-a195-09f8e3cc0410_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/2b7de89d-a212-40f2-9574-d6cb84492743_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/35ec6346-f7d7-4282-9f8c-f8884fec4ed7_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/3f9ba6e5-bd9b-4d1f-9855-200aef0b7321_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684809/portfolio/assets/clients/Lineage%20Provisions/40e46527-7612-4d69-934d-eff819cde156_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684814/portfolio/assets/clients/Lineage%20Provisions/42ab62ab-c564-4f84-99b0-bf5ef94e275b_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684819/portfolio/assets/clients/Lineage%20Provisions/4e0f3b03-792d-4ddb-907f-7ef9728a3b3c_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/4f3b55e5-4d48-46b5-8586-ea7c38fb785a_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684821/portfolio/assets/clients/Lineage%20Provisions/4fae7d2d-564e-4adb-99fd-6089e9661e65_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684825/portfolio/assets/clients/Lineage%20Provisions/59fd02fd-e661-4427-8c71-bbeee240d56e_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/610d522e-0932-4281-9d78-646be7a94a6b_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684827/portfolio/assets/clients/Lineage%20Provisions/61f2e3c8-e7bf-4461-9813-8b15e758fb4a_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684829/portfolio/assets/clients/Lineage%20Provisions/69518568-0036-4b17-9d8d-610b6e37a5dd_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684830/portfolio/assets/clients/Lineage%20Provisions/6e95869c-51f6-4b60-873e-d79d69bd4bbd_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684832/portfolio/assets/clients/Lineage%20Provisions/73c08bb1-a525-4103-811f-0a444ad7a088_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684833/portfolio/assets/clients/Lineage%20Provisions/74b53fdc-de81-481b-95d1-53e4069c6f26_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684837/portfolio/assets/clients/Lineage%20Provisions/75b0a572-a8fa-4b3a-a043-84e64e341659_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684842/portfolio/assets/clients/Lineage%20Provisions/760f8692-ba63-44d9-8a97-40220a80dabe_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/827123d2-b756-42cd-9e66-3f0b2af34c20_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684845/portfolio/assets/clients/Lineage%20Provisions/82729d42-552f-47d0-8fd9-7e6361ccccae_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684847/portfolio/assets/clients/Lineage%20Provisions/859d5938-9b22-41c3-945b-0379e303ad74_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/887f23a4-885e-4859-9274-9f682306e580_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684852/portfolio/assets/clients/Lineage%20Provisions/95eb3476-220c-4859-9a6f-e2cd1465d110_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684856/portfolio/assets/clients/Lineage%20Provisions/966880b3-90fd-4cfc-bf4c-ae7e5815b5b1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684859/portfolio/assets/clients/Lineage%20Provisions/9c2e0c79-39d4-43c2-94ed-ebfc862b05e3_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684861/portfolio/assets/clients/Lineage%20Provisions/9e603db5-acc6-4135-b776-53d061ee23ef_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684864/portfolio/assets/clients/Lineage%20Provisions/9faea502-9059-4e6d-87ae-1369f34d72da_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/ab6efc40-b44d-49af-b85c-3d0b034a9dd1_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/ac2b3e1e-9534-4ed5-a575-e1d866bb8089_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684867/portfolio/assets/clients/Lineage%20Provisions/b2e21e2f-e4ef-4f8c-9d78-e75ba2c97ccf_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/b340be56-faf0-4ae5-9d93-90c6fd6e162a_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/b74a7898-b48b-400f-b821-add4784fb3e3_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/b74c4df4-5d37-4e81-a3c5-ea1307efb1c6_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684868/portfolio/assets/clients/Lineage%20Provisions/b7874ba8-1cb1-407f-bf11-b73b6f034881_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684872/portfolio/assets/clients/Lineage%20Provisions/baa7b535-c181-4162-8f57-68ac93896e53_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/d19a9fa7-0493-4914-b75a-5541bb7966cb_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684875/portfolio/assets/clients/Lineage%20Provisions/d9789001-4dd2-4566-bd18-24eca66ac2e3_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684877/portfolio/assets/clients/Lineage%20Provisions/dd2a287a-1f83-48ab-ada6-07f69ebb1dbd_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684881/portfolio/assets/clients/Lineage%20Provisions/dd4bb864-fd0d-475e-bfc6-06347a92c0df_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684887/portfolio/assets/clients/Lineage%20Provisions/e125dfd4-01b8-4750-a9af-cc528bab3df9_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684892/portfolio/assets/clients/Lineage%20Provisions/f214fb66-8f30-4aaa-b955-d60a0718a65c_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/f55d15d8-c6b4-466a-9c0d-8bbb94307176_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/f8575e7b-8299-4756-9022-35e82f361952_1x1.jpeg",
+          "ratio": "1:1"
+        }
+      ]
+    },
+    {
+      "id": "pipsticks",
+      "name": "Pipsticks",
+      "logo": "assets/clients/Pipsticks/Logo/banner-logo_transparent_clientpage.png",
+      "igAvatar": "assets/clients/Pipsticks/Logo/289100561_1324335428093444_6043920872906502487_n_Instagram.jpg",
+      "color": "#e84393",
+      "igHandle": "pipsticks",
+      "website": "https://pipsticks.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "UGC",
+        "Copywriting",
+        "Motion Graphics",
+        "Static Design",
+        "Paid Social Strategy & Testing"
+      ],
+      "cta": "Shop Now",
+      "brandType": "E-Commerce",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684078/portfolio/assets/clients/Pipsticks/00650abc-2d69-498d-8d46-19e13f485f99_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684080/portfolio/assets/clients/Pipsticks/00aed25c-7ca0-4e43-903a-080a11b2ba28_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/00f2e211-7b19-4c0b-aa0b-0706fce3493f_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684089/portfolio/assets/clients/Pipsticks/013849a0-71f6-403d-b08c-23582aa2f22a_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/0912b580-73f3-49ab-8913-605ecfa67a37_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684095/portfolio/assets/clients/Pipsticks/0e434220-3679-43b1-aa50-bce34fa286ee_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684097/portfolio/assets/clients/Pipsticks/0f3289d3-0b24-40dc-9c03-9b5582d7fd52_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684101/portfolio/assets/clients/Pipsticks/1cdb3262-ac69-43cf-a340-7cf7e50f3a5a_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684102/portfolio/assets/clients/Pipsticks/30e4c777-e3fe-4d86-8161-893a218c408f_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684103/portfolio/assets/clients/Pipsticks/35ace4d2-8e45-4574-83fa-8e41183f83b0_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/3c0e3f49-135f-416c-9ab8-6bd25b72ec27_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684105/portfolio/assets/clients/Pipsticks/3ee47d66-ff06-45ea-b032-a7925dc70c47_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684107/portfolio/assets/clients/Pipsticks/43174b96-fdf8-4334-be22-acfc72c28fd1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/432a1c71-59f0-4557-8631-e99fc6672bca_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684131/portfolio/assets/clients/Pipsticks/44845709-dce3-4abb-adcc-16d1bd366a64_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/4939004e-fa71-4711-b688-a4609c92c6b9_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684153/portfolio/assets/clients/Pipsticks/5421ed32-e6f8-4e89-aa19-8354d3304e8a_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/59b564f1-5203-44c4-8252-fbc8d9170138_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684157/portfolio/assets/clients/Pipsticks/5b06577d-6be3-4a16-ab34-53ff6eb5057a%20%281%29_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684164/portfolio/assets/clients/Pipsticks/6be371ac-4965-4db7-aafd-9e698023c2ec_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684172/portfolio/assets/clients/Pipsticks/793433d6-6c59-4072-836b-6128c9dabc4c_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/79f6182e-54c0-45c4-95f7-38adcdbd6c7b_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684174/portfolio/assets/clients/Pipsticks/7bcec406-d162-44c5-9f38-d292d2961984_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684177/portfolio/assets/clients/Pipsticks/80b62ea1-d95e-4726-9ca1-10f0d0814e24%20%281%29_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684181/portfolio/assets/clients/Pipsticks/83358b2b-45fc-4159-8346-7125d28fcfa7_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684183/portfolio/assets/clients/Pipsticks/862d73e8-ce9a-4190-b5f9-2688efeaa059_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684219/portfolio/assets/clients/Pipsticks/9d91873c-a828-4c7d-8256-9624645bfb90_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684226/portfolio/assets/clients/Pipsticks/a2475312-c3ab-4430-a2c9-320f366cff6e_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/a3641c4d-c2fa-4101-81af-d84c0564d6dc_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/a8db71e7-78e7-48dc-b90a-1a90eb756113_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684229/portfolio/assets/clients/Pipsticks/aadf1d93-7d31-4320-a0ad-d8d335010bba_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684232/portfolio/assets/clients/Pipsticks/ac9eb031-6069-4444-9eeb-c545efb0bc86_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684243/portfolio/assets/clients/Pipsticks/b31e4e39-8f0b-4336-bd63-022c7c1ba675_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684250/portfolio/assets/clients/Pipsticks/b76ec351-e878-4eca-a4e1-8b87bad5ef58_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684261/portfolio/assets/clients/Pipsticks/bc4a8957-f161-46e3-aa1f-79aa437f31b6_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/c86d5e81-1207-4e2d-8e61-19dec0937321_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684273/portfolio/assets/clients/Pipsticks/cd85fef7-9a3a-4d1e-81c1-ecbe36b5d9d5_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684276/portfolio/assets/clients/Pipsticks/d620ca27-b432-46ea-a415-e1c9921030a8%20%281%29_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684278/portfolio/assets/clients/Pipsticks/d635bd44-a6a5-4ba5-bc9c-620047e8518d_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684280/portfolio/assets/clients/Pipsticks/dc19b7bd-204c-4378-874c-65212fc66f8c_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/e4e7aa80-45fa-4fd2-85d1-b2474a374b91_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684282/portfolio/assets/clients/Pipsticks/e5b5c80f-a76f-4100-b6d7-b5555949d6b0_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684286/portfolio/assets/clients/Pipsticks/ea85736a-27dc-4060-9073-8a947deb33f4_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684304/portfolio/assets/clients/Pipsticks/eaa9fb6b-a78a-4cf6-a669-50fb10fcc8f1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Pipsticks/f9a8f002-e186-4480-9da9-8ea7fc7d9872_9x16.png",
+          "ratio": "9:16"
+        }
+      ]
+    },
+    {
+      "id": "savage-x-fenty",
+      "name": "Savage X Fenty",
+      "logo": "assets/clients/Savage X Fenty/Logo/savage-x-fenty_logo_1683471312_clientpage.png",
+      "igAvatar": "assets/clients/Savage X Fenty/Logo/453316786_859787458815610_5444521803072524_n_Instagram.jpg",
+      "color": "#1a1a2e",
+      "igHandle": "savagexfenty",
+      "website": "https://savagex.com",
+      "description": "Coming soon.",
+      "services": [
+        "Creative Direction"
+      ],
+      "cta": "Shop Now",
+      "brandType": "E-Commerce",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684758/portfolio/assets/clients/Savage%20X%20Fenty/173d00d2-2754-4dac-87be-e50abaf2c861_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/1_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/2_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684762/portfolio/assets/clients/Savage%20X%20Fenty/2bed2807-a6b3-45b2-b898-8d565b425c9a_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/3 (1)_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/30ef1044-5208-4f90-88d4-bcedeb5e283e_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684766/portfolio/assets/clients/Savage%20X%20Fenty/34a386dd-b11d-4aa9-bf7c-f1903903866d_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/658600ff-95f5-4f6f-b99f-f31d3825f7ed_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684768/portfolio/assets/clients/Savage%20X%20Fenty/70e46e22-a702-44a2-8079-d104d591cf61_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684770/portfolio/assets/clients/Savage%20X%20Fenty/7408e960-9d9d-4dd3-ab32-b06b14c93466_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/83b80eca-083b-46fb-be9c-3ab80d6efa23_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684772/portfolio/assets/clients/Savage%20X%20Fenty/86599599-9c61-4dd8-8b08-ee7d86fb4d6a_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/8b725e55-4a58-491c-91a9-7499257deae6_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684774/portfolio/assets/clients/Savage%20X%20Fenty/981551f6-913a-497b-85b0-32ab3e695fa2_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/PNM26-Variation_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/PNM28-Variation_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684776/portfolio/assets/clients/Savage%20X%20Fenty/SXF-PNM25-Variation-Asset03_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684782/portfolio/assets/clients/Savage%20X%20Fenty/SXF-PNM26-Variation-Asset01_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684787/portfolio/assets/clients/Savage%20X%20Fenty/SavageXFenty_PNM18-Iteration_asset%202_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/b4224b04-6eb3-4822-9d74-1a5649e43026_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/c7ffdef0-e870-4406-a158-f0fd99706d6b_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684793/portfolio/assets/clients/Savage%20X%20Fenty/ed886925-d82d-4880-b4a9-6a3b869f209b_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/f7592062-4574-4232-b28b-5f51e8e203ee_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Savage X Fenty/majp_1x1.png",
+          "ratio": "1:1"
+        }
+      ]
+    },
+    {
+      "id": "sunrun",
+      "name": "Sunrun",
+      "logo": "assets/clients/Sunrun/Logo/SunrunLogo_Black_SVG_clientpage.svg",
+      "igAvatar": "assets/clients/Sunrun/Logo/Sunrun_Instagram.jpg",
+      "color": "#ff6600",
+      "igHandle": "sunrun",
+      "website": "https://sunrun.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "Paid Social Strategy & Testing",
+        "Copywriting",
+        "Motion Graphics",
+        "Static Design",
+        "UGC"
+      ],
+      "cta": "Learn More",
+      "brandType": "Lead Generation",
+      "ads": [
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/02dd3f7d-3ea2-4299-846f-32eec069e417_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684644/portfolio/assets/clients/Sunrun/04a8a614-b1f5-4432-bb4b-0be9978c7ccc_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/0e9f4eb0-e3af-415b-b15f-84e3782e6fd5_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/0f6b32fd-7af0-4399-bde9-91b228258be9_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/10d3dcdc-50f2-4af6-8f32-8a3b37c2b41a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684649/portfolio/assets/clients/Sunrun/131a9784-312c-4adc-8aaf-92e56815b1dd_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/1374ed42-c1f5-4625-904f-eefb2b125ce0_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/1e70d657-3a7e-4dc6-a573-c5eee6bd4d32_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684655/portfolio/assets/clients/Sunrun/2eb97aba-e23d-487a-9697-f1c36455ae9e_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/323d630d-f58d-48ce-809d-86d480f53456_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/3550fcd3-d9a3-4d6d-b5b7-37263e6d00fc_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684659/portfolio/assets/clients/Sunrun/3a60926f-4258-4da2-8217-913ffd34e1b7_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/40bcf5fc-d3cd-4130-b38d-59070737ef35_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684664/portfolio/assets/clients/Sunrun/425ac823-c9c6-43bc-9ab5-14d805e97a58_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/48035a55-590b-4f68-a0cb-8996a6954615_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/48c80187-21a6-4188-8251-36ace130386f_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684669/portfolio/assets/clients/Sunrun/4975efbd-43cc-4732-b976-ac6af395cd9b_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/5f08d2e8-9744-489a-9377-019e65a512be_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684672/portfolio/assets/clients/Sunrun/5fecd1ff-6509-4103-aa6b-40bdf22335f3_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684679/portfolio/assets/clients/Sunrun/60d26a36-6fd1-40b7-9760-7360c510554f_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684687/portfolio/assets/clients/Sunrun/61c2754b-b374-4332-a278-b562101fa27d_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684696/portfolio/assets/clients/Sunrun/6cb64012-4bfb-43b0-835f-e38b59269fef_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/7bad4b8b-b544-4a97-a8d4-8ab575243b7e_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/7c112219-7bf0-4b03-8f0f-8999d1a1e38a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/87d9db8d-d4bc-4aa3-8914-523c8025c74d_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684702/portfolio/assets/clients/Sunrun/9c359ad4-39a7-4613-85a1-cebeb2746302_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/9cb081fd-b5e5-4f9f-b035-4fb298727c67_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684711/portfolio/assets/clients/Sunrun/a4bdcecb-7213-492f-9b97-9636de0f5258_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684715/portfolio/assets/clients/Sunrun/aa2844b2-c184-4e84-b6c1-d142fc67a809_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/ac23603a-a836-4abc-b462-f70d3be09b1a_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684717/portfolio/assets/clients/Sunrun/b5de451a-5e7d-45cb-ae3d-9224a7f1ec64_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684719/portfolio/assets/clients/Sunrun/bb5c934a-482f-47c5-89c7-d80329094d3c_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/bc5c6c01-5f8a-43e8-8ef2-cd9f9645894c_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/c08b18f4-7558-44ab-a056-e608123256d2_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/c0ae68ec-77e1-47c1-a93c-84d65183fac5_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/c572a129-6dba-49af-955e-e1972ac96525_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684721/portfolio/assets/clients/Sunrun/c73a2ed1-b756-480a-ab25-12b5bed10051_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/c976f000-5ac1-4485-b440-049f7714a93b_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684724/portfolio/assets/clients/Sunrun/cbabd29f-2ffd-46f9-890f-293b27621934_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684727/portfolio/assets/clients/Sunrun/cfafb7da-f926-45be-8a1e-2a539172b80f_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684730/portfolio/assets/clients/Sunrun/e485a240-24b2-4bdd-9862-1a8d072d9316_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/e835c588-f715-488d-95cc-fb1128d6ec4c_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/efc22b32-2f00-4181-b3cf-c7fdd7603a75_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Sunrun/f31d1516-ee4b-45a1-8d14-bab5521c36c4_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684746/portfolio/assets/clients/Sunrun/f79f4db2-b7db-4966-847a-cc78f4cc9417_1.91x1.mp4",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684756/portfolio/assets/clients/Sunrun/fb051a9b-0a9b-4441-ba6e-35ee610adc12_9x16.mp4",
+          "ratio": "9:16"
+        }
+      ]
+    },
+    {
+      "id": "wisdom-panel",
+      "name": "Wisdom Panel",
+      "logo": "assets/clients/Wisdom Panel/Logo/Wisdom_Panel_Horizontal_TM_RGB_clientpage.png",
+      "igAvatar": "assets/clients/Wisdom Panel/Logo/WisdomPanel_Instagram.jpg",
+      "color": "#00a878",
+      "igHandle": "wisdompanel",
+      "website": "https://wisdompanel.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "Paid Social Strategy & Testing",
+        "UGC",
+        "Copywriting",
+        "Motion Graphics",
+        "Static Design"
+      ],
+      "cta": "Shop Now",
+      "brandType": "E-Commerce",
+      "ads": [
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683670/portfolio/assets/clients/Wisdom%20Panel/0cce613c-6348-4e78-974a-6d6dd10650e5_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683681/portfolio/assets/clients/Wisdom%20Panel/12819f30-4122-4303-aa78-b966028564de_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/14603f73-eba1-4bfe-b7b4-eec8a342bae2_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/18098732-257d-40ae-b110-88c9c98769b0_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683710/portfolio/assets/clients/Wisdom%20Panel/1900edf6-1770-4ac7-84fc-052460a52d53_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/22da4f20-a708-4147-8fd4-16c870ad40e9_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683716/portfolio/assets/clients/Wisdom%20Panel/2a2c61a9-7046-4737-ae2d-abf55a99acd5_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/35344da1-1fe9-4306-869f-555060324809_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683717/portfolio/assets/clients/Wisdom%20Panel/35fa3386-464b-46e8-b52a-0180b8b6b613_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/3788af23-5657-4425-966d-e56c7898afd2_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683721/portfolio/assets/clients/Wisdom%20Panel/3bc15b1c-7762-4a77-871c-959ae57c0557_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683725/portfolio/assets/clients/Wisdom%20Panel/41b354d3-705d-4110-92d5-3f68d5d6b5f4_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683734/portfolio/assets/clients/Wisdom%20Panel/498dd9ef-bfbd-4d14-b1ea-458297a43b2a_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/4ade3666-dad9-491e-830b-111759fc16ea_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683738/portfolio/assets/clients/Wisdom%20Panel/4cb8e8a4-df79-4f03-99b5-d5c9a1e75123_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683741/portfolio/assets/clients/Wisdom%20Panel/5ad13cea-a65a-460c-aae9-f7216b53d34a_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683756/portfolio/assets/clients/Wisdom%20Panel/5d9f9421-dfe5-463e-b665-95bafdb46ac2_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/65068804-f1fd-4146-bd64-4f9565b43172_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/77ca5bc7-7926-4f5e-836e-c1bd728e4b37_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683761/portfolio/assets/clients/Wisdom%20Panel/7fc7c703-9bb8-499e-a1c2-107f796a84cf_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/82896484-f929-462a-804f-696ac4dddddf_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683766/portfolio/assets/clients/Wisdom%20Panel/82e6cded-21b8-4d10-8a0a-b2b730bfb505_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683769/portfolio/assets/clients/Wisdom%20Panel/83849b27-6b67-48e5-8da0-4c71de8ee771_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683773/portfolio/assets/clients/Wisdom%20Panel/8b1d99f6-4105-4e5e-b7f3-8a0cfa679775_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683784/portfolio/assets/clients/Wisdom%20Panel/8c1afe4d-7084-4668-bfae-c1cd18503be1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683787/portfolio/assets/clients/Wisdom%20Panel/8d2d9d9a-5ad0-49b3-b881-dcb6962bb6ab_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683815/portfolio/assets/clients/Wisdom%20Panel/8e7ca98a-a2dc-4031-883d-401993aaf3b5_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683823/portfolio/assets/clients/Wisdom%20Panel/8edf96ed-2cf5-4aba-ac7e-c1126ee550d6_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683839/portfolio/assets/clients/Wisdom%20Panel/8fe775b3-2637-43ad-9fc7-dd20be3ef4d5_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683846/portfolio/assets/clients/Wisdom%20Panel/974db34a-9d81-413b-8c0c-b1e8f89a1852_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683863/portfolio/assets/clients/Wisdom%20Panel/97e24118-5325-4d3c-b220-6814a270a826_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683867/portfolio/assets/clients/Wisdom%20Panel/9b14bad2-bf78-4022-bc04-86952149e113_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683871/portfolio/assets/clients/Wisdom%20Panel/9f0b7607-94c2-48bf-833e-ffc9b9213dfd_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683873/portfolio/assets/clients/Wisdom%20Panel/a2893f6c-070b-4224-8567-a51a8e0cbd8e.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683875/portfolio/assets/clients/Wisdom%20Panel/a9f55d9b-bcb0-4fd7-bb08-bbc1ee88028d_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683877/portfolio/assets/clients/Wisdom%20Panel/aba457bb-7604-4cf3-8484-48b68a5fb489_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/aca20440-3c76-4914-b8f5-d8df23ddbdc9_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683880/portfolio/assets/clients/Wisdom%20Panel/aefec86a-13f5-4ce5-b838-d87ede5c85b3_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/c3f3ea4a-309d-450f-bd4d-0bec8ee1b725_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/c531075e-db46-4aa2-a730-9e6e700f77aa_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/c5cfbb29-15dd-470d-924e-e4b607aa6a74_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/ccbac132-2020-4728-b007-9f87d4815027_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/cd76e907-4883-4782-94ee-9c133a33fb8a_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683884/portfolio/assets/clients/Wisdom%20Panel/d5b6899e-353f-41c3-90f9-62ffda6125be_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/e8bb25e2-e9d1-4932-8d30-5d6a28c6db25_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683895/portfolio/assets/clients/Wisdom%20Panel/e8ffa1ae-f32c-4340-be8a-afdd9593ed6c_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683901/portfolio/assets/clients/Wisdom%20Panel/e9ba4e53-ff0d-4273-aa1f-612b76bb232b_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/f280d620-f870-4c88-a143-213e34c64d94_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/f9a50cd9-428a-4e65-a231-fe20fe43986e_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/fab6f57c-4e50-463d-8284-3f8514534d2c_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683907/portfolio/assets/clients/Wisdom%20Panel/fb3cf616-e7a5-46c9-ae90-73bf988b8e68_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683911/portfolio/assets/clients/Wisdom%20Panel/fb5e6ec8-343e-4efb-a84e-80c2049d39b6_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/fc4541cc-f542-4908-926c-a51b62e68439_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Wisdom Panel/fd8e1817-17a0-4fe9-aa09-15ff20230c3d_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683914/portfolio/assets/clients/Wisdom%20Panel/fdf3dcf9-5b46-4d51-9c4d-efbcb9f2f878_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775683932/portfolio/assets/clients/Wisdom%20Panel/febeca7b-b24a-4dde-a942-6d0123542d31_9x16.mp4",
+          "ratio": "9:16"
+        }
+      ]
+    }
+  ],
+  "about": {
+    "name": "James Bradley",
+    "handle": "jbradbixler",
+    "avatar": "assets/about/Logo/IMG_5235_Instagram.JPEG",
+    "logo": "assets/about/Logo/IMG_5235_Instagram.JPEG",
+    "bio": "Coming soon",
+    "website": "https://jbradbixler.com/",
+    "role": "Visionary",
+    "color": "#1d1d1f",
+    "services": [
+      "Social Media",
+      "Static Ad Design",
+      "Motion Graphics",
+      "Website Design & Development",
+      "Audio Technology",
+      "Music Production",
+      "Photography",
+      "Editorial",
+      "Management"
+    ],
+    "media": []
+  }
+}
