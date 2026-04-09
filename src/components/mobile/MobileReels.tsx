@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { usePortfolio } from '@/context/PortfolioContext'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { copyToClipboard } from '@/lib/clipboard'
+import { haptic } from '@/lib/haptic'
 import type { Ad, Client } from '@/types'
 
 interface Reel { ad: Ad; client: Client; key: string }
@@ -269,6 +270,7 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
     if (dx > 15 || dy > 20) return
     const now = Date.now()
     if (now - lastTapRef.current < 300) {
+      haptic([30, 20, 60])
       setLiked(true)
       setShowHeart(true)
       setHeartKey(k => k + 1)

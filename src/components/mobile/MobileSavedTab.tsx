@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
 import MobilePost from './MobilePost'
+import { haptic } from '@/lib/haptic'
 import type { Ad, Client } from '@/types'
 
 interface SavedAdItem { ad: Ad; client: Client; key: string }
@@ -105,6 +106,7 @@ export default function MobileSavedTab() {
     setMessages(updated)
     setInput('')
     setLoading(true)
+    haptic(30) // sent
 
     try {
       const res = await fetch('/api/chat', {
@@ -114,6 +116,7 @@ export default function MobileSavedTab() {
       })
       const data = await res.json()
       setMessages(m => [...m, { role: 'assistant', content: data.content ?? "Thanks for sharing that! Let me know more about your goals." }])
+      haptic([20, 30, 20]) // received
     } catch {
       setMessages(m => [...m, { role: 'assistant', content: "Something went wrong. Try again in a moment." }])
     } finally {

@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { copyToClipboard } from '@/lib/clipboard'
+import { haptic } from '@/lib/haptic'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
 import type { Ad, Client } from '@/types'
@@ -74,6 +75,7 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
     const now = Date.now()
     const touch = e.changedTouches[0]
     if (now - lastTapRef.current < 300) {
+      haptic([30, 20, 60])
       triggerHeart(touch.clientX, touch.clientY)
     }
     lastTapRef.current = now
