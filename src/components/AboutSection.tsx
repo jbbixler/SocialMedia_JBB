@@ -15,7 +15,7 @@ export default function AboutSection({ about }: { about: About }) {
     <motion.div
       id="about-section"
       variants={fadeUp}
-      className="w-full max-w-5xl mt-20 mb-24"
+      className="w-full max-w-5xl -mt-24 relative z-10 mb-10 px-6"
     >
       {/* Section label */}
       <p className="text-[0.68rem] font-semibold tracking-[0.1em] uppercase text-[#86868b] mb-6">

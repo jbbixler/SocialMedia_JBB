@@ -228,13 +228,16 @@ export default function HomeView({ clients, about }: { clients: Client[]; about:
         <WaterCanvas />
       </div>
 
-      {/* Brands section — below the water fade, always off-screen on load */}
+      {/* About section */}
+      {about && <AboutSection about={about} />}
+
+      {/* Brands section */}
       <motion.div
         variants={fadeUp}
-        className="-mt-24 relative z-10 w-full max-w-5xl px-6 flex flex-col gap-4"
+        className="relative z-10 w-full max-w-5xl px-6 flex flex-col gap-4 pb-24"
       >
         <h2
-          className="text-[clamp(1.25rem,3vw,2.25rem)] font-semibold tracking-[-0.04em] leading-tight text-[#1d1d1f] px-1 pt-10"
+          className="text-[clamp(1.25rem,3vw,2.25rem)] font-semibold tracking-[-0.04em] leading-tight text-[#1d1d1f] px-1 pt-2"
           style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
         >
           Brands
@@ -249,9 +252,6 @@ export default function HomeView({ clients, about }: { clients: Client[]; about:
           ))}
         </div>
       </motion.div>
-
-      {/* About section — always visible below brands */}
-      {about && <AboutSection about={about} />}
     </motion.div>
   )
 }
