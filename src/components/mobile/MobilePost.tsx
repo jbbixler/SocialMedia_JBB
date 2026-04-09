@@ -220,6 +220,17 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
           </AnimatePresence>
         </div>
 
+        {/* CTA button */}
+        <div className="px-3 pt-2">
+          <button
+            onClick={onAvatarClick}
+            className="w-full py-2 rounded-lg text-[13px] font-semibold border"
+            style={{ borderColor, color: textColor, background: dark || hotPink ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)' }}
+          >
+            {cta}
+          </button>
+        </div>
+
         {/* Actions */}
         <div className="flex items-center justify-between px-3 pt-2 pb-1">
           <div className="flex items-center gap-4">
@@ -289,16 +300,6 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
           </div>
         )}
 
-        {/* CTA button */}
-        <div className="px-3 pb-3">
-          <button
-            onClick={onAvatarClick}
-            className="w-full py-2 rounded-lg text-[13px] font-semibold border"
-            style={{ borderColor, color: textColor, background: dark || hotPink ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)' }}
-          >
-            {cta}
-          </button>
-        </div>
       </article>
 
       {/* Comment sheet */}

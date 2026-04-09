@@ -212,6 +212,17 @@ export default function IgPost({ ad, client, adIndex, isInitial, dark = true, on
         </AnimatePresence>
       </MediaWrapper>
 
+      {/* CTA */}
+      <div className="px-3 pt-2">
+        <button
+          onClick={onMediaClick}
+          className="w-full py-2 rounded-lg text-[13px] font-semibold border"
+          style={{ borderColor, color: textColor, background: dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)' }}
+        >
+          {cta}
+        </button>
+      </div>
+
       {/* Actions */}
       <div className="flex items-center justify-between px-3 pt-2 pb-1">
         <div className="flex items-center gap-4">
@@ -272,17 +283,6 @@ export default function IgPost({ ad, client, adIndex, isInitial, dark = true, on
           <button onClick={() => setShowComment(true)} className="text-[12px] text-left mt-0.5" style={{ color: subColor }}>Add a comment…</button>
         </div>
       )}
-
-      {/* CTA */}
-      <div className="px-3 pb-3">
-        <button
-          onClick={onMediaClick}
-          className="w-full py-2 rounded-lg text-[13px] font-semibold border"
-          style={{ borderColor, color: textColor, background: dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)' }}
-        >
-          {cta}
-        </button>
-      </div>
 
       {/* Comment sheet */}
       <AnimatePresence>
