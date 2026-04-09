@@ -240,8 +240,13 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
             </motion.div>
           )}
         </AnimatePresence>
-        <div>
-          <div style={{ zoom }}>
+        <div
+          style={{
+            transform: `scale(${zoom})`,
+            transformOrigin: 'top center',
+            marginBottom: `${(zoom - 1) * FRAME_H}px`,
+          }}
+        >
             {/* ── iPhone 16 Pro frame ─────────────────────── */}
             <motion.div
               ref={frameRef}
@@ -410,7 +415,6 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
                 </div>
               </div>
             </motion.div>
-          </div>
         </div>
 
       </div>

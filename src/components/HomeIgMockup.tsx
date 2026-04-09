@@ -130,16 +130,31 @@ export default function HomeIgMockup() {
     dispatch({ type: 'SELECT_CLIENT', client })
   }, [dispatch])
 
+  // Total layout height of phone + both shadow divs (used for scale margin compensation)
+  const TOTAL_H = FRAME_H + 56 - 6 + 88 + 1  // 1009px
+
   return (
     <div ref={wrapRef} className="ig-mockup-wrap flex-shrink-0 flex flex-col items-center relative">
-      {/* Outer motion div: only handles translateY nudge — no zoom here to avoid border-radius glitch */}
+      {/* Nudge wrapper — pure translateY, no zoom, so GPU compositing never touches border-radius */}
       <motion.div
         animate={{ y: nudgeY }}
         transition={{ type: 'spring', stiffness: 340, damping: 28 }}
-        style={{ willChange: 'transform' }}
       >
-        {/* Inner div: zoom only — hidden until first layout effect so no SSR shape flash */}
-        <div style={{ zoom, visibility: phoneMounted ? 'visible' : 'hidden' }}>
+        {/*
+          scale() instead of zoom:
+          - zoom is non-standard and interacts badly with GPU compositing (causes border-radius flash)
+          - transform:scale() composes cleanly with framer-motion's layer promotion
+          - marginBottom compensates layout space so siblings aren't pushed down by full-size element
+          - opacity:0 until phoneMounted so the scale(1)→scale(zoom) jump isn't visible
+        */}
+        <div
+          style={{
+            transform: `scale(${zoom})`,
+            transformOrigin: 'top center',
+            marginBottom: `${(zoom - 1) * TOTAL_H}px`,
+            opacity: phoneMounted ? 1 : 0,
+          }}
+        >
           <DarkModeProvider>
             <BookmarkProvider>
               <PhoneFrame
