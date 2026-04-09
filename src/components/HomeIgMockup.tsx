@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { usePortfolio } from '@/context/PortfolioContext'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import IgPost from './IgPost'
+import IosStatusBar from './IosStatusBar'
 import type { Client, Ad } from '@/types'
 
 const SCREEN_W = 390
@@ -24,54 +25,6 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 const PAGE_SIZE = 50
-
-function StatusTime({ dark }: { dark: boolean }) {
-  const [time, setTime] = useState(() => {
-    const d = new Date()
-    return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(' AM','').replace(' PM','')
-  })
-  useEffect(() => {
-    const tick = () => {
-      const d = new Date()
-      setTime(d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(' AM','').replace(' PM',''))
-    }
-    const id = setInterval(tick, 10000)
-    return () => clearInterval(id)
-  }, [])
-  return (
-    <span style={{ color: dark ? '#fff' : '#000', fontSize: '15px', fontWeight: 600, fontFamily: '-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif', letterSpacing: '-0.01em' }}>
-      {time}
-    </span>
-  )
-}
-
-function StatusIcons({ dark }: { dark: boolean }) {
-  const c = dark ? '#fff' : '#000'
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-      {/* Cellular bars */}
-      <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
-        <rect x="0"  y="8"  width="3" height="4"  rx="1" fill={c} />
-        <rect x="4.5" y="5.5" width="3" height="6.5" rx="1" fill={c} />
-        <rect x="9"  y="3"  width="3" height="9"  rx="1" fill={c} />
-        <rect x="13.5" y="0" width="3" height="12" rx="1" fill={c} />
-      </svg>
-      {/* WiFi */}
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-        <path d="M8 10.5a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z" fill={c} />
-        <path d="M4.2 7.3a5.4 5.4 0 0 1 7.6 0" stroke={c} strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M1.6 4.7a9 9 0 0 1 12.8 0" stroke={c} strokeWidth="1.4" strokeLinecap="round" />
-      </svg>
-      {/* Battery */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
-        <div style={{ width: '25px', height: '12px', border: `1.5px solid ${c}`, borderRadius: '3.5px', padding: '1.5px', position: 'relative' }}>
-          <div style={{ width: '99%', height: '100%', background: c, borderRadius: '1.5px' }} />
-        </div>
-        <div style={{ width: '2px', height: '5px', background: c, borderRadius: '0 1px 1px 0', opacity: 0.4 }} />
-      </div>
-    </div>
-  )
-}
 
 export default function HomeIgMockup() {
   const { clients, about, dispatch, goToAbout } = usePortfolio()
@@ -311,10 +264,7 @@ export default function HomeIgMockup() {
             <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
 
             {/* Status bar */}
-            <div className="flex-shrink-0 flex items-end justify-between px-7 pb-1.5" style={{ height:'59px', background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }}>
-              <StatusTime dark={dark} />
-              <StatusIcons dark={dark} />
-            </div>
+            <IosStatusBar dark={dark} />
 
             {/* Top nav — dark toggle left, name center, heart right */}
             <div

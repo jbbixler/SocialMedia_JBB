@@ -6,6 +6,7 @@ import { usePortfolio } from '@/context/PortfolioContext'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { useFeedPagination } from '@/hooks/useFeedPagination'
 import IgPost from './IgPost'
+import IosStatusBar from './IosStatusBar'
 import Lightbox from './Lightbox'
 import type { Client } from '@/types'
 
@@ -288,7 +289,7 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
                 <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
 
                 {/* Status bar */}
-                <div className="flex-shrink-0 bg-black" style={{ height:'59px' }} />
+                <IosStatusBar />
 
                 {/* Top nav */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 pb-2.5 bg-black border-b border-white/[0.07]">
