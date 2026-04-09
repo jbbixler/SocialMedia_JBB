@@ -26,6 +26,8 @@ export default function HomeIgMockup() {
   const wrapRef          = useRef<HTMLDivElement>(null)
   const [zoom, setZoom]  = useState(1)
   const [nudgeY, setNudgeY] = useState(0)
+  // Hide phone until zoom is calculated to avoid SSR→client shape flash
+  const [phoneMounted, setPhoneMounted] = useState(false)
 
   // Refs so wheel handler never goes stale
   const allowPageScrollRef = useRef(false)
@@ -34,6 +36,7 @@ export default function HomeIgMockup() {
   useLayoutEffect(() => {
     const compute = () => setZoom(Math.min(1, (window.innerHeight - 260) / FRAME_H))
     compute()
+    setPhoneMounted(true)
     window.addEventListener('resize', compute)
     return () => window.removeEventListener('resize', compute)
   }, [])
@@ -129,29 +132,32 @@ export default function HomeIgMockup() {
 
   return (
     <div ref={wrapRef} className="ig-mockup-wrap flex-shrink-0 flex flex-col items-center relative">
+      {/* Outer motion div: only handles translateY nudge — no zoom here to avoid border-radius glitch */}
       <motion.div
-        style={{ zoom }}
         animate={{ y: nudgeY }}
         transition={{ type: 'spring', stiffness: 340, damping: 28 }}
+        style={{ willChange: 'transform' }}
       >
-        {/* Providers wrap the entire phone so dark mode affects status bar + screen bg */}
-        <DarkModeProvider>
-          <BookmarkProvider>
-            <PhoneFrame
-              frameRef={frameRef}
-              screenOverlayRef={screenOverlayRef}
-              onMouseMove={handleFrameMouseMove}
-              onMouseLeave={handleFrameMouseLeave}
-              onClientSelect={openClient}
-              onProfileSelect={goToAbout}
-              about={about}
-            />
-          </BookmarkProvider>
-        </DarkModeProvider>
+        {/* Inner div: zoom only — hidden until first layout effect so no SSR shape flash */}
+        <div style={{ zoom, visibility: phoneMounted ? 'visible' : 'hidden' }}>
+          <DarkModeProvider>
+            <BookmarkProvider>
+              <PhoneFrame
+                frameRef={frameRef}
+                screenOverlayRef={screenOverlayRef}
+                onMouseMove={handleFrameMouseMove}
+                onMouseLeave={handleFrameMouseLeave}
+                onClientSelect={openClient}
+                onProfileSelect={goToAbout}
+                about={about}
+              />
+            </BookmarkProvider>
+          </DarkModeProvider>
 
-        {/* Drop shadow glow */}
-        <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'56px', marginTop:'-6px', pointerEvents:'none', background:['radial-gradient(ellipse 88% 100% at 50% 8%, rgba(155,160,225,0.28) 0%, transparent 68%)','radial-gradient(ellipse 60% 80%  at 50% 10%, rgba(170,175,240,0.18) 0%, transparent 55%)','radial-gradient(ellipse 36% 55%  at 50% 12%, rgba(190,195,255,0.22) 0%, transparent 42%)'].join(', '), filter:'blur(9px)' }} />
-        <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'88px', marginTop:'1px', pointerEvents:'none', borderRadius:'0 0 54px 54px', background:'linear-gradient(to bottom, rgba(100,100,108,0.20) 0%, rgba(14,14,18,0.14) 18%, rgba(14,14,18,0.08) 48%, transparent 100%)', filter:'blur(22px)', opacity:0.75, transform:'scaleX(0.92)' }} />
+          {/* Drop shadow glow */}
+          <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'56px', marginTop:'-6px', pointerEvents:'none', background:['radial-gradient(ellipse 88% 100% at 50% 8%, rgba(155,160,225,0.28) 0%, transparent 68%)','radial-gradient(ellipse 60% 80%  at 50% 10%, rgba(170,175,240,0.18) 0%, transparent 55%)','radial-gradient(ellipse 36% 55%  at 50% 12%, rgba(190,195,255,0.22) 0%, transparent 42%)'].join(', '), filter:'blur(9px)' }} />
+          <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'88px', marginTop:'1px', pointerEvents:'none', borderRadius:'0 0 54px 54px', background:'linear-gradient(to bottom, rgba(100,100,108,0.20) 0%, rgba(14,14,18,0.14) 18%, rgba(14,14,18,0.08) 48%, transparent 100%)', filter:'blur(22px)', opacity:0.75, transform:'scaleX(0.92)' }} />
+        </div>
       </motion.div>
     </div>
   )
