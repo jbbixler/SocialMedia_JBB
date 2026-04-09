@@ -264,6 +264,7 @@ export default function HomeIgMockup() {
               onMouseMove={onStoriesMouseMove}
               onMouseUp={onStoriesMouseUp}
               onMouseLeave={onStoriesMouseLeave}
+              onDragStart={e => e.preventDefault()}
             >
               {/* "Me" story — always first */}
               {about && (
