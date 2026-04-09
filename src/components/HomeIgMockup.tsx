@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useLayoutEffect, useState, useCallback } from 'react'
+import { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { usePortfolio } from '@/context/PortfolioContext'
 import { DarkModeProvider, useTheme } from '@/context/DarkModeContext'
@@ -23,13 +23,80 @@ export default function HomeIgMockup() {
   const { dispatch, goToAbout, about } = usePortfolio()
   const frameRef         = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
+  const wrapRef          = useRef<HTMLDivElement>(null)
   const [zoom, setZoom]  = useState(1)
+  const [nudgeY, setNudgeY] = useState(0)
+
+  // Refs so wheel handler never goes stale
+  const allowPageScrollRef = useRef(false)
+  const nudgingRef         = useRef(false)
 
   useLayoutEffect(() => {
     const compute = () => setZoom(Math.min(1, (window.innerHeight - 260) / FRAME_H))
     compute()
     window.addEventListener('resize', compute)
     return () => window.removeEventListener('resize', compute)
+  }, [])
+
+  // Intercept wheel events: nudge the phone when feed scroll bottoms out,
+  // then release page scroll after the spring animation settles.
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY <= 0) {
+        // Scrolling up — reset so the nudge can fire again next time
+        allowPageScrollRef.current = false
+        nudgingRef.current = false
+        return
+      }
+
+      // Find the innermost vertically-scrollable element under the cursor
+      let node = e.target as HTMLElement | null
+      let scrollable: HTMLElement | null = null
+      while (node && node !== el) {
+        const style = window.getComputedStyle(node)
+        const overflow = style.overflowY
+        if (
+          (overflow === 'auto' || overflow === 'scroll') &&
+          node.scrollHeight > node.clientHeight + 2
+        ) {
+          scrollable = node
+          break
+        }
+        node = node.parentElement
+      }
+
+      const atBottom = scrollable
+        ? scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 12
+        : false
+
+      if (!atBottom) {
+        allowPageScrollRef.current = false
+        return
+      }
+
+      // Feed is at the bottom — gate the page scroll behind a nudge
+      if (!allowPageScrollRef.current) {
+        e.preventDefault()
+        if (!nudgingRef.current) {
+          nudgingRef.current = true
+          // Spring the phone upward, then release it back
+          setNudgeY(-16)
+          setTimeout(() => setNudgeY(0), 180)
+          // After the spring settles, open the page scroll floodgate
+          setTimeout(() => {
+            allowPageScrollRef.current = true
+            nudgingRef.current = false
+          }, 480)
+        }
+      }
+      // If allowPageScrollRef.current is true, we don't preventDefault → page scrolls
+    }
+
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
   }, [])
 
   const handleFrameMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -61,8 +128,12 @@ export default function HomeIgMockup() {
   }, [dispatch])
 
   return (
-    <div className="ig-mockup-wrap flex-shrink-0 flex flex-col items-center relative">
-      <div style={{ zoom }}>
+    <div ref={wrapRef} className="ig-mockup-wrap flex-shrink-0 flex flex-col items-center relative">
+      <motion.div
+        style={{ zoom }}
+        animate={{ y: nudgeY }}
+        transition={{ type: 'spring', stiffness: 340, damping: 28 }}
+      >
         {/* Providers wrap the entire phone so dark mode affects status bar + screen bg */}
         <DarkModeProvider>
           <BookmarkProvider>
@@ -81,7 +152,7 @@ export default function HomeIgMockup() {
         {/* Drop shadow glow */}
         <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'56px', marginTop:'-6px', pointerEvents:'none', background:['radial-gradient(ellipse 88% 100% at 50% 8%, rgba(155,160,225,0.28) 0%, transparent 68%)','radial-gradient(ellipse 60% 80%  at 50% 10%, rgba(170,175,240,0.18) 0%, transparent 55%)','radial-gradient(ellipse 36% 55%  at 50% 12%, rgba(190,195,255,0.22) 0%, transparent 42%)'].join(', '), filter:'blur(9px)' }} />
         <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'88px', marginTop:'1px', pointerEvents:'none', borderRadius:'0 0 54px 54px', background:'linear-gradient(to bottom, rgba(100,100,108,0.20) 0%, rgba(14,14,18,0.14) 18%, rgba(14,14,18,0.08) 48%, transparent 100%)', filter:'blur(22px)', opacity:0.75, transform:'scaleX(0.92)' }} />
-      </div>
+      </motion.div>
     </div>
   )
 }
