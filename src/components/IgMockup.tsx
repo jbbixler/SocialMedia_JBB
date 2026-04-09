@@ -25,6 +25,65 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
   const sentinelRef     = useRef<HTMLDivElement>(null)
   const frameRef        = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
+  const storiesRef      = useRef<HTMLDivElement>(null)
+  const dragRef         = useRef({ startX: 0, scrollLeft: 0, dragging: false, didDrag: false })
+  const velocityRef     = useRef({ x: 0, lastX: 0, lastT: 0 })
+  const momentumRaf     = useRef(0)
+
+  const stopMomentum = useCallback(() => cancelAnimationFrame(momentumRaf.current), [])
+
+  const startMomentum = useCallback((velocity: number) => {
+    const el = storiesRef.current
+    if (!el) return
+    stopMomentum()
+    const FRICTION = 0.92
+    const step = () => {
+      velocity *= FRICTION
+      if (Math.abs(velocity) < 0.5) return
+      el.scrollLeft += velocity
+      momentumRaf.current = requestAnimationFrame(step)
+    }
+    momentumRaf.current = requestAnimationFrame(step)
+  }, [stopMomentum])
+
+  const onStoriesMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = storiesRef.current
+    if (!el) return
+    stopMomentum()
+    dragRef.current = { startX: e.pageX, scrollLeft: el.scrollLeft, dragging: true, didDrag: false }
+    velocityRef.current = { x: 0, lastX: e.pageX, lastT: Date.now() }
+    el.style.cursor = 'grabbing'
+    el.style.userSelect = 'none'
+  }, [stopMomentum])
+
+  const onStoriesMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!dragRef.current.dragging) return
+    const el = storiesRef.current
+    if (!el) return
+    const dx = e.pageX - dragRef.current.startX
+    if (Math.abs(dx) > 4) dragRef.current.didDrag = true
+    el.scrollLeft = dragRef.current.scrollLeft - dx
+    const now = Date.now()
+    const dt = now - velocityRef.current.lastT
+    if (dt > 0) {
+      velocityRef.current.x = (velocityRef.current.lastX - e.pageX) / dt * 16
+      velocityRef.current.lastX = e.pageX
+      velocityRef.current.lastT = now
+    }
+  }, [])
+
+  const endStoryDrag = useCallback((e?: React.MouseEvent) => {
+    const el = storiesRef.current
+    if (!el) return
+    if (e && dragRef.current.didDrag) e.stopPropagation()
+    dragRef.current.dragging = false
+    el.style.cursor = 'grab'
+    el.style.userSelect = ''
+    startMomentum(velocityRef.current.x)
+  }, [startMomentum])
+
+  const onStoriesMouseUp    = useCallback((e: React.MouseEvent) => endStoryDrag(e), [endStoryDrag])
+  const onStoriesMouseLeave = useCallback(() => endStoryDrag(), [endStoryDrag])
 
   const [currentIndex,  setCurrentIndex]  = useState(initialAdIndex)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
@@ -250,7 +309,16 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
                 </div>
 
                 {/* Stories */}
-                <div className="flex-shrink-0 flex gap-3 px-4 py-3 bg-black border-b border-white/[0.07] overflow-x-auto">
+                <div
+                  ref={storiesRef}
+                  className="flex-shrink-0 flex gap-3 px-4 py-3 bg-black border-b border-white/[0.07] overflow-x-auto select-none"
+                  style={{ scrollbarWidth: 'none', cursor: 'grab' }}
+                  onMouseDown={onStoriesMouseDown}
+                  onMouseMove={onStoriesMouseMove}
+                  onMouseUp={onStoriesMouseUp}
+                  onMouseLeave={onStoriesMouseLeave}
+                  onDragStart={e => e.preventDefault()}
+                >
                   {/* "Me" story — always first */}
                   {about && (
                     <button
