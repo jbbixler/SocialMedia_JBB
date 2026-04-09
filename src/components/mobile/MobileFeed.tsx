@@ -24,9 +24,14 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
+const HEART_COLORS = [
+  '#ff3b5c', '#ff9f0a', '#30d158', '#0a84ff', '#bf5af2',
+  '#ff69b4', '#00c7be', '#ffd60a', '#ff6b00', '#ffffff',
+]
+
 export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   const { clients, about } = usePortfolio()
-  const { dark, hotPink, toggleDark, onHeartTap, setStoryOpen } = useTheme()
+  const { dark, hotPink, heartCount, toggleDark, onHeartTap, setStoryOpen } = useTheme()
   const [allAds, setAllAds] = useState<AdWithClient[]>([])
   const [rendered, setRendered] = useState(12)
   const [showCopied, setShowCopied] = useState(false)
@@ -105,11 +110,22 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             {about?.name || 'James Bradley'}
           </span>
 
-          {/* Heart Easter egg */}
+          {/* Heart Easter egg — cycles color on each tap */}
           <button onClick={onHeartTap} className="w-8 h-8 flex items-center justify-center">
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
+            {(() => {
+              const heartColor = heartCount > 0
+                ? HEART_COLORS[(heartCount - 1) % HEART_COLORS.length]
+                : textColor
+              const filled = heartCount > 0
+              return (
+                <svg className="w-6 h-6" viewBox="0 0 24 24" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"
+                  fill={filled ? heartColor : 'none'}
+                  stroke={heartColor}
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              )
+            })()}
           </button>
         </div>
 
@@ -234,6 +250,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             storySets={storySets}
             initialClientIndex={storyClientIdx}
             onClose={() => { setStoryClientIdx(null); setStoryOpen(false) }}
+            onClientSelect={(client) => { setStoryClientIdx(null); setStoryOpen(false); onClientSelect(client) }}
           />
         )}
       </AnimatePresence>

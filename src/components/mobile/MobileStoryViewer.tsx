@@ -15,11 +15,12 @@ interface Props {
   storySets: StorySet[]
   initialClientIndex: number
   onClose: () => void
+  onClientSelect?: (client: Client) => void
 }
 
 const STORY_DURATION = 5000
 
-export default function MobileStoryViewer({ storySets, initialClientIndex, onClose }: Props) {
+export default function MobileStoryViewer({ storySets, initialClientIndex, onClose, onClientSelect }: Props) {
   const [clientIdx, setClientIdx] = useState(initialClientIndex)
   const [storyIdx, setStoryIdx] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -258,14 +259,22 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
           {/* Header */}
           <div className="absolute top-6 inset-x-0 z-30 flex items-center gap-3 px-4">
-            <div
-              className="w-8 h-8 rounded-full overflow-hidden border-2 border-white flex-shrink-0"
-              style={{ background: currentSet.client.color || '#27272a' }}
+            <button
+              data-no-nav
+              className="flex items-center gap-3 flex-1 min-w-0"
+              onClick={() => { onClose(); onClientSelect?.(currentSet.client) }}
+              onMouseDown={e => e.stopPropagation()}
+              style={{ cursor: onClientSelect ? 'pointer' : 'default' }}
             >
-              <img src={currentSet.client.igAvatar || currentSet.client.logo} alt={handle} className="w-full h-full object-contain" />
-            </div>
-            <span className="text-white text-[13px] font-semibold drop-shadow">{handle}</span>
-            <span className="text-white/60 text-[12px]">Sponsored</span>
+              <div
+                className="w-8 h-8 rounded-full overflow-hidden border-2 border-white flex-shrink-0"
+                style={{ background: currentSet.client.color || '#27272a' }}
+              >
+                <img src={currentSet.client.igAvatar || currentSet.client.logo} alt={handle} className="w-full h-full object-contain" />
+              </div>
+              <span className="text-white text-[13px] font-semibold drop-shadow">{handle}</span>
+              <span className="text-white/60 text-[12px]">Sponsored</span>
+            </button>
             <button
               data-no-nav
               onClick={onClose}
@@ -302,17 +311,20 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
         </motion.div>
       </AnimatePresence>
 
-      {/* ── Bottom action bar — transparent with bottom scrim for legibility ── */}
+      {/* ── Bottom action bar ── */}
       <div
         data-no-nav
         className="absolute bottom-0 inset-x-0 z-40 flex flex-col"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)', cursor: 'default' }}
+        style={{ cursor: 'default' }}
         onMouseDown={e => e.stopPropagation()}
         onMouseUp={e => e.stopPropagation()}
       >
-        {/* CTA link button */}
+        {/* CTA — transparent, overlaid on asset with gradient scrim */}
         {ctaHref && (
-          <div className="px-4 pt-3 pb-2">
+          <div
+            className="px-4 pt-3 pb-2"
+            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 70%, transparent 100%)' }}
+          >
             <a
               href={ctaHref}
               target="_blank"
@@ -329,8 +341,8 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           </div>
         )}
 
-        {/* Reply row — order: input · heart · bookmark · send */}
-        <div className="flex items-center gap-2.5 px-3 pb-3 pt-1">
+        {/* Reply row — solid dark background */}
+        <div className="flex items-center gap-2.5 px-3 pb-3 pt-2" style={{ background: 'rgba(0,0,0,0.88)' }}>
           {/* Reply input */}
           <div
             className="flex-1 flex items-center rounded-full overflow-hidden"
