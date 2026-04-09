@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '@/context/DarkModeContext'
 import type { Client, Ad } from '@/types'
 
 interface StorySet {
@@ -29,6 +30,9 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
   const touchStartRef = useRef<{ x: number; y: number; t: number } | null>(null)
   // Mouse tracking for desktop drag
   const mouseDownRef = useRef<{ x: number; moved: boolean } | null>(null)
+
+  const { dark, hotPink } = useTheme()
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
 
   const currentSet = storySets[clientIdx]
   const images = currentSet?.images ?? []
@@ -183,8 +187,8 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] bg-black flex flex-col overflow-hidden select-none"
-      style={{ cursor: 'pointer' }}
+      className="fixed inset-0 z-[200] flex flex-col overflow-hidden select-none"
+      style={{ cursor: 'pointer', background: bg, transition: 'background 0.3s ease' }}
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
@@ -246,13 +250,14 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           <div className="absolute inset-y-0 left-0 w-[35%] z-20" style={{ cursor: 'w-resize' }} />
           <div className="absolute inset-y-0 right-0 w-[65%] z-20" style={{ cursor: 'e-resize' }} />
 
-          {/* Story image */}
+          {/* Story image — anchored to top so brand header overlays the image */}
           <AnimatePresence mode="wait">
             <motion.img
               key={`${clientIdx}-${storyIdx}`}
               src={ad.src}
               alt=""
-              className="absolute inset-0 w-full h-full object-contain"
+              className="absolute left-0 right-0 w-full"
+              style={{ top: 0, height: 'auto' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
