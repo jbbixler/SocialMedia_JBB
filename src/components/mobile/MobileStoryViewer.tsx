@@ -274,7 +274,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
           {/* Brand dots */}
           {storySets.length > 1 && (
-            <div className="absolute bottom-[108px] inset-x-0 z-30 flex justify-center gap-1.5 pointer-events-none">
+            <div className="absolute bottom-[128px] inset-x-0 z-30 flex justify-center gap-1.5 pointer-events-none">
               {storySets.map((_, i) => (
                 <div
                   key={i}
@@ -291,28 +291,23 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
         </motion.div>
       </AnimatePresence>
 
-      {/* ── Bottom action bar — outside slide so it doesn't flash on brand switch ── */}
+      {/* ── Bottom action bar — always black, outside slide so it doesn't flash ── */}
       <div
         data-no-nav
         className="absolute bottom-0 inset-x-0 z-40 flex flex-col"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)', cursor: 'default' }}
+        style={{ background: '#000', cursor: 'default' }}
         onMouseDown={e => e.stopPropagation()}
         onMouseUp={e => e.stopPropagation()}
       >
         {/* CTA link button */}
         {ctaHref && (
-          <div className="px-4 pb-2.5 pt-1">
+          <div className="px-4 pt-3 pb-2">
             <a
               href={ctaHref}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-full text-[14px] font-semibold text-white"
-              style={{
-                background: 'rgba(255,255,255,0.18)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.28)',
-              }}
+              style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.22)' }}
               onMouseDown={e => e.stopPropagation()}
             >
               {ctaLabel}
@@ -323,12 +318,12 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           </div>
         )}
 
-        {/* Reply row */}
-        <div className="flex items-center gap-2.5 px-3 pb-3">
+        {/* Reply row — order: input · heart · bookmark · send */}
+        <div className="flex items-center gap-2.5 px-3 pb-3 pt-1">
           {/* Reply input */}
           <div
             className="flex-1 flex items-center rounded-full overflow-hidden"
-            style={{ border: '1.5px solid rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.08)' }}
+            style={{ border: '1.5px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.08)' }}
           >
             {commentSent ? (
               <span className="px-4 py-2 text-[13px] text-white/70 w-full">Sent ✓</span>
@@ -342,7 +337,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
                 onBlur={() => setInputFocused(false)}
                 onKeyDown={e => { if (e.key === 'Enter') sendComment() }}
                 placeholder={`Reply to ${handle}…`}
-                className="flex-1 bg-transparent outline-none px-4 py-2.5 text-[13px] text-white placeholder-white/55 w-full min-w-0"
+                className="flex-1 bg-transparent outline-none px-4 py-2.5 text-[13px] text-white placeholder-white/50 w-full min-w-0"
                 style={{ cursor: 'text' }}
               />
             )}
@@ -381,21 +376,6 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
             </motion.svg>
           </button>
 
-          {/* Share */}
-          <button
-            onMouseDown={e => e.stopPropagation()}
-            onClick={() => {
-              if (navigator.share) navigator.share({ url: currentSet.client.website || window.location.href }).catch(() => {})
-            }}
-            className="flex-shrink-0 w-9 h-9 flex items-center justify-center"
-            style={{ cursor: 'pointer' }}
-          >
-            <svg viewBox="0 0 24 24" className="w-[24px] h-[24px]" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13" />
-              <polygon points="22 2 15 22 11 13 2 9 22 2" />
-            </svg>
-          </button>
-
           {/* Bookmark */}
           <button
             onClick={() => setBookmarked(b => !b)}
@@ -418,6 +398,22 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
                 strokeLinejoin="round"
               />
             </motion.svg>
+          </button>
+
+          {/* Send — copies brand URL to clipboard */}
+          <button
+            onMouseDown={e => e.stopPropagation()}
+            onClick={() => {
+              const url = currentSet.client.website || window.location.href
+              navigator.clipboard?.writeText(url).catch(() => {})
+            }}
+            className="flex-shrink-0 w-9 h-9 flex items-center justify-center"
+            style={{ cursor: 'pointer' }}
+          >
+            <svg viewBox="0 0 24 24" className="w-[24px] h-[24px]" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
           </button>
         </div>
       </div>

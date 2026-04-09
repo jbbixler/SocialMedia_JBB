@@ -19,14 +19,13 @@ export default function MobileNav({ tab, onTab }: Props) {
 
   return (
     <nav
-      className={`fixed bottom-0 inset-x-0 z-50 flex items-center justify-around border-t ${border}`}
+      className={`fixed bottom-0 inset-x-0 z-50 flex flex-col border-t ${border}`}
       style={{
         background: bg,
-        paddingBottom: 'env(safe-area-inset-bottom)',
-        height: 'calc(49px + env(safe-area-inset-bottom))',
         transition: 'background 0.4s ease',
       }}
     >
+      <div className="flex items-center justify-around" style={{ height: '49px' }}>
       {/* Home */}
       <NavBtn active={tab === 'feed'} onClick={() => onTab('feed')} label="Home" activeFill={activeFill} inactiveFill={inactiveFill}>
         <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
@@ -91,6 +90,15 @@ export default function MobileNav({ tab, onTab }: Props) {
           <circle cx="12" cy="7" r="4" />
         </svg>
       </NavBtn>
+      </div>
+
+      {/* Home indicator pill */}
+      <div aria-hidden className="flex justify-center pb-2 pt-1">
+        <div
+          className="rounded-full"
+          style={{ width: '134px', height: '5px', background: dark || hotPink ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.22)' }}
+        />
+      </div>
     </nav>
   )
 }
