@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/context/DarkModeContext'
+import { useBookmarks } from '@/context/BookmarkContext'
 import type { Client, Ad } from '@/types'
 
 interface StorySet {
@@ -27,10 +28,12 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
   // Bottom bar interaction state
   const [liked, setLiked] = useState(false)
-  const [bookmarked, setBookmarked] = useState(false)
   const [commentText, setCommentText] = useState('')
   const [commentSent, setCommentSent] = useState(false)
   const [inputFocused, setInputFocused] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const { toggle: toggleBookmark, isSaved } = useBookmarks()
 
   const rafRef       = useRef<number>(0)
   const startTimeRef = useRef<number>(0)
@@ -45,10 +48,9 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
   const images     = currentSet?.images ?? []
   const totalStories = images.length
 
-  // Reset per-story state when brand changes
+  // Reset per-brand state when brand changes
   useEffect(() => {
     setLiked(false)
-    setBookmarked(false)
     setCommentText('')
     setCommentSent(false)
     setInputFocused(false)
@@ -163,19 +165,28 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
     setCommentSent(true)
     setCommentText('')
     setInputFocused(false)
+    // currentSet / storyIdx captured at call time — read ad from images array
+    const targetAd = currentSet.images[storyIdx]
     try {
       await fetch('/api/comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: `story-${currentSet.client.id}-${storyIdx}`, comment: text }),
+        body: JSON.stringify({
+          comment: text,
+          clientName: currentSet.client.name,
+          adIndex: storyIdx,
+          adSrc: targetAd?.src ?? '',
+        }),
       })
     } catch {}
   }, [commentText, currentSet, storyIdx])
 
   if (!currentSet || images.length === 0) { onClose(); return null }
 
-  const ad      = images[storyIdx]
-  const handle  = currentSet.client.igHandle || currentSet.client.id
+  const ad        = images[storyIdx]
+  const handle    = currentSet.client.igHandle || currentSet.client.id
+  const storyKey  = `story-${currentSet.client.id}-${storyIdx}`
+  const bookmarked = isSaved(storyKey)
   const ctaHref = currentSet.client.website || ''
   const ctaLabel = currentSet.client.cta || 'Learn More'
 
@@ -376,9 +387,9 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
             </motion.svg>
           </button>
 
-          {/* Bookmark */}
+          {/* Bookmark — saves to Saved tab via BookmarkContext */}
           <button
-            onClick={() => setBookmarked(b => !b)}
+            onClick={() => toggleBookmark({ ad, client: currentSet.client, key: storyKey })}
             onMouseDown={e => e.stopPropagation()}
             className="flex-shrink-0 w-9 h-9 flex items-center justify-center"
             style={{ cursor: 'pointer' }}
@@ -400,12 +411,15 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
             </motion.svg>
           </button>
 
-          {/* Send — copies brand URL to clipboard */}
+          {/* Send — copies brand URL to clipboard, shows toast */}
           <button
             onMouseDown={e => e.stopPropagation()}
             onClick={() => {
               const url = currentSet.client.website || window.location.href
-              navigator.clipboard?.writeText(url).catch(() => {})
+              navigator.clipboard?.writeText(url).then(() => {
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2200)
+              }).catch(() => {})
             }}
             className="flex-shrink-0 w-9 h-9 flex items-center justify-center"
             style={{ cursor: 'pointer' }}
@@ -417,6 +431,21 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           </button>
         </div>
       </div>
+
+      {/* Clipboard copy toast */}
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            className="absolute left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full text-white text-[13px] font-medium whitespace-nowrap pointer-events-none"
+            style={{ bottom: '110px', background: 'rgba(30,30,30,0.92)' }}
+          >
+            Link copied to clipboard
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
