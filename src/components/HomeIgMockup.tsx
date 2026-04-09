@@ -99,6 +99,11 @@ export default function HomeIgMockup() {
   const [allAds, setAllAds] = useState<AdWithClient[]>([])
   const [showCopied, setShowCopied] = useState(false)
   const [activeClientId, setActiveClientId] = useState<string | null>(null)
+  const [dark, setDark] = useState(true)
+  const [heartCount, setHeartCount] = useState(0)
+
+  const toggleDark = useCallback(() => setDark(d => !d), [])
+  const onHeartTap = useCallback(() => setHeartCount(c => c + 1), [])
 
   // Shuffle all ads client-side only to avoid hydration mismatch
   useEffect(() => {
@@ -241,8 +246,8 @@ export default function HomeIgMockup() {
 
           {/* Screen */}
           <div
-            className="relative bg-black flex flex-col overflow-hidden"
-            style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px' }}
+            className="relative flex flex-col overflow-hidden"
+            style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px', background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }}
           >
             {/* Cursor-reactive glass sheen — very subtle */}
             <div
@@ -258,112 +263,117 @@ export default function HomeIgMockup() {
             <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
 
             {/* Status bar */}
-            <div className="flex-shrink-0 bg-black" style={{ height:'59px' }} />
+            <div className="flex-shrink-0" style={{ height:'59px', background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }} />
 
-            {/* Top nav */}
-            <div className="flex-shrink-0 flex items-center justify-between px-4 pb-2.5 bg-black border-b border-white/[0.07]">
+            {/* Top nav — dark toggle left, name center, heart right */}
+            <div
+              className="flex-shrink-0 relative flex items-center justify-between px-4 pb-2.5 border-b"
+              style={{ background: dark ? '#000' : '#fff', borderColor: dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)', transition: 'background 0.3s ease' }}
+            >
+              {/* Dark mode toggle */}
+              <button onClick={toggleDark} className="w-8 h-8 flex items-center justify-center">
+                {dark ? (
+                  <svg className="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                ) : (
+                  <svg className="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                )}
+              </button>
+
+              {/* Centered name */}
               <button
                 onClick={goToAbout}
-                className="text-white hover:opacity-75 transition-opacity text-left"
-                style={{ fontFamily:'-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif', fontSize:'19px', fontWeight:600, letterSpacing:'-0.025em', lineHeight:1 }}
+                className="absolute left-1/2 -translate-x-1/2"
+                style={{ fontFamily:'-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif', fontSize:'19px', fontWeight:600, letterSpacing:'-0.025em', lineHeight:1, color: dark ? '#fff' : '#1d1d1f' }}
               >
                 {about?.name || 'James Bradley'}
               </button>
-              <div className="flex items-center gap-4">
-                <button onClick={goToAbout}>
-                  <svg className="w-6 h-6 stroke-white hover:stroke-red-400 transition-colors" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
-                </button>
-              </div>
+
+              {/* Heart Easter egg */}
+              <button onClick={onHeartTap} className="w-8 h-8 flex items-center justify-center">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke={dark ? '#fff' : '#1d1d1f'} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </button>
             </div>
 
-            {/* Stories */}
-            <div
-              ref={storiesRef}
-              className="flex-shrink-0 flex gap-3 px-4 py-3 bg-black border-b border-white/[0.07] overflow-x-auto select-none"
-              style={{ scrollbarWidth: 'none', cursor: 'grab' }}
-              onMouseDown={onStoriesMouseDown}
-              onMouseMove={onStoriesMouseMove}
-              onMouseUp={onStoriesMouseUp}
-              onMouseLeave={onStoriesMouseLeave}
-              onDragStart={e => e.preventDefault()}
-            >
-              {/* "Me" story — always first */}
-              {about && (
-                <button
-                  onClick={goToAbout}
-                  className="flex flex-col items-center gap-1 flex-shrink-0"
-                  title={about.name}
+            {/* Stories — only clients with 9:16 static images */}
+            {(() => {
+              const storySets = clients.filter(c => c.ads.some(a => a.type === 'image' && a.ratio === '9:16'))
+              const nonStory  = clients.filter(c => !storySets.some(s => s.id === c.id))
+              const borderC   = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'
+              const nameColor = dark ? '#fff' : '#1d1d1f'
+              const frameBorder = dark ? '#000' : '#fff'
+              return (
+                <div
+                  ref={storiesRef}
+                  className="flex-shrink-0 flex gap-3 px-4 py-3 border-b overflow-x-auto select-none"
+                  style={{ scrollbarWidth: 'none', cursor: 'grab', background: dark ? '#000' : '#fff', borderColor: borderC, transition: 'background 0.3s ease' }}
+                  onMouseDown={onStoriesMouseDown}
+                  onMouseMove={onStoriesMouseMove}
+                  onMouseUp={onStoriesMouseUp}
+                  onMouseLeave={onStoriesMouseLeave}
+                  onDragStart={e => e.preventDefault()}
                 >
-                  <div className="relative w-[58px] h-[58px]">
-                    <div
-                      className="w-full h-full rounded-full p-[2.5px]"
-                      style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
-                    >
-                      <div
-                        className="w-full h-full rounded-full overflow-hidden border-2 border-black flex items-center justify-center"
-                        style={{ background: about.color || '#1d1d1f' }}
-                      >
-                        {about.avatar ? (
-                          <img src={about.avatar} alt={about.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="text-white text-[11px] font-semibold">{about.name.charAt(0)}</span>
-                        )}
+                  {/* "Me" story */}
+                  {about && (
+                    <button onClick={goToAbout} className="flex flex-col items-center gap-1 flex-shrink-0">
+                      <div className="relative w-[58px] h-[58px]">
+                        <div className="w-full h-full rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
+                          <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: about.color || '#1d1d1f', borderColor: frameBorder }}>
+                            {about.avatar
+                              ? <img src={about.avatar} alt={about.name} className="w-full h-full object-cover" />
+                              : <span className="text-white text-[11px] font-semibold">{about.name.charAt(0)}</span>}
+                          </div>
+                        </div>
+                        <span className="absolute bottom-0 right-0 w-[13px] h-[13px] rounded-full bg-[#22c55e] border-[2px]" style={{ borderColor: frameBorder }} />
                       </div>
-                    </div>
-                    {/* Green active dot */}
-                    <span className="absolute bottom-0 right-0 w-[13px] h-[13px] rounded-full bg-[#22c55e] border-[2px] border-black" />
-                  </div>
-                  <span className="text-[10px] text-white max-w-[58px] truncate">
-                    {about.handle || 'you'}
-                  </span>
-                </button>
-              )}
+                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: dark ? 'rgba(255,255,255,0.5)' : '#8e8e8e' }}>{about.handle || 'you'}</span>
+                    </button>
+                  )}
 
-              {clients.map(c => {
-                const isActive = !activeClientId || c.id === activeClientId
-                return (
-                  <button
-                    key={c.id}
-                    onClick={() => dispatch({ type: 'SELECT_CLIENT', client: c })}
-                    className="flex flex-col items-center gap-1 flex-shrink-0 group"
-                    title={c.name}
-                    style={{ opacity: isActive ? 1 : 0.97, transition: 'opacity 0.5s ease' }}
-                  >
-                    <div
-                      className="w-[58px] h-[58px] rounded-full p-[2.5px]"
-                      style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
-                    >
-                      <div
-                        className="w-full h-full rounded-full overflow-hidden border-2 border-black flex items-center justify-center"
-                        style={{ background: c.color || '#27272a' }}
-                      >
-                        <img
-                          src={c.igAvatar || c.logo}
-                          alt={c.name}
-                          className="w-full h-full object-contain"
-                          onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
-                        />
+                  {/* Clients with 9:16 statics — story ring */}
+                  {storySets.map(c => (
+                    <button key={c.id} onClick={() => dispatch({ type: 'SELECT_CLIENT', client: c })} className="flex flex-col items-center gap-1 flex-shrink-0">
+                      <div className="w-[58px] h-[58px] rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
+                        <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: c.color || '#27272a', borderColor: frameBorder }}>
+                          <img src={c.igAvatar || c.logo} alt={c.name} className="w-full h-full object-contain" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                        </div>
                       </div>
-                    </div>
-                    <span className="text-[10px] max-w-[58px] truncate transition-colors" style={{ color: isActive ? '#fff' : '#71717a' }}>
-                      {c.igHandle || c.id}
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
+                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: nameColor }}>{c.igHandle || c.id}</span>
+                    </button>
+                  ))}
+
+                  {/* Clients without 9:16 statics — no story ring */}
+                  {nonStory.map(c => (
+                    <button key={c.id} onClick={() => dispatch({ type: 'SELECT_CLIENT', client: c })} className="flex flex-col items-center gap-1 flex-shrink-0">
+                      <div className="w-[58px] h-[58px] rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: c.color || '#27272a', borderColor: dark ? '#444' : '#ddd' }}>
+                        <img src={c.igAvatar || c.logo} alt={c.name} className="w-full h-full object-contain" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                      </div>
+                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: nameColor }}>{c.igHandle || c.id}</span>
+                    </button>
+                  ))}
+                </div>
+              )
+            })()}
 
             {/* Feed */}
-            <div ref={feedRef} className="flex-1 overflow-y-auto">
+            <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ background: dark ? '#000' : '#f5f5f7', transition: 'background 0.3s ease' }}>
               {visible.map(({ ad, client, key }, i) => (
-                <div key={key} data-post-index={i} data-client-id={client.id} className={i > 0 ? 'border-t-[6px] border-[#0a0a0a]' : ''}>
+                <div key={key} data-post-index={i} data-client-id={client.id} style={{ borderTop: i > 0 ? `6px solid ${dark ? '#0a0a0a' : '#e5e5ea'}` : 'none' }}>
                   <IgPost
                     ad={ad}
                     client={client}
                     adIndex={i}
                     isInitial={false}
+                    dark={dark}
                     onMediaClick={() => dispatch({ type: 'SELECT_CLIENT', client })}
                     onShare={handleShare}
                   />
@@ -373,8 +383,8 @@ export default function HomeIgMockup() {
             </div>
 
             {/* Home indicator */}
-            <div className="flex-shrink-0 flex justify-center items-end pb-2 pt-1.5 bg-black">
-              <div className="w-[130px] h-[5px] bg-white/30 rounded-full" />
+            <div className="flex-shrink-0 flex justify-center items-end pb-2 pt-1.5" style={{ background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }}>
+              <div className="w-[130px] h-[5px] rounded-full" style={{ background: dark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.15)' }} />
             </div>
           </div>
         </motion.div>
