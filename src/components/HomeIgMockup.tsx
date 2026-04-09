@@ -98,7 +98,7 @@ interface PhoneFrameProps {
 }
 
 function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onClientSelect, onProfileSelect, about }: PhoneFrameProps) {
-  const { dark } = useTheme()
+  const { dark, hotPink } = useTheme()
   const screenBg = dark ? '#000' : '#fff'
 
   return (
@@ -144,6 +144,9 @@ function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onC
         <div className="flex-1 relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
           <EmbeddedMobileApp onClientSelect={onClientSelect} onProfileSelect={onProfileSelect} about={about} />
         </div>
+
+        {/* Home indicator */}
+        <div aria-hidden className="absolute left-1/2 -translate-x-1/2 rounded-full pointer-events-none" style={{ bottom: '8px', width: '134px', height: '5px', zIndex: 60, background: dark || hotPink ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.22)' }} />
       </div>
     </motion.div>
   )
