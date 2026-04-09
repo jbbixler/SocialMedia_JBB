@@ -80,6 +80,7 @@ export default function MobileSavedTab() {
   const feedOverlayRef = useRef<HTMLDivElement>(null)
   const swipeRef = useSwipeBack(() => setViewingIndex(null))
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const cardBg = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#f5f5f7'
@@ -91,7 +92,9 @@ export default function MobileSavedTab() {
   useEffect(() => {
     // Skip initial mount — only auto-scroll when new messages are added
     if (messages.length <= 1) return
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Scroll within the container directly — avoids propagating to the outer page
+    const el = scrollContainerRef.current
+    if (el) el.scrollTop = el.scrollHeight
   }, [messages])
 
   const sendMessage = useCallback(async () => {
@@ -144,7 +147,7 @@ export default function MobileSavedTab() {
         </span>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto">
         {/* ── Chatbot section ───────────────────────────────────────────── */}
         <div className="px-4 pt-4 pb-2">
           <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-3" style={{ color: subColor }}>
