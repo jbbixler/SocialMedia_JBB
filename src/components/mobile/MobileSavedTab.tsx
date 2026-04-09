@@ -89,6 +89,8 @@ export default function MobileSavedTab() {
   const inputBg = dark || hotPink ? '#1a1a1a' : '#efefef'
 
   useEffect(() => {
+    // Skip initial mount — only auto-scroll when new messages are added
+    if (messages.length <= 1) return
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
