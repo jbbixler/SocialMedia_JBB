@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback, RefObject } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
@@ -8,6 +8,56 @@ import MobilePost from './MobilePost'
 import type { Ad, Client } from '@/types'
 
 interface SavedAdItem { ad: Ad; client: Client; key: string }
+
+function useSwipeBack(onBack: () => void): RefObject<HTMLDivElement> {
+  const elRef = useRef<HTMLDivElement>(null)
+  const touchRef = useRef<{ startX: number; startY: number; locked: boolean } | null>(null)
+
+  useEffect(() => {
+    const el = elRef.current
+    if (!el) return
+
+    const onStart = (e: TouchEvent) => {
+      touchRef.current = { startX: e.touches[0].clientX, startY: e.touches[0].clientY, locked: false }
+      el.style.transition = 'none'
+    }
+    const onMove = (e: TouchEvent) => {
+      const t = touchRef.current
+      if (!t) return
+      const dx = e.touches[0].clientX - t.startX
+      const dy = Math.abs(e.touches[0].clientY - t.startY)
+      if (!t.locked) {
+        if (dy > 10 && dy > Math.abs(dx)) { touchRef.current = null; return }
+        t.locked = true
+      }
+      if (dx > 0) el.style.transform = `translateX(${dx}px)`
+    }
+    const onEnd = (e: TouchEvent) => {
+      const t = touchRef.current
+      touchRef.current = null
+      el.style.transition = 'transform 0.25s ease'
+      if (!t) return
+      const dx = e.changedTouches[0].clientX - t.startX
+      if (dx > 80) {
+        el.style.transform = 'translateX(100%)'
+        setTimeout(onBack, 230)
+      } else {
+        el.style.transform = 'translateX(0)'
+      }
+    }
+
+    el.addEventListener('touchstart', onStart, { passive: true })
+    el.addEventListener('touchmove', onMove, { passive: true })
+    el.addEventListener('touchend', onEnd, { passive: true })
+    return () => {
+      el.removeEventListener('touchstart', onStart)
+      el.removeEventListener('touchmove', onMove)
+      el.removeEventListener('touchend', onEnd)
+    }
+  }, [onBack])
+
+  return elRef
+}
 
 interface Message {
   role: 'user' | 'assistant'
@@ -28,6 +78,7 @@ export default function MobileSavedTab() {
   const [sent, setSent] = useState(false)
   const [viewingIndex, setViewingIndex] = useState<number | null>(null)
   const feedOverlayRef = useRef<HTMLDivElement>(null)
+  const swipeRef = useSwipeBack(() => setViewingIndex(null))
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -237,6 +288,7 @@ export default function MobileSavedTab() {
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 32 }}
           >
+            <div ref={swipeRef} className="flex-1 flex flex-col overflow-hidden">
             {/* Close bar */}
             <div
               className="flex-shrink-0 flex items-center gap-3 px-3 h-[44px] border-b"
@@ -271,6 +323,7 @@ export default function MobileSavedTab() {
                   />
                 </div>
               ))}
+            </div>
             </div>
           </motion.div>
         )}

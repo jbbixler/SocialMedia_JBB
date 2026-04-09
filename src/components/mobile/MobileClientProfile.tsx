@@ -1,12 +1,66 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback, RefObject } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { copyToClipboard } from '@/lib/clipboard'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
 import type { Client, Ad } from '@/types'
+
+// Swipe-right-to-go-back gesture — applies directly to element via ref
+function useSwipeBack(onBack: () => void): RefObject<HTMLDivElement> {
+  const elRef = useRef<HTMLDivElement>(null)
+  const touchRef = useRef<{ startX: number; startY: number; locked: boolean } | null>(null)
+
+  useEffect(() => {
+    const el = elRef.current
+    if (!el) return
+
+    const onStart = (e: TouchEvent) => {
+      touchRef.current = { startX: e.touches[0].clientX, startY: e.touches[0].clientY, locked: false }
+      el.style.transition = 'none'
+    }
+
+    const onMove = (e: TouchEvent) => {
+      const t = touchRef.current
+      if (!t) return
+      const dx = e.touches[0].clientX - t.startX
+      const dy = Math.abs(e.touches[0].clientY - t.startY)
+      if (!t.locked) {
+        if (dy > 10 && dy > Math.abs(dx)) { touchRef.current = null; return } // vertical scroll
+        t.locked = true
+      }
+      if (dx > 0) el.style.transform = `translateX(${dx}px)`
+    }
+
+    const onEnd = (e: TouchEvent) => {
+      const t = touchRef.current
+      touchRef.current = null
+      el.style.transition = 'transform 0.25s ease'
+      if (!t) return
+      const dx = e.changedTouches[0].clientX - t.startX
+      const vx = dx / Math.max(1, e.timeStamp - performance.now() + 300) // rough velocity
+      if (dx > 80 || (dx > 40 && vx > 0.3)) {
+        el.style.transform = `translateX(100%)`
+        setTimeout(onBack, 230)
+      } else {
+        el.style.transform = 'translateX(0)'
+      }
+    }
+
+    el.addEventListener('touchstart', onStart, { passive: true })
+    el.addEventListener('touchmove', onMove, { passive: true })
+    el.addEventListener('touchend', onEnd, { passive: true })
+    return () => {
+      el.removeEventListener('touchstart', onStart)
+      el.removeEventListener('touchmove', onMove)
+      el.removeEventListener('touchend', onEnd)
+    }
+  }, [onBack])
+
+  return elRef
+}
 
 interface Props {
   client: Client
@@ -23,6 +77,7 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
   const [tab, setTab] = useState<ProfileTab>('posts')
   const [feedStartIndex, setFeedStartIndex] = useState<number | null>(null)
   const [reelsViewerIndex, setReelsViewerIndex] = useState<number | null>(null)
+  const swipeRef = useSwipeBack(onBack)
 
   const handle = client.igHandle || client.id
   // Reels: 9:16 videos only
@@ -50,26 +105,18 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
   // Post feed opened from grid
   if (feedStartIndex !== null) {
     return (
-      <motion.div
-        className="flex-1 flex flex-col overflow-hidden"
-        style={{ background: bg }}
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
-      >
-        <ClientPostFeed
-          client={client}
-          ads={client.ads}
-          startIndex={feedStartIndex}
-          onBack={() => setFeedStartIndex(null)}
-          onProfileSelect={onProfileSelect}
-        />
-      </motion.div>
+      <ClientPostFeed
+        client={client}
+        ads={client.ads}
+        startIndex={feedStartIndex}
+        onBack={() => setFeedStartIndex(null)}
+        onProfileSelect={onProfileSelect}
+      />
     )
   }
 
   return (
-    <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(49px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
+    <div ref={swipeRef} className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(49px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
       {/* Top bar */}
       <div className="sticky top-0 z-30 flex items-center gap-3 px-3 h-[44px] border-b" style={{ background: bg, borderColor }}>
         <button onClick={onBack} className="p-1 -ml-1">
@@ -190,12 +237,13 @@ function ClientReelsViewer({ client, ads, startIndex, onBack, onProfileSelect }:
   const mutedRef = useRef(true)
   const toggleMute = () => { const n = !mutedRef.current; mutedRef.current = n; setMuted(n) }
   const handle = client.igHandle || client.id
+  const swipeRef = useSwipeBack(onBack)
 
   const windowStart = Math.max(0, activeIndex - 2)
   const windowEnd = Math.min(ads.length - 1, activeIndex + 2)
 
   return (
-    <div className="flex-1 relative bg-black overflow-hidden">
+    <div ref={swipeRef} className="flex-1 relative bg-black overflow-hidden">
       {/* Top bar */}
       <div className="absolute top-0 inset-x-0 z-30 flex items-center gap-3 px-4 pt-3 pb-2 pointer-events-none">
         <button className="pointer-events-auto" onClick={onBack}>
@@ -326,6 +374,7 @@ function ClientPostFeed({ client, ads, startIndex, onBack, onProfileSelect }: {
   client: Client; ads: Ad[]; startIndex: number; onBack: () => void; onProfileSelect: () => void
 }) {
   const feedRef = useRef<HTMLDivElement>(null)
+  const swipeRef = useSwipeBack(onBack)
   const [showCopied, setShowCopied] = useState(false)
   const { dark, hotPink } = useTheme()
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -347,7 +396,7 @@ function ClientPostFeed({ client, ads, startIndex, onBack, onProfileSelect }: {
   }, [startIndex])
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden" style={{ background: bg }}>
+    <div ref={swipeRef} className="flex-1 flex flex-col overflow-hidden" style={{ background: bg }}>
       <div className="flex-shrink-0 flex items-center gap-3 px-3 h-[44px] border-b z-30" style={{ background: bg, borderColor }}>
         <button onClick={onBack} className="p-1 -ml-1">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
