@@ -6,10 +6,16 @@ export async function POST(req: NextRequest) {
     const RESEND_KEY = process.env.RESEND_API_KEY
     const TO_EMAIL = process.env.LEAD_EMAIL || 'jbbleads@gmail.com'
 
+    // Build an absolute URL so the link works from email
+    const origin = req.headers.get('origin') || req.headers.get('x-forwarded-host')
+      ? `https://${req.headers.get('x-forwarded-host')}`
+      : 'https://jbradbixler.com'
+    const assetUrl = adSrc?.startsWith('http') ? adSrc : `${origin}/${adSrc}`
+
     const html = `
       <h2 style="margin:0 0 16px">💬 New Comment on Portfolio Ad</h2>
       <p style="margin:0 0 4px"><strong>Client:</strong> ${clientName}</p>
-      <p style="margin:0 0 16px"><strong>Asset:</strong> <a href="${adSrc}" style="color:#0095f6">${adSrc}</a></p>
+      <p style="margin:0 0 16px"><strong>Asset:</strong> <a href="${assetUrl}" style="color:#0095f6">${adSrc}</a></p>
       <blockquote style="border-left:3px solid #0095f6;margin:0 0 16px;padding:8px 16px;background:#f5f5f7;border-radius:0 8px 8px 0;font-size:15px">
         ${comment}
       </blockquote>
