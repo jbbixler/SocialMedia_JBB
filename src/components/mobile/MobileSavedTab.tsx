@@ -81,7 +81,7 @@ export default function MobileSavedTab() {
   const swipeRef = useSwipeBack(() => setViewingIndex(null))
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const bg = hotPink ? 'transparent' : dark ? '#000' : '#fff'
   const cardBg = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#f5f5f7'
   const textColor = dark || hotPink ? '#fff' : '#1d1d1f'
   const subColor = dark || hotPink ? 'rgba(255,255,255,0.55)' : '#8e8e8e'
@@ -160,7 +160,7 @@ export default function MobileSavedTab() {
                       ? (hotPink ? '#fff' : '#0095f6')
                       : cardBg,
                     color: m.role === 'user'
-                      ? (hotPink ? '#ff69b4' : '#fff')
+                      ? (hotPink ? '#3d4e28' : '#fff')
                       : textColor,
                     borderRadius: m.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
                   }}
@@ -198,7 +198,7 @@ export default function MobileSavedTab() {
                 style={{ background: input.trim() ? (hotPink ? '#fff' : '#0095f6') : 'transparent', transition: 'background 0.2s' }}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                  stroke={input.trim() ? (hotPink ? '#ff69b4' : '#fff') : subColor}
+                  stroke={input.trim() ? (hotPink ? '#3d4e28' : '#fff') : subColor}
                   strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                 >
                   <line x1="22" y1="2" x2="11" y2="13" />
@@ -213,7 +213,7 @@ export default function MobileSavedTab() {
             <button
               onClick={sendLead}
               className="w-full mt-3 py-2.5 rounded-full text-[13px] font-semibold"
-              style={{ background: hotPink ? '#fff' : '#0095f6', color: hotPink ? '#ff69b4' : '#fff' }}
+              style={{ background: hotPink ? '#fff' : '#0095f6', color: hotPink ? '#3d4e28' : '#fff' }}
             >
               Send to James
             </button>

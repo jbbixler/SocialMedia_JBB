@@ -34,7 +34,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   const sentinelRef = useRef<HTMLDivElement>(null)
 
   // Theme colors
-  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const bg = hotPink ? 'transparent' : dark ? '#000' : '#fff'
   const textColor = dark || hotPink ? '#fff' : '#1d1d1f'
   const borderColor = dark || hotPink ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'
   const subColor = dark || hotPink ? 'rgba(255,255,255,0.5)' : '#8e8e8e'

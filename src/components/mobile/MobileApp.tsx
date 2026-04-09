@@ -68,10 +68,10 @@ function MobileAppInner({ about }: Props) {
     }
   }
 
-  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const bg = hotPink ? 'transparent' : dark ? '#000' : '#fff'
 
   return (
-    <div className="flex flex-col h-[100dvh] overflow-hidden" style={{ background: bg, transition: 'background 0.4s ease' }}>
+    <div className={`flex flex-col h-[100dvh] overflow-hidden${hotPink ? ' camo-bg' : ''}`} style={{ background: bg, transition: 'background 0.4s ease' }}>
       {/* No AnimatePresence transition — instant tab switching like Instagram */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {current.screen === 'feed' && (
