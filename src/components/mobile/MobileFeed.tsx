@@ -36,7 +36,41 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   const [rendered, setRendered] = useState(12)
   const [showCopied, setShowCopied] = useState(false)
   const [storyClientIdx, setStoryClientIdx] = useState<number | null>(null)
-  const sentinelRef = useRef<HTMLDivElement>(null)
+  const sentinelRef  = useRef<HTMLDivElement>(null)
+  const storiesRef   = useRef<HTMLDivElement>(null)
+  const storyDragRef = useRef({ down: false, startX: 0, scrollLeft: 0, moved: false })
+
+  const onStoriesMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = storiesRef.current
+    if (!el) return
+    storyDragRef.current = { down: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false }
+    el.style.cursor = 'grabbing'
+  }, [])
+
+  const onStoriesMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!storyDragRef.current.down) return
+    const el = storiesRef.current
+    if (!el) return
+    const dx = e.clientX - storyDragRef.current.startX
+    if (Math.abs(dx) > 5) storyDragRef.current.moved = true
+    el.scrollLeft = storyDragRef.current.scrollLeft - dx
+  }, [])
+
+  const onStoriesMouseUp = useCallback(() => {
+    const el = storiesRef.current
+    if (el) el.style.cursor = 'grab'
+    storyDragRef.current.down = false
+    // Reset after click event fires so taps still work
+    setTimeout(() => { storyDragRef.current.moved = false }, 80)
+  }, [])
+
+  const onStoriesMouseLeave = useCallback(() => {
+    if (!storyDragRef.current.down) return
+    storyDragRef.current.down = false
+    const el = storiesRef.current
+    if (el) el.style.cursor = 'grab'
+    setTimeout(() => { storyDragRef.current.moved = false }, 80)
+  }, [])
 
   // Theme colors
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -131,13 +165,18 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
 
         {/* Stories */}
         <div
-          className="flex gap-4 px-4 py-3 overflow-x-auto border-b"
-          style={{ scrollbarWidth: 'none', borderColor }}
+          ref={storiesRef}
+          className="flex gap-4 px-4 py-3 overflow-x-auto border-b select-none"
+          style={{ scrollbarWidth: 'none', borderColor, cursor: 'grab' }}
+          onMouseDown={onStoriesMouseDown}
+          onMouseMove={onStoriesMouseMove}
+          onMouseUp={onStoriesMouseUp}
+          onMouseLeave={onStoriesMouseLeave}
         >
           {/* "Me" story — navigates to profile */}
           {about && (
             <button
-              onClick={onProfileSelect}
+              onClick={() => { if (!storyDragRef.current.moved) onProfileSelect() }}
               className="flex flex-col items-center gap-1.5 flex-shrink-0"
               title={about.name}
             >
@@ -167,7 +206,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
           {storySets.map((set, i) => (
             <button
               key={set.client.id}
-              onClick={() => { setStoryClientIdx(i); setStoryOpen(true) }}
+              onClick={() => { if (!storyDragRef.current.moved) { setStoryClientIdx(i); setStoryOpen(true) } }}
               className="flex flex-col items-center gap-1.5 flex-shrink-0"
             >
               <div
@@ -193,7 +232,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             .map(c => (
               <button
                 key={c.id}
-                onClick={() => onClientSelect(c)}
+                onClick={() => { if (!storyDragRef.current.moved) onClientSelect(c) }}
                 className="flex flex-col items-center gap-1.5 flex-shrink-0"
               >
                 <div
