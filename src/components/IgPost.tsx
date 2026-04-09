@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import type { Ad, Client } from '@/types'
@@ -11,11 +12,12 @@ interface Props {
   adIndex: number
   isInitial: boolean
   dark?: boolean
+  commentPortal?: HTMLElement | null
   onMediaClick?: () => void
   onShare?: () => void
 }
 
-export default function IgPost({ ad, client, adIndex, isInitial, dark = true, onMediaClick, onShare }: Props) {
+export default function IgPost({ ad, client, adIndex, isInitial, dark = true, commentPortal, onMediaClick, onShare }: Props) {
   const postRef  = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
@@ -284,43 +286,48 @@ export default function IgPost({ ad, client, adIndex, isInitial, dark = true, on
         </div>
       )}
 
-      {/* Comment sheet */}
-      <AnimatePresence>
-        {showComment && (
-          <>
-            <motion.div className="fixed inset-0 z-[100] bg-black/50"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setShowComment(false)}
-            />
-            <motion.div
-              className="fixed bottom-0 inset-x-0 z-[101] rounded-t-2xl p-5 pb-8"
-              style={{ background: menuBg }}
-              initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
-              transition={{ type: 'spring', stiffness: 340, damping: 32 }}
-            >
-              <div className="w-10 h-1 rounded-full bg-gray-300 mx-auto mb-4" />
-              <p className="text-[15px] font-semibold mb-3 text-center" style={{ color: textColor }}>Leave a comment</p>
-              <p className="text-[12px] text-center mb-4" style={{ color: subColor }}>on @{handle}'s ad</p>
-              <textarea
-                value={commentText}
-                onChange={e => setCommentText(e.target.value)}
-                placeholder="Write your thoughts…"
-                rows={4}
-                className="w-full rounded-xl px-4 py-3 text-[14px] outline-none resize-none"
-                style={{ background: inputBg, color: textColor, border: `1px solid ${borderColor}` }}
-              />
-              <button
-                onClick={handleComment}
-                disabled={!commentText.trim()}
-                className="w-full mt-3 py-3 rounded-xl text-[14px] font-semibold"
-                style={{ background: commentText.trim() ? '#0095f6' : (dark ? '#333' : '#e0e0e0'), color: commentText.trim() ? '#fff' : subColor }}
-              >
-                Send comment
-              </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {/* Comment sheet — portaled into phone frame on desktop, fixed on mobile */}
+      {showComment && (() => {
+        const sheet = (
+          <AnimatePresence>
+            {showComment && (
+              <>
+                <motion.div
+                  style={{ position: commentPortal ? 'absolute' : 'fixed', inset: 0, zIndex: 100, background: 'rgba(0,0,0,0.5)' }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  onClick={() => setShowComment(false)}
+                />
+                <motion.div
+                  style={{ position: commentPortal ? 'absolute' : 'fixed', bottom: 0, left: 0, right: 0, zIndex: 101, background: menuBg, borderRadius: '16px 16px 0 0', padding: '20px 20px 32px' }}
+                  initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+                  transition={{ type: 'spring', stiffness: 340, damping: 32 }}
+                >
+                  <div style={{ width: 40, height: 4, borderRadius: 9999, background: dark ? '#555' : '#d1d1d6', margin: '0 auto 16px' }} />
+                  <p className="text-[15px] font-semibold mb-3 text-center" style={{ color: textColor }}>Leave a comment</p>
+                  <p className="text-[12px] text-center mb-4" style={{ color: subColor }}>on @{handle}'s ad</p>
+                  <textarea
+                    value={commentText}
+                    onChange={e => setCommentText(e.target.value)}
+                    placeholder="Write your thoughts…"
+                    rows={4}
+                    className="w-full rounded-xl px-4 py-3 text-[14px] outline-none resize-none"
+                    style={{ background: inputBg, color: textColor, border: `1px solid ${borderColor}` }}
+                  />
+                  <button
+                    onClick={handleComment}
+                    disabled={!commentText.trim()}
+                    className="w-full mt-3 py-3 rounded-xl text-[14px] font-semibold"
+                    style={{ background: commentText.trim() ? '#0095f6' : (dark ? '#333' : '#e0e0e0'), color: commentText.trim() ? '#fff' : subColor }}
+                  >
+                    Send comment
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        )
+        return commentPortal ? createPortal(sheet, commentPortal) : sheet
+      })()}
     </div>
   )
 }

@@ -81,7 +81,7 @@ export default function MobileSavedTab() {
   const swipeRef = useSwipeBack(() => setViewingIndex(null))
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const bg = hotPink ? 'transparent' : dark ? '#000' : '#fff'
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const cardBg = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#f5f5f7'
   const textColor = dark || hotPink ? '#fff' : '#1d1d1f'
   const subColor = dark || hotPink ? 'rgba(255,255,255,0.55)' : '#8e8e8e'
@@ -146,7 +146,7 @@ export default function MobileSavedTab() {
         {/* ── Chatbot section ───────────────────────────────────────────── */}
         <div className="px-4 pt-4 pb-2">
           <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-3" style={{ color: subColor }}>
-            Ad Strategy Chat
+            Let's Talk
           </p>
 
           {/* Message thread */}

@@ -8,7 +8,14 @@
       "Bash(xargs du:*)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); c=d['clients'][0]; print\\(json.dumps\\(c['ads'][:3], indent=2\\)\\)\")",
       "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/jamesbixler/portfolio-next/data.json'\\)\\); c=d['clients'][0]; print\\(json.dumps\\(c['ads'][:2], indent=2\\)\\)\")",
-      "Bash(python3 -c ':*)"
+      "Bash(python3 -c ':*)",
+      "Bash(ffmpeg -version)",
+      "Bash(bash convert_audio.sh)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

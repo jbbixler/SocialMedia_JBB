@@ -18,22 +18,38 @@ html, body {
   display: none;
 }
 
-/* ── Realtree camo Easter egg background ────────────────── */
-.camo-bg {
-  background-color: #4a5c35 !important;
-  background-image:
-    radial-gradient(ellipse 22% 16% at 6% 10%,  #1c2812 0%, transparent 85%),
-    radial-gradient(ellipse 14% 22% at 28% 52%,  #5c4218 0%, transparent 80%),
-    radial-gradient(ellipse 26% 12% at 58% 6%,   #2a3818 0%, transparent 80%),
-    radial-gradient(ellipse 16% 24% at 82% 38%,  #7a5828 0%, transparent 78%),
-    radial-gradient(ellipse 20% 14% at 48% 82%,  #232e14 0%, transparent 82%),
-    radial-gradient(ellipse 18% 20% at 15% 75%,  #4a3210 0%, transparent 80%),
-    radial-gradient(ellipse 12% 18% at 70% 65%,  #1e2c10 0%, transparent 78%),
-    radial-gradient(ellipse 24% 10% at 92% 18%,  #5a4a1e 0%, transparent 82%),
-    radial-gradient(ellipse 10% 20% at 38% 28%,  #8a7840 0%, transparent 75%),
-    radial-gradient(ellipse 18% 12% at 75% 88%,  #3a4e22 0%, transparent 80%),
-    radial-gradient(ellipse 14% 18% at 50% 45%,  #1a2610 0%, transparent 85%),
-    radial-gradient(ellipse 20% 14% at 20% 35%,  #6a5428 0%, transparent 78%) !important;
+/* ── Hot pink Easter egg background ─────────────────────── */
+.hot-pink-bg {
+  background-color: #ff69b4 !important;
+}
+
+/* ── Meteor shower animation ─────────────────────────────── */
+@keyframes meteor-fall {
+  0%   { transform: translateY(-140px) translateX(0); opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 0.75; }
+  100% { transform: translateY(108vh) translateX(-28px); opacity: 0; }
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.4); }
+}
+
+.meteor-star {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.55) 35%, transparent 100%);
+  animation: meteor-fall linear infinite;
+}
+
+.twinkle-star {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: #fff;
+  animation: star-twinkle ease-in-out infinite;
 }
 
 /* ── Aspect ratio helpers ───────────────────────────────── */

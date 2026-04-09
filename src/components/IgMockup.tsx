@@ -25,6 +25,7 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
   const feedRef         = useRef<HTMLDivElement>(null)
   const sentinelRef     = useRef<HTMLDivElement>(null)
   const frameRef        = useRef<HTMLDivElement>(null)
+  const screenRef       = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
   const storiesRef      = useRef<HTMLDivElement>(null)
   const dragRef         = useRef({ startX: 0, scrollLeft: 0, dragging: false, didDrag: false })
@@ -272,6 +273,7 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
 
               {/* ── Screen ──────────────────────────────── */}
               <div
+                ref={screenRef}
                 className="relative bg-black flex flex-col overflow-hidden"
                 style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px' }}
               >
@@ -393,6 +395,7 @@ export default function IgMockup({ client, initialAdIndex }: Props) {
                         client={client}
                         adIndex={i}
                         isInitial={i === initialAdIndex}
+                        commentPortal={screenRef.current}
                         onMediaClick={() => setLightboxIndex(i)}
                         onShare={handleShare}
                       />

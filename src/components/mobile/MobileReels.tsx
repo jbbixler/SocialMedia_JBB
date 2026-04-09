@@ -203,11 +203,32 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
   const [liked, setLiked] = useState(false)
   const [showHeart, setShowHeart] = useState(false)
   const [heartKey, setHeartKey] = useState(0)
+  const [showComment, setShowComment] = useState(false)
+  const [commentText, setCommentText] = useState('')
+  const [comments, setComments] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return []
+    try { return JSON.parse(localStorage.getItem(`comments_${reel.key}`) || '[]') } catch { return [] }
+  })
   const lastTapRef = useRef(0)
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
   const { toggle, isSaved } = useBookmarks()
   const bookmarked = isSaved(reel.key)
+
+  const handleComment = useCallback(() => {
+    const text = commentText.trim()
+    if (!text) return
+    const updated = [...comments, text]
+    setComments(updated)
+    try { localStorage.setItem(`comments_${reel.key}`, JSON.stringify(updated)) } catch {}
+    setCommentText('')
+    setShowComment(false)
+    fetch('/api/comment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment: text, clientName: reel.client.name, adIndex: reel.key, adSrc: reel.ad.src }),
+    }).catch(() => {})
+  }, [commentText, comments, reel.key, reel.client.name, reel.ad.src])
 
   useEffect(() => {
     const el = slideRef.current
@@ -345,12 +366,12 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
           <span className="text-white text-[12px] font-medium">{likes.toLocaleString()}</span>
         </button>
 
-        {/* Contact → about/profile */}
-        <button onClick={onProfileSelect} className="flex flex-col items-center gap-1">
+        {/* Comment */}
+        <button onClick={() => setShowComment(true)} className="flex flex-col items-center gap-1">
           <svg className="w-8 h-8 stroke-white" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
-          <span className="text-white text-[12px] font-medium">Contact</span>
+          <span className="text-white text-[12px] font-medium">{comments.length > 0 ? comments.length : ''}</span>
         </button>
 
         {/* Share */}
@@ -397,6 +418,44 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
           </div>
         )}
       </div>
+
+      {/* Comment sheet */}
+      <AnimatePresence>
+        {showComment && (
+          <>
+            <motion.div className="fixed inset-0 z-[100] bg-black/50"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setShowComment(false)}
+            />
+            <motion.div
+              className="fixed bottom-0 inset-x-0 z-[101] rounded-t-2xl p-5 pb-8"
+              style={{ background: '#1c1c1e' }}
+              initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 340, damping: 32 }}
+            >
+              <div className="w-10 h-1 rounded-full bg-gray-600 mx-auto mb-4" />
+              <p className="text-[15px] font-semibold mb-1 text-center text-white">Leave a comment</p>
+              <p className="text-[12px] text-center mb-4 text-white/50">on @{handle}'s reel</p>
+              <textarea
+                value={commentText}
+                onChange={e => setCommentText(e.target.value)}
+                placeholder="Write your thoughts…"
+                rows={4}
+                className="w-full rounded-xl px-4 py-3 text-[14px] outline-none resize-none"
+                style={{ background: '#2c2c2e', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
+              />
+              <button
+                onClick={handleComment}
+                disabled={!commentText.trim()}
+                className="w-full mt-3 py-3 rounded-xl text-[14px] font-semibold"
+                style={{ background: commentText.trim() ? '#0095f6' : '#333', color: commentText.trim() ? '#fff' : 'rgba(255,255,255,0.4)' }}
+              >
+                Send comment
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

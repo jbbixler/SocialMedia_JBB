@@ -12,7 +12,7 @@ interface Props {
 
 export default function MobileNav({ tab, onTab }: Props) {
   const { dark, hotPink } = useTheme()
-  const bg = hotPink ? 'transparent' : dark ? '#000' : '#fff'
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const activeFill = hotPink ? '#fff' : dark ? '#fff' : '#1d1d1f'
   const inactiveFill = hotPink ? 'rgba(255,255,255,0.55)' : dark ? 'rgba(255,255,255,0.45)' : '#8e8e8e'
   const border = dark || hotPink ? 'border-white/[0.1]' : 'border-black/[0.1]'

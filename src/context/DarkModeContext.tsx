@@ -42,15 +42,11 @@ const HEART_SOUNDS = [
 
 interface ThemeCtx {
   dark: boolean
-  hotPink: boolean   // true = camo Easter egg active
+  hotPink: boolean   // true = hot pink Easter egg active
   heartCount: number
   toggleDark: () => void
   onHeartTap: () => void
-  camoBg: string     // CSS background value to use instead of solid color
 }
-
-// Solid fallback color used for borders/tints when camo is active
-export const CAMO_TINT = '#3d4e28'
 
 const Ctx = createContext<ThemeCtx>({
   dark: false,
@@ -58,7 +54,6 @@ const Ctx = createContext<ThemeCtx>({
   heartCount: 0,
   toggleDark: () => {},
   onHeartTap: () => {},
-  camoBg: CAMO_TINT,
 })
 
 export function DarkModeProvider({ children }: { children: React.ReactNode }) {
@@ -78,11 +73,9 @@ export function DarkModeProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const hotPink = heartCount >= 69
-  // camoBg: used as the `background` CSS value; transparent so .camo-bg class shows through
-  const camoBg = hotPink ? 'transparent' : ''
 
   return (
-    <Ctx.Provider value={{ dark, hotPink, heartCount, toggleDark, onHeartTap, camoBg }}>
+    <Ctx.Provider value={{ dark, hotPink, heartCount, toggleDark, onHeartTap }}>
       {children}
     </Ctx.Provider>
   )

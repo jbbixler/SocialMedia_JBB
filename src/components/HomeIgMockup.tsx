@@ -31,6 +31,7 @@ export default function HomeIgMockup() {
   const feedRef          = useRef<HTMLDivElement>(null)
   const sentinelRef      = useRef<HTMLDivElement>(null)
   const frameRef         = useRef<HTMLDivElement>(null)
+  const screenRef        = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
   const storiesRef    = useRef<HTMLDivElement>(null)
   const dragRef       = useRef({ startX: 0, scrollLeft: 0, dragging: false, didDrag: false })
@@ -247,6 +248,7 @@ export default function HomeIgMockup() {
 
           {/* Screen */}
           <div
+            ref={screenRef}
             className="relative flex flex-col overflow-hidden"
             style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px', background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }}
           >
@@ -375,6 +377,7 @@ export default function HomeIgMockup() {
                     adIndex={i}
                     isInitial={false}
                     dark={dark}
+                    commentPortal={screenRef.current}
                     onMediaClick={() => dispatch({ type: 'SELECT_CLIENT', client })}
                     onShare={handleShare}
                   />
