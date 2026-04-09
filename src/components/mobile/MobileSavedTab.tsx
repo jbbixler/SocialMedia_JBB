@@ -26,7 +26,8 @@ export default function MobileSavedTab() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
-  const [viewing, setViewing] = useState<SavedAdItem | null>(null)
+  const [viewingIndex, setViewingIndex] = useState<number | null>(null)
+  const feedOverlayRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -191,10 +192,10 @@ export default function MobileSavedTab() {
             </div>
           ) : (
             <div className="columns-2 gap-2">
-              {saved.map((item) => (
+              {saved.map((item, idx) => (
                 <button
                   key={item.key}
-                  onClick={() => setViewing(item)}
+                  onClick={() => setViewingIndex(idx)}
                   className="break-inside-avoid mb-2 rounded-xl overflow-hidden w-full text-left"
                   style={{ border: `1px solid ${borderColor}` }}
                 >
@@ -225,9 +226,9 @@ export default function MobileSavedTab() {
         </div>
       </div>
 
-      {/* Full-screen post viewer */}
+      {/* Full-screen feed viewer — all saved posts, scrolled to tapped index */}
       <AnimatePresence>
-        {viewing && (
+        {viewingIndex !== null && (
           <motion.div
             className="fixed inset-0 z-[200] flex flex-col overflow-hidden"
             style={{ background: bg }}
@@ -241,23 +242,35 @@ export default function MobileSavedTab() {
               className="flex-shrink-0 flex items-center gap-3 px-3 h-[44px] border-b"
               style={{ borderColor, background: bg }}
             >
-              <button onClick={() => setViewing(null)} className="flex items-center gap-1.5">
+              <button onClick={() => setViewingIndex(null)} className="flex items-center gap-1.5">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
                 <span className="text-[15px]" style={{ color: textColor }}>Saved</span>
               </button>
             </div>
-            {/* Post */}
-            <div className="flex-1 overflow-y-auto">
-              <MobilePost
-                ad={viewing.ad}
-                client={viewing.client}
-                postKey={viewing.key}
-                onAvatarClick={() => {}}
-                onContact={() => {}}
-                onShare={() => {}}
-              />
+
+            {/* All saved posts — scroll to tapped one */}
+            <div
+              ref={feedOverlayRef}
+              className="flex-1 overflow-y-auto"
+              style={{ background: bg }}
+            >
+              {saved.map((item, idx) => (
+                <div
+                  key={item.key}
+                  ref={idx === viewingIndex ? (el) => { el?.scrollIntoView() } : undefined}
+                >
+                  <MobilePost
+                    ad={item.ad}
+                    client={item.client}
+                    postKey={item.key}
+                    onAvatarClick={() => {}}
+                    onContact={() => {}}
+                    onShare={() => {}}
+                  />
+                </div>
+              ))}
             </div>
           </motion.div>
         )}
