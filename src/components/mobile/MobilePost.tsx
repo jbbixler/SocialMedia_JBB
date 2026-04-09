@@ -106,7 +106,7 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
     fetch('/api/comment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comment: text, clientName: client.name, adIndex: postKey }),
+      body: JSON.stringify({ comment: text, clientName: client.name, adIndex: postKey, adSrc: ad.src }),
     }).catch(() => {})
   }, [commentText, comments, client.name, postKey])
 
