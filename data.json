@@ -1,6 +1,317 @@
 {
   "clients": [
     {
+      "id": "doordash",
+      "name": "DoorDash",
+      "logo": "assets/clients/DoorDash/Logo/DoorDash_stacked_logo_RGB_clientpage.svg",
+      "igAvatar": "assets/clients/DoorDash/Logo/308799191_1220304505208265_6920119268519300093_n_Instagram.jpg",
+      "color": "#FF3008",
+      "igHandle": "doordash",
+      "website": "https://doordash.com",
+      "description": "Coming soon",
+      "services": [
+        "Creative Direction",
+        "Paid Social Strategy & Testing",
+        "Static Design",
+        "Motion Graphics",
+        "Copywriting"
+      ],
+      "cta": "Learn More",
+      "brandType": "B2B",
+      "ads": [
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1.1_10_ratio_IGExploreHome_TOFU_coins_Red50_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1.1_2_ratio_FBFeed_TOFU_WinterWindow_Red_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1.1_3_ratio_FBStories_TOFU__Red_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1.1_6_ratio_IGFeed_TOFU_OffsitePlacements_Red50_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1.91.1_9_ratio_IGExplore_TOFU_citydelivery_Red_1.91x1.png",
+          "ratio": "1.91:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_1200x1200_Shoptalk DD Ads Shoptalk Request-1 LinkedIn_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_4.5_13_ratio_FBRightColumn_TOFU_cuisineshowcase_Red_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/DDAds_4.5_7_ratio_IGStories_TOFU__Red50_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749668/portfolio/assets/clients/DoorDash/flower_03fed3a6-aa3f-4801-b5ae-31add820303c%20%281%29_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_157343034956851_testimonialtextonly_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_158600192379964_genericmotoroiltextonly_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749671/portfolio/assets/clients/DoorDash/flower_17339636441547_bermudaflower_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749674/portfolio/assets/clients/DoorDash/flower_18461702987786_carlovideo_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_245688760473335_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749676/portfolio/assets/clients/DoorDash/flower_262213809312197_joycevideoshort_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749677/portfolio/assets/clients/DoorDash/flower_291056185899719_animatedtextonly_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_30f0f4c7-fac4-4a0c-b3bd-1045e0343a27 (1)_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749679/portfolio/assets/clients/DoorDash/flower_34c539f7-6ce6-47e8-b736-76a9b5966c04%20%281%29conveyorvertical_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_399813429777474_flower38kplusspend_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749681/portfolio/assets/clients/DoorDash/flower_424423316663354fleurista_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749683/portfolio/assets/clients/DoorDash/flower_438079890942617_animatedtextonly_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749684/portfolio/assets/clients/DoorDash/flower_4a054be0-14e7-494b-bb8a-fda9b711256f%20%281%29_ydtmarch_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_605686341064017_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749685/portfolio/assets/clients/DoorDash/flower_605809609254675_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749686/portfolio/assets/clients/DoorDash/flower_634370605152916_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749687/portfolio/assets/clients/DoorDash/flower_79574606888984_grid_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_843190573202463_heart_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749687/portfolio/assets/clients/DoorDash/flower_866955041885296priceincrease_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749690/portfolio/assets/clients/DoorDash/flower_904871189731030_arch_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_909234916791188_flower155kplusspend_9x16.jpeg",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_999805053918469_tweet_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_a4365e43-74c0-4644-8fda-7f03b3616a3b (1)arch_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_a4841747-008b-4181-b5c5-97b3a734c0b6_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749698/portfolio/assets/clients/DoorDash/flower_b4964642-aa4e-487a-91fc-16ac1ce3ebb7_flaurista_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "assets/clients/DoorDash/flower_de7167f8-5691-4538-bb59-3b97fd964d39joyce_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_e0ef09dd-e867-4f7c-be80-03aec17e5d3dmothersdaynotif_9x16.png",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749715/portfolio/assets/clients/DoorDash/flower_e86492f5-0300-4f2e-95d4-3070cf7c3d82_insights_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749722/portfolio/assets/clients/DoorDash/flower_f41d562a-c318-44d0-8eab-ee8529221791_fun_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/flower_videoframe_5340_archflowercutouts_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749731/portfolio/assets/clients/DoorDash/liquor_07c358da-e55f-4bf2-9b70-99d6d4dd1dd2%20%283%29_laliquors1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749739/portfolio/assets/clients/DoorDash/liquor_11e6a8e5-e01c-424f-acc6-085ad6086201%20%281%29_sipnyc1_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/liquor_180c360f-6522-428e-b5f9-a575dcda8f68 (3)_1x1.jpeg",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749744/portfolio/assets/clients/DoorDash/liquor_1e4f281a-5ecf-4e3c-9cbc-a7074b1573e0%20%281%29sipnyc2_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749746/portfolio/assets/clients/DoorDash/liquor_20a03c34-eec0-4d9b-8a5f-7e7f7e043337_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749753/portfolio/assets/clients/DoorDash/liquor_4a8ea2b9-00b6-46ab-980b-77422c37553d%20%282%29_laliquors2_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/liquor_4c1ed4cf-7126-438f-b919-5128ba736e6f_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/liquor_77d9fde5-4d94-4c35-b013-e983bd6dcbe0 (1)_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/liquor_98581dbd-bcae-49db-95f9-b8b2b044f5ff (1)_4x5.png",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749757/portfolio/assets/clients/DoorDash/liquor_af3d77d0-3cbf-404d-86a8-296755d89e4b%20%282%29_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749758/portfolio/assets/clients/DoorDash/liquor_bb2568b1-d490-4fde-810f-7605aeb9dd22%20%281%29_4x5.mp4",
+          "ratio": "4:5"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749759/portfolio/assets/clients/DoorDash/liquor_liquor_football_d0d638e9-9a3e-49dd-9fde-96779e126497%20%281%29_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/DoorDash/misc_dd_310c8fac-c9ed-4bd1-9c08-b6b364e0393e_1x1.png",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749763/portfolio/assets/clients/DoorDash/misc_dd_7b1b2b05-f098-45d1-8a44-819356eef5ec_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749770/portfolio/assets/clients/DoorDash/misc_dd_9698f198-6178-4195-b692-96aee6be6c51_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749772/portfolio/assets/clients/DoorDash/misc_dd_9aac43ad-4d70-4882-b4a3-56eead8313b1_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749776/portfolio/assets/clients/DoorDash/misc_dd_b53851fd-e3b2-46f6-ac38-cdffcdc712f0_9x16.mp4",
+          "ratio": "9:16"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749777/portfolio/assets/clients/DoorDash/misc_dd_d90fb676-95d2-4293-ad8d-e022d7eef97e_1x1.mp4",
+          "ratio": "1:1"
+        },
+        {
+          "type": "video",
+          "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775749783/portfolio/assets/clients/DoorDash/misc_dd_f7f8feac-b1e5-4b71-a5ae-3fb53226cc2f_1x1.mp4",
+          "ratio": "1:1"
+        }
+      ]
+    },
+    {
       "id": "european-wax-center",
       "name": "European Wax Center",
       "logo": "assets/clients/European Wax Center/Logo/EWC-LOGO_clientpage.png",
@@ -744,6 +1055,11 @@
           "type": "video",
           "src": "https://res.cloudinary.com/dwrvp3dmf/video/upload/v1775684864/portfolio/assets/clients/Lineage%20Provisions/9faea502-9059-4e6d-87ae-1369f34d72da_9x16.mp4",
           "ratio": "9:16"
+        },
+        {
+          "type": "image",
+          "src": "assets/clients/Lineage Provisions/a2c13aed-7613-4932-b7cf-9fd546e83002lineage_1x1.jpeg",
+          "ratio": "1:1"
         },
         {
           "type": "image",
