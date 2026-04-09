@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTheme } from '@/context/DarkModeContext'
 import type { About } from '@/types'
 
 interface Props {
@@ -8,12 +9,21 @@ interface Props {
 }
 
 export default function MobileAboutProfile({ about }: Props) {
+  const { dark, hotPink } = useTheme()
   const [descExpanded, setDescExpanded] = useState(false)
+
+  const bg          = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const textColor   = dark || hotPink ? '#fff' : '#1d1d1f'
+  const subColor    = dark || hotPink ? 'rgba(255,255,255,0.55)' : '#8e8e8e'
+  const borderColor = dark || hotPink ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.06)'
+  const cardBg      = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#efefef'
+  const gridGap     = dark || hotPink ? '#222' : '#f0f0f0'
+  const linkColor   = dark || hotPink ? 'rgba(255,255,255,0.7)' : '#00376b'
 
   if (!about) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-white" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
-        <p className="text-[#8e8e8e] text-[14px]">Profile coming soon.</p>
+      <div className="flex-1 flex items-center justify-center" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
+        <p className="text-[14px]" style={{ color: subColor }}>Profile coming soon.</p>
       </div>
     )
   }
@@ -24,19 +34,20 @@ export default function MobileAboutProfile({ about }: Props) {
   const totalMedia = about.media.length
 
   return (
-    <div className="flex-1 overflow-y-auto bg-white" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
+    <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.3s ease' }}>
       {/* Top bar */}
       <div
-        className="sticky top-0 z-30 bg-white border-b border-black/[0.06] flex items-center justify-between px-4 h-[44px]"
+        className="sticky top-0 z-30 border-b flex items-center justify-between px-4 h-[44px]"
+        style={{ background: bg, borderColor }}
       >
         <span
-          className="text-[17px] font-semibold text-[#1d1d1f] tracking-[-0.02em]"
-          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
+          className="text-[17px] font-semibold tracking-[-0.02em]"
+          style={{ color: textColor, fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
         >
           {handle}
         </span>
         <a href={about.website || 'https://jbradbixler.com/'} target="_blank" rel="noopener noreferrer">
-          <svg className="w-6 h-6 stroke-[#1d1d1f]" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
             <polyline points="15 3 21 3 21 9" />
             <line x1="10" y1="14" x2="21" y2="3" />
@@ -54,8 +65,8 @@ export default function MobileAboutProfile({ about }: Props) {
               style={{ background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
             >
               <div
-                className="w-full h-full rounded-full overflow-hidden border-[2.5px] border-white flex items-center justify-center"
-                style={{ background: about.color || '#1d1d1f' }}
+                className="w-full h-full rounded-full overflow-hidden flex items-center justify-center"
+                style={{ background: about.color || '#1d1d1f', border: `2.5px solid ${bg}` }}
               >
                 {about.avatar ? (
                   <img src={about.avatar} alt={name} className="w-full h-full object-cover" />
@@ -64,34 +75,33 @@ export default function MobileAboutProfile({ about }: Props) {
                 )}
               </div>
             </div>
-            {/* Green active dot */}
-            <span className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-[#22c55e] border-2 border-white" />
+            <span className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-[#22c55e]" style={{ border: `2px solid ${bg}` }} />
           </div>
 
           {/* Stats */}
           <div className="flex-1 flex items-center justify-around pt-3">
-            <Stat label="Work" value="999+" />
-            <Stat label="Brands" value="15+" />
-            <Stat label="Potential" value="∞" />
+            <Stat label="Work" value="999+" textColor={textColor} />
+            <Stat label="Brands" value="15+" textColor={textColor} />
+            <Stat label="Potential" value="∞" textColor={textColor} />
           </div>
         </div>
 
         {/* Name + role + bio */}
         <div className="mt-3">
-          <p className="text-[13px] font-semibold text-[#1d1d1f]">{name}</p>
+          <p className="text-[13px] font-semibold" style={{ color: textColor }}>{name}</p>
           {about.role && (
-            <p className="text-[12px] text-zinc-500 mt-0.5">{about.role}</p>
+            <p className="text-[12px] mt-0.5" style={{ color: subColor }}>{about.role}</p>
           )}
           {about.services.length > 0 && (
-            <p className="text-[12px] text-zinc-500 mt-0.5">{about.services.slice(0, 3).join(' · ')}</p>
+            <p className="text-[12px] mt-0.5" style={{ color: subColor }}>{about.services.slice(0, 3).join(' · ')}</p>
           )}
           {bio && (
             <div className="mt-1.5">
-              <p className="text-[13px] text-[#1d1d1f] leading-snug">
+              <p className="text-[13px] leading-snug" style={{ color: textColor }}>
                 {descExpanded ? bio : bio.slice(0, 120) + (bio.length > 120 ? '…' : '')}
               </p>
               {bio.length > 120 && (
-                <button onClick={() => setDescExpanded(v => !v)} className="text-[13px] text-zinc-400 mt-0.5">
+                <button onClick={() => setDescExpanded(v => !v)} className="text-[13px] mt-0.5" style={{ color: subColor }}>
                   {descExpanded ? 'less' : 'more'}
                 </button>
               )}
@@ -103,7 +113,7 @@ export default function MobileAboutProfile({ about }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="text-[13px] font-medium mt-1 block"
-              style={{ color: '#00376b' }}
+              style={{ color: linkColor }}
             >
               {about.website.replace(/^https?:\/\//, '')}
             </a>
@@ -116,7 +126,8 @@ export default function MobileAboutProfile({ about }: Props) {
             href={about.website || 'https://jbradbixler.com/'}
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-center py-1.5 rounded-lg bg-[#efefef] text-[13px] font-semibold text-[#1d1d1f]"
+            className="block text-center py-1.5 rounded-lg text-[13px] font-semibold"
+            style={{ background: cardBg, color: textColor }}
           >
             Contact
           </a>
@@ -125,11 +136,11 @@ export default function MobileAboutProfile({ about }: Props) {
 
       {/* Services section */}
       {about.services.length > 0 && (
-        <div className="px-4 pb-4 border-b border-black/[0.06]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8e8e8e] mb-2">Services</p>
+        <div className="px-4 pb-4 border-b" style={{ borderColor }}>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] mb-2" style={{ color: subColor }}>Services</p>
           <div className="flex flex-wrap gap-1.5">
             {about.services.map(s => (
-              <span key={s} className="px-2.5 py-1 rounded-full bg-[#f0f0f0] text-[11px] text-[#1d1d1f]">
+              <span key={s} className="px-2.5 py-1 rounded-full text-[11px]" style={{ background: cardBg, color: textColor }}>
                 {s}
               </span>
             ))}
@@ -140,15 +151,15 @@ export default function MobileAboutProfile({ about }: Props) {
       {/* Media grid or placeholder */}
       {totalMedia > 0 ? (
         <>
-          <div className="border-t border-black/[0.08] flex items-center justify-center py-2.5">
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          <div className="border-t flex items-center justify-center py-2.5" style={{ borderColor }}>
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
               <rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
             </svg>
           </div>
-          <div className="grid grid-cols-3 gap-[1.5px] bg-[#f0f0f0]">
+          <div className="grid grid-cols-3 gap-[1.5px]" style={{ background: gridGap }}>
             {about.media.map((item, i) => (
-              <div key={i} className="relative aspect-square overflow-hidden bg-zinc-100">
+              <div key={i} className="relative aspect-square overflow-hidden" style={{ background: cardBg }}>
                 {item.type === 'image' ? (
                   <img src={item.src} alt="" className="w-full h-full object-cover" loading="lazy" />
                 ) : (
@@ -176,23 +187,23 @@ export default function MobileAboutProfile({ about }: Props) {
           </div>
         </>
       ) : (
-        <div className="px-4 py-12 flex flex-col items-center gap-3 text-center border-t border-black/[0.08]">
-          <svg className="w-12 h-12 stroke-[#c7c7cc]" viewBox="0 0 24 24" fill="none" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+        <div className="px-4 py-12 flex flex-col items-center gap-3 text-center border-t" style={{ borderColor }}>
+          <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" stroke={subColor}>
             <rect x="3" y="3" width="18" height="18" rx="2" />
             <path d="M3 15l5-5 4 4 3-3 6 6" />
           </svg>
-          <p className="text-[13px] text-[#8e8e8e]">Coming soon</p>
+          <p className="text-[13px]" style={{ color: subColor }}>Coming soon</p>
         </div>
       )}
     </div>
   )
 }
 
-function Stat({ label, value }: { label: string; value: string | number }) {
+function Stat({ label, value, textColor }: { label: string; value: string | number; textColor: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-[16px] font-semibold text-[#1d1d1f]">{value}</span>
-      <span className="text-[12px] text-[#1d1d1f]">{label}</span>
+      <span className="text-[16px] font-semibold" style={{ color: textColor }}>{value}</span>
+      <span className="text-[12px]" style={{ color: textColor }}>{label}</span>
     </div>
   )
 }
