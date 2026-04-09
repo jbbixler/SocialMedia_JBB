@@ -3,6 +3,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePortfolio } from '@/context/PortfolioContext'
+import { useBookmarks } from '@/context/BookmarkContext'
 import { copyToClipboard } from '@/lib/clipboard'
 import type { Ad, Client } from '@/types'
 
@@ -17,25 +18,57 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
+// MP3 tracks only (skip .wav / .m4a)
+const TRACK_FILES = [
+  '06.22.23._ddddd_144 bpm@brad._.mp3',
+  '09.25.23._ gooe_149 bpm_ @brad._ .mp3',
+  '101 bpm 04.22.23._itshumming @brad._ .mp3',
+  '120bpm_special_05.02.22. copy.mp3',
+  '129 bpm_ @brad._ 01.28.24._mydogswedding.mp3',
+  '137 bpmdrum loop_timbs_01.30.24._@brad._ .mp3',
+  '139_Untitled_g.mp3',
+  '150 bpm_ @brad._ dancething_.mp3',
+  '171 bpm_ loopAMaj_@brad._ aggintheam.mp3',
+  '4vweryoung.mp3',
+  'AUDIO_5474.mp3',
+  'D.A.M_147.33bpm.mp3',
+  'Mars_arpyloop_F#major_@brad._ _128bpm_02.07.22.mp3',
+  'dx7_03.23.23._124 bpm_@brad._.mp3',
+  'itkicksurface_loop_190bpm.mp3',
+  'looseends_bang.mp3',
+  'scratch @brad._ icannotbelieve.._030924_.mp3',
+  'slowed_souljaboy_ng_b_2.mp3',
+  'snow_big_ring.mp3',
+  'tuuuuuuuuuuuttuuuuuuuut.mp3',
+]
+
 interface Props {
   onClientSelect: (client: Client) => void
   onProfileSelect: () => void
 }
-
-const WINDOW_SIZE = 5 // render this many slides around the active one
 
 export default function MobileReels({ onClientSelect, onProfileSelect }: Props) {
   const { clients } = usePortfolio()
   const [reels, setReels] = useState<Reel[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
   const [muted, setMuted] = useState(true)
-  // Ref so IntersectionObserver closures always read current mute state
   const mutedRef = useRef(true)
-  const toggleMute = () => {
+
+  // Background music
+  const musicRef = useRef<HTMLAudioElement | null>(null)
+  const tracksRef = useRef<string[]>([])
+  const trackIdxRef = useRef(0)
+
+  useEffect(() => {
+    tracksRef.current = shuffle([...TRACK_FILES])
+  }, [])
+
+  const toggleMute = useCallback(() => {
     const next = !mutedRef.current
     mutedRef.current = next
     setMuted(next)
-  }
+    if (musicRef.current) musicRef.current.muted = next
+  }, [])
 
   useEffect(() => {
     const all: Reel[] = []
@@ -48,7 +81,47 @@ export default function MobileReels({ onClientSelect, onProfileSelect }: Props) 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Only render slides within a window around the active index
+  // Background music: play for image reels, pause for video reels
+  useEffect(() => {
+    if (reels.length === 0) return
+    const activeReel = reels[activeIndex]
+    if (!activeReel) return
+
+    if (activeReel.ad.type === 'image') {
+      // Start or resume music
+      if (!musicRef.current) {
+        const tracks = tracksRef.current
+        if (tracks.length === 0) return
+        const src = `/assets/sounds/reels/${encodeURIComponent(tracks[trackIdxRef.current])}`
+        const audio = new Audio(src)
+        audio.muted = mutedRef.current
+        audio.volume = 0.7
+        audio.addEventListener('ended', () => {
+          trackIdxRef.current = (trackIdxRef.current + 1) % tracks.length
+          audio.src = `/assets/sounds/reels/${encodeURIComponent(tracks[trackIdxRef.current])}`
+          audio.play().catch(() => {})
+        })
+        musicRef.current = audio
+      }
+      musicRef.current.play().catch(() => {})
+    } else {
+      // Video reel — pause background music
+      if (musicRef.current) {
+        musicRef.current.pause()
+      }
+    }
+  }, [activeIndex, reels])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (musicRef.current) {
+        musicRef.current.pause()
+        musicRef.current = null
+      }
+    }
+  }, [])
+
   const windowStart = Math.max(0, activeIndex - 2)
   const windowEnd   = Math.min(reels.length - 1, activeIndex + 2)
 
@@ -128,13 +201,14 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
   const videoRef = useRef<HTMLVideoElement>(null)
   const slideRef = useRef<HTMLDivElement>(null)
   const [liked, setLiked] = useState(false)
-  const [bookmarked, setBookmarked] = useState(false)
   const [showHeart, setShowHeart] = useState(false)
   const [heartKey, setHeartKey] = useState(0)
   const lastTapRef = useRef(0)
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
-  // Play/pause — reads mutedRef so it always has the current value
+  const { toggle, isSaved } = useBookmarks()
+  const bookmarked = isSaved(reel.key)
+
   useEffect(() => {
     const el = slideRef.current
     if (!el) return
@@ -155,7 +229,6 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Sync mute prop changes to video while it's playing
   useEffect(() => {
     const v = videoRef.current
     if (!v || v.paused) return
@@ -172,16 +245,14 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
     const dx = Math.abs(e.changedTouches[0].clientX - start.x)
     const dy = Math.abs(e.changedTouches[0].clientY - start.y)
     touchStartRef.current = null
-    if (dx > 15 || dy > 20) return // was a scroll, not a tap
+    if (dx > 15 || dy > 20) return
     const now = Date.now()
     if (now - lastTapRef.current < 300) {
-      // Double-tap → like
       setLiked(true)
       setShowHeart(true)
       setHeartKey(k => k + 1)
       setTimeout(() => setShowHeart(false), 900)
     } else {
-      // Single tap → toggle mute (like Instagram)
       onToggleMute()
     }
     lastTapRef.current = now
@@ -195,16 +266,11 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
     <div
       ref={slideRef}
       className="relative bg-black"
-      style={{
-        // Fills exactly the scroll container (which is inset-0 inside flex-1)
-        height: '100%',
-        scrollSnapAlign: 'start',
-        scrollSnapStop: 'always',
-      }}
+      style={{ height: '100%', scrollSnapAlign: 'start', scrollSnapStop: 'always' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Media — only load src when in render window */}
+      {/* Media */}
       {reel.ad.type === 'video' ? (
         <video
           ref={videoRef}
@@ -217,12 +283,7 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         />
       ) : (
         inWindow ? (
-          <img
-            src={reel.ad.src}
-            alt=""
-            className="absolute inset-0 w-full h-full object-contain"
-            loading="eager"
-          />
+          <img src={reel.ad.src} alt="" className="absolute inset-0 w-full h-full object-contain" loading="eager" />
         ) : (
           <div className="absolute inset-0 bg-black" />
         )
@@ -301,7 +362,7 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         </button>
 
         {/* Bookmark */}
-        <button onClick={() => setBookmarked(v => !v)}>
+        <button onClick={() => toggle({ ad: reel.ad, client: reel.client, key: reel.key })}>
           <svg className="w-7 h-7" viewBox="0 0 24 24" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"
             fill={bookmarked ? 'white' : 'none'}
             stroke="white"
@@ -311,7 +372,7 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         </button>
       </div>
 
-      {/* Bottom info */}
+      {/* Bottom info — no CTA button */}
       <div className="absolute left-0 right-16 z-20 px-4" style={{ bottom: '88px' }}>
         <button onClick={() => onClientSelect(reel.client)} className="mb-1.5">
           <span className="text-white text-[14px] font-semibold drop-shadow">@{handle}</span>
@@ -319,12 +380,14 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         {reel.ad.caption && (
           <p className="text-white/90 text-[13px] leading-snug line-clamp-2">{reel.ad.caption}</p>
         )}
-        <button
-          onClick={() => onClientSelect(reel.client)}
-          className="w-full mt-2.5 py-2 rounded-md bg-white/10 border border-white/30 text-white text-[13px] font-semibold backdrop-blur-sm"
-        >
-          {reel.client.cta || 'Learn More'}
-        </button>
+        {reel.ad.type === 'image' && (
+          <div className="flex items-center gap-2 mt-2">
+            <svg className="w-3.5 h-3.5 fill-white opacity-60" viewBox="0 0 24 24">
+              <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
+            </svg>
+            <span className="text-white/60 text-[12px]">{handle}</span>
+          </div>
+        )}
         {reel.ad.type === 'video' && (
           <div className="flex items-center gap-2 mt-2">
             <svg className="w-3.5 h-3.5 fill-white opacity-60" viewBox="0 0 24 24">

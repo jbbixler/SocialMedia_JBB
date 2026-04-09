@@ -1,0 +1,16 @@
+name: DoorDash
+website: https://doordash.com
+ig_handle: doordash
+color: #FF3008
+cta: Learn More
+brand_type: B2B
+
+description:
+Coming soon
+
+services:
+Creative Direction
+Paid Social Strategy & Testing
+Static Design
+Motion Graphics
+Copywriting

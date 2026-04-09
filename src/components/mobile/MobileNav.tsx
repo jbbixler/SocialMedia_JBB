@@ -1,8 +1,9 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { useTheme } from '@/context/DarkModeContext'
 
-export type MobileTab = 'feed' | 'search' | 'reels' | 'profile'
+export type MobileTab = 'feed' | 'reels' | 'saved' | 'search' | 'profile'
 
 interface Props {
   tab: MobileTab
@@ -10,16 +11,28 @@ interface Props {
 }
 
 export default function MobileNav({ tab, onTab }: Props) {
+  const { dark, hotPink } = useTheme()
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const activeFill = hotPink ? '#fff' : dark ? '#fff' : '#1d1d1f'
+  const inactiveFill = hotPink ? 'rgba(255,255,255,0.55)' : dark ? 'rgba(255,255,255,0.45)' : '#8e8e8e'
+  const border = dark || hotPink ? 'border-white/[0.1]' : 'border-black/[0.1]'
+
   return (
     <nav
-      className="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-black/[0.1] flex items-center justify-around"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom)', height: 'calc(49px + env(safe-area-inset-bottom))' }}
+      className={`fixed bottom-0 inset-x-0 z-50 flex items-center justify-around border-t ${border}`}
+      style={{
+        background: bg,
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        height: 'calc(49px + env(safe-area-inset-bottom))',
+        transition: 'background 0.4s ease',
+      }}
     >
       {/* Home */}
-      <NavBtn active={tab === 'feed'} onClick={() => onTab('feed')} label="Home">
+      <NavBtn active={tab === 'feed'} onClick={() => onTab('feed')} label="Home" activeFill={activeFill} inactiveFill={inactiveFill}>
         <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
-          fill={tab === 'feed' ? 'currentColor' : 'none'}
-          stroke="currentColor" strokeWidth={tab === 'feed' ? 0 : 1.75}
+          fill={tab === 'feed' ? activeFill : 'none'}
+          stroke={tab === 'feed' ? activeFill : inactiveFill}
+          strokeWidth={tab === 'feed' ? 0 : 1.75}
           strokeLinecap="round" strokeLinejoin="round"
         >
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -27,10 +40,37 @@ export default function MobileNav({ tab, onTab }: Props) {
         </svg>
       </NavBtn>
 
-      {/* Search */}
-      <NavBtn active={tab === 'search'} onClick={() => onTab('search')} label="Search">
+      {/* Reels */}
+      <NavBtn active={tab === 'reels'} onClick={() => onTab('reels')} label="Reels" activeFill={activeFill} inactiveFill={inactiveFill}>
         <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
-          fill="none" stroke="currentColor"
+          fill={tab === 'reels' ? activeFill : 'none'}
+          stroke={tab === 'reels' ? activeFill : inactiveFill}
+          strokeWidth={tab === 'reels' ? 0 : 1.75}
+          strokeLinecap="round" strokeLinejoin="round"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="3" />
+          <path fill={tab === 'reels' ? (dark || hotPink ? '#000' : '#fff') : inactiveFill} stroke="none" d="M10 8l6 4-6 4V8z" />
+        </svg>
+      </NavBtn>
+
+      {/* Send / Saved */}
+      <NavBtn active={tab === 'saved'} onClick={() => onTab('saved')} label="Saved" activeFill={activeFill} inactiveFill={inactiveFill}>
+        <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
+          fill="none"
+          stroke={tab === 'saved' ? activeFill : inactiveFill}
+          strokeWidth={tab === 'saved' ? 2.1 : 1.75}
+          strokeLinecap="round" strokeLinejoin="round"
+        >
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+      </NavBtn>
+
+      {/* Search */}
+      <NavBtn active={tab === 'search'} onClick={() => onTab('search')} label="Search" activeFill={activeFill} inactiveFill={inactiveFill}>
+        <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
+          fill="none"
+          stroke={tab === 'search' ? activeFill : inactiveFill}
           strokeWidth={tab === 'search' ? 2.25 : 1.75}
           strokeLinecap="round" strokeLinejoin="round"
         >
@@ -39,24 +79,12 @@ export default function MobileNav({ tab, onTab }: Props) {
         </svg>
       </NavBtn>
 
-      {/* Reels */}
-      <NavBtn active={tab === 'reels'} onClick={() => onTab('reels')} label="Reels">
-        <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
-          fill={tab === 'reels' ? 'currentColor' : 'none'}
-          stroke="currentColor" strokeWidth={tab === 'reels' ? 0 : 1.75}
-          strokeLinecap="round" strokeLinejoin="round"
-        >
-          <rect x="2" y="2" width="20" height="20" rx="3" />
-          <path fill={tab === 'reels' ? 'white' : 'currentColor'} stroke="none"
-            d="M10 8l6 4-6 4V8z" />
-        </svg>
-      </NavBtn>
-
       {/* Profile */}
-      <NavBtn active={tab === 'profile'} onClick={() => onTab('profile')} label="Profile">
+      <NavBtn active={tab === 'profile'} onClick={() => onTab('profile')} label="Profile" activeFill={activeFill} inactiveFill={inactiveFill}>
         <svg viewBox="0 0 24 24" className="w-[26px] h-[26px]"
-          fill={tab === 'profile' ? 'currentColor' : 'none'}
-          stroke="currentColor" strokeWidth={tab === 'profile' ? 0 : 1.75}
+          fill={tab === 'profile' ? activeFill : 'none'}
+          stroke={tab === 'profile' ? activeFill : inactiveFill}
+          strokeWidth={tab === 'profile' ? 0 : 1.75}
           strokeLinecap="round" strokeLinejoin="round"
         >
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -67,12 +95,16 @@ export default function MobileNav({ tab, onTab }: Props) {
   )
 }
 
-function NavBtn({ children, active, onClick, label }: { children: ReactNode; active: boolean; onClick: () => void; label: string }) {
+function NavBtn({ children, active, onClick, label, activeFill, inactiveFill }: {
+  children: ReactNode; active: boolean; onClick: () => void; label: string
+  activeFill: string; inactiveFill: string
+}) {
+  void activeFill; void inactiveFill
   return (
     <button
       onClick={onClick}
       aria-label={label}
-      className={`flex items-center justify-center w-16 h-12 transition-colors ${active ? 'text-[#1d1d1f]' : 'text-[#8e8e8e]'}`}
+      className="flex items-center justify-center w-16 h-12"
     >
       {children}
     </button>

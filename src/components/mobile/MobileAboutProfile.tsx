@@ -72,7 +72,7 @@ export default function MobileAboutProfile({ about }: Props) {
           <div className="flex-1 flex items-center justify-around pt-3">
             <Stat label="Work" value="999+" />
             <Stat label="Brands" value="15+" />
-            <Stat label="Networth" value="∞" />
+            <Stat label="Potential" value="∞" />
           </div>
         </div>
 

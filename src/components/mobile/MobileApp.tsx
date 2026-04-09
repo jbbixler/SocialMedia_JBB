@@ -1,13 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import MobileNav, { type MobileTab } from './MobileNav'
 import MobileFeed from './MobileFeed'
 import MobileSearch from './MobileSearch'
 import MobileReels from './MobileReels'
 import MobileClientProfile from './MobileClientProfile'
 import MobileAboutProfile from './MobileAboutProfile'
+import MobileSavedTab from './MobileSavedTab'
+import { DarkModeProvider } from '@/context/DarkModeContext'
+import { BookmarkProvider } from '@/context/BookmarkContext'
+import { useTheme } from '@/context/DarkModeContext'
 import type { Client, About } from '@/types'
 
 type Screen =
@@ -15,6 +19,7 @@ type Screen =
   | { screen: 'search' }
   | { screen: 'reels' }
   | { screen: 'profile' }
+  | { screen: 'saved' }
   | { screen: 'client'; client: Client; from: MobileTab }
 
 interface Props {
@@ -22,6 +27,17 @@ interface Props {
 }
 
 export default function MobileApp({ about }: Props) {
+  return (
+    <DarkModeProvider>
+      <BookmarkProvider>
+        <MobileAppInner about={about} />
+      </BookmarkProvider>
+    </DarkModeProvider>
+  )
+}
+
+function MobileAppInner({ about }: Props) {
+  const { dark, hotPink } = useTheme()
   const [current, setCurrent] = useState<Screen>({ screen: 'feed' })
   const [tab, setTab] = useState<MobileTab>('feed')
 
@@ -31,7 +47,8 @@ export default function MobileApp({ about }: Props) {
   }
 
   const openClient = (client: Client) => {
-    const from: MobileTab = current.screen === 'reels' ? 'reels'
+    const from: MobileTab =
+      current.screen === 'reels' ? 'reels'
       : current.screen === 'search' ? 'search'
       : current.screen === 'profile' ? 'profile'
       : 'feed'
@@ -51,57 +68,38 @@ export default function MobileApp({ about }: Props) {
     }
   }
 
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+
   return (
-    <div className="flex flex-col h-[100dvh] overflow-hidden bg-white">
-      <AnimatePresence mode="wait">
+    <div className="flex flex-col h-[100dvh] overflow-hidden" style={{ background: bg, transition: 'background 0.4s ease' }}>
+      {/* No AnimatePresence transition — instant tab switching like Instagram */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         {current.screen === 'feed' && (
-          <SlideIn key="feed" direction="left">
-            <MobileFeed onClientSelect={openClient} onProfileSelect={openProfile} />
-          </SlideIn>
+          <MobileFeed onClientSelect={openClient} onProfileSelect={openProfile} />
         )}
         {current.screen === 'search' && (
-          <SlideIn key="search" direction="left">
-            <MobileSearch onClientSelect={openClient} />
-          </SlideIn>
+          <MobileSearch onClientSelect={openClient} />
         )}
         {current.screen === 'reels' && (
-          <SlideIn key="reels" direction="left">
-            <MobileReels onClientSelect={openClient} onProfileSelect={openProfile} />
-          </SlideIn>
+          <MobileReels onClientSelect={openClient} onProfileSelect={openProfile} />
         )}
         {current.screen === 'profile' && (
-          <SlideIn key="profile" direction="right">
-            <MobileAboutProfile about={about} />
-          </SlideIn>
+          <MobileAboutProfile about={about} />
+        )}
+        {current.screen === 'saved' && (
+          <MobileSavedTab />
         )}
         {current.screen === 'client' && (
-          <SlideIn key={`client-${current.client.id}`} direction="right">
-            <MobileClientProfile
-              client={current.client}
-              onBack={goBack}
-              onClientSelect={openClient}
-              onProfileSelect={openProfile}
-            />
-          </SlideIn>
+          <MobileClientProfile
+            client={current.client}
+            onBack={goBack}
+            onClientSelect={openClient}
+            onProfileSelect={openProfile}
+          />
         )}
-      </AnimatePresence>
+      </div>
 
       <MobileNav tab={tab} onTab={goTab} />
     </div>
-  )
-}
-
-function SlideIn({ children, direction }: { children: React.ReactNode; direction: 'left' | 'right' }) {
-  const x = direction === 'right' ? 40 : -40
-  return (
-    <motion.div
-      className="flex-1 flex flex-col overflow-hidden"
-      initial={{ opacity: 0, x }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -x }}
-      transition={{ duration: 0.22, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.div>
   )
 }
