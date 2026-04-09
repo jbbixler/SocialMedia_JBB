@@ -302,11 +302,11 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
         </motion.div>
       </AnimatePresence>
 
-      {/* ── Bottom action bar — always black, outside slide so it doesn't flash ── */}
+      {/* ── Bottom action bar — transparent with bottom scrim for legibility ── */}
       <div
         data-no-nav
         className="absolute bottom-0 inset-x-0 z-40 flex flex-col"
-        style={{ background: '#000', cursor: 'default' }}
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)', cursor: 'default' }}
         onMouseDown={e => e.stopPropagation()}
         onMouseUp={e => e.stopPropagation()}
       >
@@ -318,7 +318,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-full text-[14px] font-semibold text-white"
-              style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.22)' }}
+              style={{ background: 'rgba(255,255,255,0.20)', border: '1px solid rgba(255,255,255,0.35)' }}
               onMouseDown={e => e.stopPropagation()}
             >
               {ctaLabel}
