@@ -67,7 +67,7 @@ interface Message {
 
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
-  content: "Hey! I'm here to help match you with the right social media creative strategy. To get started — what kind of brand or product are you looking to advertise?",
+  content: "What are you looking to get done?",
 }
 
 export default function MobileSavedTab() {
@@ -115,8 +115,19 @@ export default function MobileSavedTab() {
         body: JSON.stringify({ messages: updated }),
       })
       const data = await res.json()
-      setMessages(m => [...m, { role: 'assistant', content: data.content ?? "Thanks for sharing that! Let me know more about your goals." }])
+      const finalMessages = [...updated, { role: 'assistant' as const, content: data.content ?? "Something went wrong. Try again." }]
+      setMessages(finalMessages)
       haptic([20, 30, 20]) // received
+
+      // Auto-send lead when Claude signals it has what it needs
+      if (data.shouldSend) {
+        setSent(true)
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: finalMessages }),
+        }).catch(() => {})
+      }
     } catch {
       setMessages(m => [...m, { role: 'assistant', content: "Something went wrong. Try again in a moment." }])
     } finally {
@@ -216,8 +227,8 @@ export default function MobileSavedTab() {
             </div>
           ) : null}
 
-          {/* Send to James CTA — appears after a few messages */}
-          {messages.length >= 5 && !sent && (
+          {/* Manual send fallback — appears after a few exchanges if not auto-sent */}
+          {messages.length >= 7 && !sent && (
             <button
               onClick={sendLead}
               className="w-full mt-3 py-2.5 rounded-full text-[13px] font-semibold"
@@ -227,8 +238,8 @@ export default function MobileSavedTab() {
             </button>
           )}
           {sent && (
-            <p className="text-center text-[13px] mt-3" style={{ color: subColor }}>
-              Sent! James will be in touch soon.
+            <p className="text-center text-[13px] mt-3 font-medium" style={{ color: subColor }}>
+              Sent. James will follow up.
             </p>
           )}
         </div>
