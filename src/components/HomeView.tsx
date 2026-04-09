@@ -18,6 +18,13 @@ const fadeUp = {
   show:   { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 26 } },
 }
 
+// Phone wrapper keeps full opacity on exit so layoutId can animate position smoothly
+const phoneVariant = {
+  hidden: { opacity: 0, y: 24 },
+  show:   { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 26 } },
+  exit:   { opacity: 1 },
+}
+
 // Calm pastel hues — lavender, sky, mint, peach, rose, aqua
 const PASTEL_HUES = [262, 200, 158, 28, 335, 182]
 let _rippleHueIdx = 0
@@ -207,8 +214,8 @@ export default function HomeView({ clients, about }: { clients: Client[]; about:
           </p>
         </motion.header>
 
-        {/* Phone */}
-        <motion.div variants={fadeUp} className="relative z-10">
+        {/* Phone — uses phoneVariant so it stays opaque during exit, letting layoutId pan it */}
+        <motion.div variants={phoneVariant} className="relative z-10">
           <HomeIgMockup />
         </motion.div>
       </div>
