@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react'
+import { useRef, useLayoutEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { usePortfolio } from '@/context/PortfolioContext'
-import { DarkModeProvider } from '@/context/DarkModeContext'
+import { DarkModeProvider, useTheme } from '@/context/DarkModeContext'
 import { BookmarkProvider } from '@/context/BookmarkContext'
 import IosStatusBar from './IosStatusBar'
 import MobileFeed from './mobile/MobileFeed'
@@ -25,7 +25,6 @@ export default function HomeIgMockup() {
   const screenOverlayRef = useRef<HTMLDivElement>(null)
   const [zoom, setZoom]  = useState(1)
 
-  // Fit phone to viewport height
   useLayoutEffect(() => {
     const compute = () => setZoom(Math.min(1, (window.innerHeight - 260) / FRAME_H))
     compute()
@@ -33,7 +32,6 @@ export default function HomeIgMockup() {
     return () => window.removeEventListener('resize', compute)
   }, [])
 
-  // Chrome shimmer on mouse move
   const handleFrameMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const frame = frameRef.current
     const overlay = screenOverlayRef.current
@@ -65,66 +63,89 @@ export default function HomeIgMockup() {
   return (
     <div className="ig-mockup-wrap flex-shrink-0 flex flex-col items-center relative">
       <div style={{ zoom }}>
-        {/* iPhone 16 Pro frame */}
-        <motion.div
-          ref={frameRef}
-          layoutId="ig-phone"
-          className="relative"
-          onMouseMove={handleFrameMouseMove}
-          onMouseLeave={handleFrameMouseLeave}
-          style={{
-            borderRadius: '54px',
-            background: 'linear-gradient(135deg,#c0c0c8 0%,#848490 6%,#585860 14%,#3c3c44 28%,#2a2a32 46%,#1c1c24 64%,#121218 82%,#0c0c10 100%)',
-            padding: `${FRAME_PAD}px`,
-            width: `${SCREEN_W + FRAME_PAD * 2}px`,
-            boxShadow: [
-              '0 60px 120px rgba(0,0,0,0.38)',
-              '0 24px 48px rgba(0,0,0,0.20)',
-              'inset 0 2px 0 rgba(255,255,255,0.55)',
-              'inset 0 -1.5px 0 rgba(0,0,0,0.55)',
-              'inset 2px 0 0 rgba(255,255,255,0.18)',
-              'inset -2px 0 0 rgba(0,0,0,0.38)',
-            ].join(','),
-          }}
-        >
-          {/* Side buttons */}
-          <div className="absolute" style={{ left:'-3.5px', top:'108px',  width:'3.5px', height:'34px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
-          <div className="absolute" style={{ left:'-3.5px', top:'158px',  width:'3.5px', height:'62px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
-          <div className="absolute" style={{ left:'-3.5px', top:'232px',  width:'3.5px', height:'62px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
-          <div className="absolute" style={{ right:'-3.5px', top:'190px', width:'3.5px', height:'80px', background:'linear-gradient(to left,#1e1e20,#3a3a3c)',  borderRadius:'0 3px 3px 0' }} />
-
-          {/* Screen */}
-          <div
-            className="relative flex flex-col overflow-hidden"
-            style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px', background:'#000' }}
-          >
-            {/* Glass sheen */}
-            <div ref={screenOverlayRef} aria-hidden style={{ position:'absolute', inset:0, borderRadius:'42px', pointerEvents:'none', zIndex:48, opacity:0, transition:'opacity 0.4s ease' }} />
-
-            {/* Dynamic Island */}
-            <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
-
-            {/* Status bar */}
-            <IosStatusBar dark={true} />
-
-            {/* Mobile app content — transform scopes all fixed elements to this container */}
-            <div className="flex-1 relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
-              <DarkModeProvider>
-                <BookmarkProvider>
-                  <EmbeddedMobileApp onClientSelect={openClient} onProfileSelect={goToAbout} about={about} />
-                </BookmarkProvider>
-              </DarkModeProvider>
-            </div>
-          </div>
-        </motion.div>
+        {/* Providers wrap the entire phone so dark mode affects status bar + screen bg */}
+        <DarkModeProvider>
+          <BookmarkProvider>
+            <PhoneFrame
+              frameRef={frameRef}
+              screenOverlayRef={screenOverlayRef}
+              onMouseMove={handleFrameMouseMove}
+              onMouseLeave={handleFrameMouseLeave}
+              onClientSelect={openClient}
+              onProfileSelect={goToAbout}
+              about={about}
+            />
+          </BookmarkProvider>
+        </DarkModeProvider>
 
         {/* Drop shadow glow */}
         <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'56px', marginTop:'-6px', pointerEvents:'none', background:['radial-gradient(ellipse 88% 100% at 50% 8%, rgba(155,160,225,0.28) 0%, transparent 68%)','radial-gradient(ellipse 60% 80%  at 50% 10%, rgba(170,175,240,0.18) 0%, transparent 55%)','radial-gradient(ellipse 36% 55%  at 50% 12%, rgba(190,195,255,0.22) 0%, transparent 42%)'].join(', '), filter:'blur(9px)' }} />
-
-        {/* Blurred reflection */}
         <div aria-hidden style={{ width:`${SCREEN_W + FRAME_PAD * 2}px`, height:'88px', marginTop:'1px', pointerEvents:'none', borderRadius:'0 0 54px 54px', background:'linear-gradient(to bottom, rgba(100,100,108,0.20) 0%, rgba(14,14,18,0.14) 18%, rgba(14,14,18,0.08) 48%, transparent 100%)', filter:'blur(22px)', opacity:0.75, transform:'scaleX(0.92)' }} />
       </div>
     </div>
+  )
+}
+
+// Inner phone frame — reads dark from context so status bar + screen bg stay in sync
+interface PhoneFrameProps {
+  frameRef: React.RefObject<HTMLDivElement>
+  screenOverlayRef: React.RefObject<HTMLDivElement>
+  onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void
+  onMouseLeave: () => void
+  onClientSelect: (client: Client) => void
+  onProfileSelect: () => void
+  about: import('@/types').About | null
+}
+
+function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onClientSelect, onProfileSelect, about }: PhoneFrameProps) {
+  const { dark } = useTheme()
+  const screenBg = dark ? '#000' : '#fff'
+
+  return (
+    <motion.div
+      ref={frameRef}
+      layoutId="ig-phone"
+      className="relative"
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{
+        borderRadius: '54px',
+        background: 'linear-gradient(135deg,#c0c0c8 0%,#848490 6%,#585860 14%,#3c3c44 28%,#2a2a32 46%,#1c1c24 64%,#121218 82%,#0c0c10 100%)',
+        padding: `${FRAME_PAD}px`,
+        width: `${SCREEN_W + FRAME_PAD * 2}px`,
+        boxShadow: [
+          '0 60px 120px rgba(0,0,0,0.38)',
+          '0 24px 48px rgba(0,0,0,0.20)',
+          'inset 0 2px 0 rgba(255,255,255,0.55)',
+          'inset 0 -1.5px 0 rgba(0,0,0,0.55)',
+          'inset 2px 0 0 rgba(255,255,255,0.18)',
+          'inset -2px 0 0 rgba(0,0,0,0.38)',
+        ].join(','),
+      }}
+    >
+      {/* Side buttons */}
+      <div className="absolute" style={{ left:'-3.5px', top:'108px',  width:'3.5px', height:'34px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
+      <div className="absolute" style={{ left:'-3.5px', top:'158px',  width:'3.5px', height:'62px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
+      <div className="absolute" style={{ left:'-3.5px', top:'232px',  width:'3.5px', height:'62px', background:'linear-gradient(to right,#1e1e20,#3a3a3c)', borderRadius:'3px 0 0 3px' }} />
+      <div className="absolute" style={{ right:'-3.5px', top:'190px', width:'3.5px', height:'80px', background:'linear-gradient(to left,#1e1e20,#3a3a3c)',  borderRadius:'0 3px 3px 0' }} />
+
+      {/* Screen */}
+      <div
+        className="relative flex flex-col overflow-hidden"
+        style={{ width:`${SCREEN_W}px`, height:`${SCREEN_H}px`, borderRadius:'42px', background: screenBg, transition: 'background 0.3s ease' }}
+      >
+        <div ref={screenOverlayRef} aria-hidden style={{ position:'absolute', inset:0, borderRadius:'42px', pointerEvents:'none', zIndex:48, opacity:0, transition:'opacity 0.4s ease' }} />
+        <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
+
+        {/* Status bar — reads dark from context */}
+        <IosStatusBar dark={dark} />
+
+        {/* transform: translateZ(0) scopes all fixed elements to the phone frame */}
+        <div className="flex-1 relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+          <EmbeddedMobileApp onClientSelect={onClientSelect} onProfileSelect={onProfileSelect} about={about} />
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
