@@ -65,7 +65,7 @@ function StatusIcons({ dark }: { dark: boolean }) {
       {/* Battery */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
         <div style={{ width: '25px', height: '12px', border: `1.5px solid ${c}`, borderRadius: '3.5px', padding: '1.5px', position: 'relative' }}>
-          <div style={{ width: '85%', height: '100%', background: c, borderRadius: '1.5px' }} />
+          <div style={{ width: '99%', height: '100%', background: c, borderRadius: '1.5px' }} />
         </div>
         <div style={{ width: '2px', height: '5px', background: c, borderRadius: '0 1px 1px 0', opacity: 0.4 }} />
       </div>
