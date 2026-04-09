@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/context/DarkModeContext'
 import { useBookmarks } from '@/context/BookmarkContext'
+import IosStatusBar from '@/components/IosStatusBar'
 import type { Client, Ad } from '@/types'
 
 interface StorySet {
@@ -211,6 +212,11 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Always-dark status bar overlay — sits on top of the theme status bar */}
+      <div className="absolute top-0 inset-x-0 z-[210] pointer-events-none">
+        <IosStatusBar dark={true} />
+      </div>
+
       {/* Brand slide */}
       <AnimatePresence mode="wait" custom={slideDir}>
         <motion.div
