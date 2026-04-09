@@ -31,44 +31,67 @@ export default function HomeIgMockup() {
   const sentinelRef      = useRef<HTMLDivElement>(null)
   const frameRef         = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
-  const storiesRef       = useRef<HTMLDivElement>(null)
-  const dragRef          = useRef<{ startX: number; scrollLeft: number; dragging: boolean }>({ startX: 0, scrollLeft: 0, dragging: false })
+  const storiesRef    = useRef<HTMLDivElement>(null)
+  const dragRef       = useRef({ startX: 0, scrollLeft: 0, dragging: false, didDrag: false })
+  const velocityRef   = useRef({ x: 0, lastX: 0, lastT: 0 })
+  const momentumRaf   = useRef(0)
+
+  const stopMomentum = () => cancelAnimationFrame(momentumRaf.current)
+
+  const startMomentum = useCallback((velocity: number) => {
+    const el = storiesRef.current
+    if (!el) return
+    stopMomentum()
+    const FRICTION = 0.92
+    const step = () => {
+      velocity *= FRICTION
+      if (Math.abs(velocity) < 0.5) return
+      el.scrollLeft += velocity
+      momentumRaf.current = requestAnimationFrame(step)
+    }
+    momentumRaf.current = requestAnimationFrame(step)
+  }, [])
 
   const onStoriesMouseDown = useCallback((e: React.MouseEvent) => {
     const el = storiesRef.current
     if (!el) return
-    dragRef.current = { startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft, dragging: true }
+    stopMomentum()
+    dragRef.current = { startX: e.pageX, scrollLeft: el.scrollLeft, dragging: true, didDrag: false }
+    velocityRef.current = { x: 0, lastX: e.pageX, lastT: Date.now() }
     el.style.cursor = 'grabbing'
     el.style.userSelect = 'none'
-  }, [])
+  }, [startMomentum])
 
   const onStoriesMouseMove = useCallback((e: React.MouseEvent) => {
     if (!dragRef.current.dragging) return
     const el = storiesRef.current
     if (!el) return
-    const x = e.pageX - el.offsetLeft
-    el.scrollLeft = dragRef.current.scrollLeft - (x - dragRef.current.startX)
-  }, [])
+    const dx = e.pageX - dragRef.current.startX
+    if (Math.abs(dx) > 4) dragRef.current.didDrag = true
+    el.scrollLeft = dragRef.current.scrollLeft - dx
 
-  const onStoriesMouseUp = useCallback((e: React.MouseEvent) => {
-    const el = storiesRef.current
-    if (!el) return
-    // Suppress click if it was a real drag
-    if (Math.abs(e.pageX - el.offsetLeft - dragRef.current.startX + dragRef.current.scrollLeft - el.scrollLeft) > 4) {
-      e.stopPropagation()
+    // Track velocity
+    const now = Date.now()
+    const dt = now - velocityRef.current.lastT
+    if (dt > 0) {
+      velocityRef.current.x = (velocityRef.current.lastX - e.pageX) / dt * 16
+      velocityRef.current.lastX = e.pageX
+      velocityRef.current.lastT = now
     }
-    dragRef.current.dragging = false
-    el.style.cursor = 'grab'
-    el.style.userSelect = ''
   }, [])
 
-  const onStoriesMouseLeave = useCallback(() => {
+  const endDrag = useCallback((e?: React.MouseEvent) => {
     const el = storiesRef.current
     if (!el) return
+    if (e && dragRef.current.didDrag) e.stopPropagation()
     dragRef.current.dragging = false
     el.style.cursor = 'grab'
     el.style.userSelect = ''
-  }, [])
+    startMomentum(velocityRef.current.x)
+  }, [startMomentum])
+
+  const onStoriesMouseUp   = useCallback((e: React.MouseEvent) => endDrag(e), [endDrag])
+  const onStoriesMouseLeave = useCallback(() => endDrag(), [endDrag])
 
 
   const [rendered, setRendered] = useState(100)
