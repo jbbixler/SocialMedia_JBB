@@ -34,6 +34,10 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
   const [showComment, setShowComment] = useState(false)
   const [commentText, setCommentText] = useState('')
   const [commentSent, setCommentSent] = useState(false)
+  const [comments, setComments] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return []
+    try { return JSON.parse(localStorage.getItem(`comments_${postKey}`) || '[]') } catch { return [] }
+  })
 
   const bookmarked = isSaved(postKey)
   const handle = client.igHandle || client.id
@@ -88,17 +92,23 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
   }
 
   const handleComment = useCallback(async () => {
-    if (!commentText.trim()) return
+    const text = commentText.trim()
+    if (!text) return
+    // Add locally immediately
+    const updated = [...comments, text]
+    setComments(updated)
+    try { localStorage.setItem(`comments_${postKey}`, JSON.stringify(updated)) } catch {}
     setCommentSent(true)
-    try {
-      await fetch('/api/comment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment: commentText, clientName: client.name, adIndex: postKey }),
-      })
-    } catch {}
-    setTimeout(() => { setShowComment(false); setCommentText(''); setCommentSent(false) }, 1500)
-  }, [commentText, client.name, postKey])
+    setShowComment(false)
+    setCommentText('')
+    setTimeout(() => setCommentSent(false), 100)
+    // Email notification (fire-and-forget)
+    fetch('/api/comment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment: text, clientName: client.name, adIndex: postKey }),
+    }).catch(() => {})
+  }, [commentText, comments, client.name, postKey])
 
   return (
     <>
@@ -226,10 +236,13 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
               </motion.div>
             </button>
             {/* Comment */}
-            <button onClick={() => setShowComment(true)}>
+            <button onClick={() => setShowComment(true)} className="flex items-center gap-1">
               <svg className="w-[26px] h-[26px]" viewBox="0 0 24 24" fill="none" stroke={iconStroke} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
+              {comments.length > 0 && (
+                <span className="text-[12px] font-medium" style={{ color: subColor }}>{comments.length}</span>
+              )}
             </button>
             {/* Send → clipboard */}
             <button onClick={() => { copyToClipboard('https://social-media-4qprfs6vv-jbbixlers-projects.vercel.app/').then(() => onShare()).catch(() => onShare()) }}>
@@ -259,6 +272,20 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
         {ad.caption && (
           <div className="px-3 pb-2 text-[13px] leading-snug" style={{ color: textColor }}>
             <span className="font-semibold mr-1">{handle}</span>{ad.caption}
+          </div>
+        )}
+
+        {/* Comments */}
+        {comments.length > 0 && (
+          <div className="px-3 pb-1 flex flex-col gap-1">
+            {comments.map((c, i) => (
+              <div key={i} className="text-[13px] leading-snug" style={{ color: textColor }}>
+                <span className="font-semibold mr-1">you</span>{c}
+              </div>
+            ))}
+            <button onClick={() => setShowComment(true)} className="text-[12px] text-left mt-0.5" style={{ color: subColor }}>
+              Add a comment…
+            </button>
           </div>
         )}
 
