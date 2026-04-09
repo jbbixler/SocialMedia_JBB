@@ -44,21 +44,26 @@ interface ThemeCtx {
   dark: boolean
   hotPink: boolean   // true = hot pink Easter egg active
   heartCount: number
+  storyOpen: boolean // true while story viewer is visible
   toggleDark: () => void
   onHeartTap: () => void
+  setStoryOpen: (v: boolean) => void
 }
 
 const Ctx = createContext<ThemeCtx>({
   dark: false,
   hotPink: false,
   heartCount: 0,
+  storyOpen: false,
   toggleDark: () => {},
   onHeartTap: () => {},
+  setStoryOpen: () => {},
 })
 
 export function DarkModeProvider({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(false)
   const [heartCount, setHeartCount] = useState(0)
+  const [storyOpen, setStoryOpen] = useState(false)
 
   const toggleDark = useCallback(() => setDark(d => !d), [])
 
@@ -75,7 +80,7 @@ export function DarkModeProvider({ children }: { children: React.ReactNode }) {
   const hotPink = heartCount >= 69
 
   return (
-    <Ctx.Provider value={{ dark, hotPink, heartCount, toggleDark, onHeartTap }}>
+    <Ctx.Provider value={{ dark, hotPink, heartCount, storyOpen, toggleDark, onHeartTap, setStoryOpen }}>
       {children}
     </Ctx.Provider>
   )

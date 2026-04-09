@@ -98,7 +98,7 @@ interface PhoneFrameProps {
 }
 
 function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onClientSelect, onProfileSelect, about }: PhoneFrameProps) {
-  const { dark, hotPink } = useTheme()
+  const { dark, hotPink, storyOpen } = useTheme()
   const screenBg = dark ? '#000' : '#fff'
 
   return (
@@ -137,8 +137,8 @@ function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onC
         <div ref={screenOverlayRef} aria-hidden style={{ position:'absolute', inset:0, borderRadius:'42px', pointerEvents:'none', zIndex:48, opacity:0, transition:'opacity 0.4s ease' }} />
         <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
 
-        {/* Status bar — reads dark from context */}
-        <IosStatusBar dark={dark} />
+        {/* Status bar — forced dark while story viewer is open */}
+        <IosStatusBar dark={dark || storyOpen} />
 
         {/* transform: translateZ(0) scopes all fixed elements to the phone frame */}
         <div className="flex-1 relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>

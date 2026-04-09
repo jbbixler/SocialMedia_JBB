@@ -26,7 +26,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   const { clients, about } = usePortfolio()
-  const { dark, hotPink, toggleDark, onHeartTap } = useTheme()
+  const { dark, hotPink, toggleDark, onHeartTap, setStoryOpen } = useTheme()
   const [allAds, setAllAds] = useState<AdWithClient[]>([])
   const [rendered, setRendered] = useState(12)
   const [showCopied, setShowCopied] = useState(false)
@@ -151,7 +151,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
           {storySets.map((set, i) => (
             <button
               key={set.client.id}
-              onClick={() => setStoryClientIdx(i)}
+              onClick={() => { setStoryClientIdx(i); setStoryOpen(true) }}
               className="flex flex-col items-center gap-1.5 flex-shrink-0"
             >
               <div
@@ -233,7 +233,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
           <MobileStoryViewer
             storySets={storySets}
             initialClientIndex={storyClientIdx}
-            onClose={() => setStoryClientIdx(null)}
+            onClose={() => { setStoryClientIdx(null); setStoryOpen(false) }}
           />
         )}
       </AnimatePresence>
