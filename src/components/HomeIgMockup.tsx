@@ -301,8 +301,8 @@ export default function HomeIgMockup() {
 
             {/* Top nav — dark toggle left, name center, heart right */}
             <div
-              className="flex-shrink-0 relative flex items-center justify-between px-4 pb-2.5 border-b"
-              style={{ background: dark ? '#000' : '#fff', borderColor: dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)', transition: 'background 0.3s ease', display: activeTab === 'feed' ? undefined : 'none' }}
+              className="flex-shrink-0 relative flex items-center justify-between px-4 border-b"
+              style={{ height: '44px', background: dark ? '#000' : '#fff', borderColor: dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)', transition: 'background 0.3s ease', display: activeTab === 'feed' ? undefined : 'none' }}
             >
               {/* Dark mode toggle */}
               <button onClick={toggleDark} className="w-8 h-8 flex items-center justify-center">
@@ -340,59 +340,67 @@ export default function HomeIgMockup() {
 
             {/* ── FEED TAB ─────────────────────────────────────── */}
             {activeTab === 'feed' && (() => {
-              const storySets = clients.filter(c => c.ads.some(a => a.type === 'image' && a.ratio === '9:16'))
-              const nonStory  = clients.filter(c => !storySets.some(s => s.id === c.id))
-              const borderC   = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'
+              const storySets = clients
+                .map(c => ({ client: c, images: c.ads.filter(a => a.type === 'image' && a.ratio === '9:16') }))
+                .filter(s => s.images.length > 0)
+              const nonStory = clients.filter(c => !storySets.some(s => s.client.id === c.id))
+              const borderC  = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'
+              const bg       = dark ? '#000' : '#fff'
               const nameColor = dark ? '#fff' : '#1d1d1f'
-              const frameBorder = dark ? '#000' : '#fff'
+              const subColor  = dark ? 'rgba(255,255,255,0.5)' : '#8e8e8e'
               return <>
-                {/* Stories */}
+                {/* Stories — matches mobile exactly */}
                 <div
                   ref={storiesRef}
-                  className="flex-shrink-0 flex gap-3 px-4 py-3 border-b overflow-x-auto select-none"
-                  style={{ scrollbarWidth: 'none', cursor: 'grab', background: dark ? '#000' : '#fff', borderColor: borderC, transition: 'background 0.3s ease' }}
+                  className="flex-shrink-0 flex gap-4 px-4 py-3 border-b overflow-x-auto select-none"
+                  style={{ scrollbarWidth: 'none', cursor: 'grab', background: bg, borderColor: borderC, transition: 'background 0.3s ease' }}
                   onMouseDown={onStoriesMouseDown}
                   onMouseMove={onStoriesMouseMove}
                   onMouseUp={onStoriesMouseUp}
                   onMouseLeave={onStoriesMouseLeave}
                   onDragStart={e => e.preventDefault()}
                 >
+                  {/* "Me" story */}
                   {about && (
-                    <button onClick={goToAbout} className="flex flex-col items-center gap-1 flex-shrink-0">
-                      <div className="relative w-[58px] h-[58px]">
+                    <button onClick={goToAbout} className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                      <div className="relative w-[62px] h-[62px]">
                         <div className="w-full h-full rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
-                          <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: about.color || '#1d1d1f', borderColor: frameBorder }}>
+                          <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: about.color || '#1d1d1f', borderColor: bg }}>
                             {about.avatar ? <img src={about.avatar} alt={about.name} className="w-full h-full object-cover" /> : <span className="text-white text-[11px] font-semibold">{about.name.charAt(0)}</span>}
                           </div>
                         </div>
-                        <span className="absolute bottom-0 right-0 w-[13px] h-[13px] rounded-full bg-[#22c55e] border-[2px]" style={{ borderColor: frameBorder }} />
+                        <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-[#22c55e] border-2" style={{ borderColor: bg }} />
                       </div>
-                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: dark ? 'rgba(255,255,255,0.5)' : '#8e8e8e' }}>{about.handle || 'you'}</span>
+                      <span className="text-[11px] max-w-[62px] truncate" style={{ color: subColor }}>{about.handle || 'you'}</span>
                     </button>
                   )}
-                  {storySets.map((c, idx) => (
-                    <button key={c.id} onClick={() => setStoryState({ startIdx: idx })} className="flex flex-col items-center gap-1 flex-shrink-0">
-                      <div className="w-[58px] h-[58px] rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
-                        <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: c.color || '#27272a', borderColor: frameBorder }}>
+                  {/* Clients WITH 9:16 statics — open story viewer */}
+                  {storySets.map((s, idx) => (
+                    <button key={s.client.id} onClick={() => setStoryState({ startIdx: idx })} className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                      <div className="w-[62px] h-[62px] rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
+                        <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: s.client.color || '#27272a', borderColor: bg }}>
+                          <img src={s.client.igAvatar || s.client.logo} alt={s.client.name} className="w-full h-full object-contain" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                        </div>
+                      </div>
+                      <span className="text-[11px] max-w-[62px] truncate" style={{ color: nameColor }}>{s.client.igHandle || s.client.id}</span>
+                    </button>
+                  ))}
+                  {/* Clients WITHOUT 9:16 statics — still get gradient ring, go to client */}
+                  {nonStory.map(c => (
+                    <button key={c.id} onClick={() => dispatch({ type: 'SELECT_CLIENT', client: c })} className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                      <div className="w-[62px] h-[62px] rounded-full p-[2.5px]" style={{ background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}>
+                        <div className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: c.color || '#27272a', borderColor: bg }}>
                           <img src={c.igAvatar || c.logo} alt={c.name} className="w-full h-full object-contain" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
                         </div>
                       </div>
-                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: nameColor }}>{c.igHandle || c.id}</span>
-                    </button>
-                  ))}
-                  {nonStory.map(c => (
-                    <button key={c.id} onClick={() => dispatch({ type: 'SELECT_CLIENT', client: c })} className="flex flex-col items-center gap-1 flex-shrink-0">
-                      <div className="w-[58px] h-[58px] rounded-full overflow-hidden border-2 flex items-center justify-center" style={{ background: c.color || '#27272a', borderColor: dark ? '#444' : '#ddd' }}>
-                        <img src={c.igAvatar || c.logo} alt={c.name} className="w-full h-full object-contain" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
-                      </div>
-                      <span className="text-[10px] max-w-[58px] truncate" style={{ color: nameColor }}>{c.igHandle || c.id}</span>
+                      <span className="text-[11px] max-w-[62px] truncate" style={{ color: nameColor }}>{c.igHandle || c.id}</span>
                     </button>
                   ))}
                 </div>
                 {/* Feed */}
                 <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ background: dark ? '#000' : '#f5f5f7', transition: 'background 0.3s ease' }}>
                   {visible.map(({ ad, client, key }, i) => (
-                    <div key={key} data-post-index={i} data-client-id={client.id} style={{ borderTop: i > 0 ? `6px solid ${dark ? '#0a0a0a' : '#e5e5ea'}` : 'none' }}>
+                    <div key={key} data-post-index={i} data-client-id={client.id}>
                       <IgPost ad={ad} client={client} adIndex={i} isInitial={false} dark={dark} commentPortal={screenRef.current} onMediaClick={() => dispatch({ type: 'SELECT_CLIENT', client })} onShare={handleShare} />
                     </div>
                   ))}
