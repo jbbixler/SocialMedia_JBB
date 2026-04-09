@@ -36,9 +36,14 @@ export default function HomeIgMockup() {
   useLayoutEffect(() => {
     const compute = () => setZoom(Math.min(1, (window.innerHeight - 260) / FRAME_H))
     compute()
-    setPhoneMounted(true)
     window.addEventListener('resize', compute)
     return () => window.removeEventListener('resize', compute)
+  }, [])
+
+  useEffect(() => {
+    // Delay so the phone only appears after framer-motion's initial layout pass settles
+    const id = setTimeout(() => setPhoneMounted(true), 80)
+    return () => clearTimeout(id)
   }, [])
 
   // Intercept wheel events: nudge the phone when feed scroll bottoms out,
@@ -153,6 +158,7 @@ export default function HomeIgMockup() {
             transformOrigin: 'top center',
             marginBottom: `${(zoom - 1) * TOTAL_H}px`,
             opacity: phoneMounted ? 1 : 0,
+            transition: 'opacity 0.15s ease',
           }}
         >
           <DarkModeProvider>
@@ -197,6 +203,7 @@ function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onC
     <motion.div
       ref={frameRef}
       layoutId="ig-phone"
+      layoutDependency={0}
       className="relative"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
@@ -229,11 +236,9 @@ function PhoneFrame({ frameRef, screenOverlayRef, onMouseMove, onMouseLeave, onC
         <div ref={screenOverlayRef} aria-hidden style={{ position:'absolute', inset:0, borderRadius:'42px', pointerEvents:'none', zIndex:48, opacity:0, transition:'opacity 0.4s ease' }} />
         <div className="absolute z-50 left-1/2 -translate-x-1/2" style={{ top:'13px', width:'120px', height:'36px', background:'#000', borderRadius:'50px', boxShadow:'0 0 0 1.5px rgba(255,255,255,0.06)' }} />
 
-        {/* Status bar — forced dark while story viewer is open */}
-        <IosStatusBar dark={dark || storyOpen} />
-
-        {/* transform: translateZ(0) scopes all fixed elements to the phone frame */}
-        <div className="flex-1 relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+        {/* translateZ(0) scopes fixed elements to the phone frame; status bar shares the same compositing layer to prevent sub-pixel gaps */}
+        <div className="flex-1 flex flex-col relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+          <IosStatusBar dark={dark || storyOpen} />
           <EmbeddedMobileApp onClientSelect={onClientSelect} onProfileSelect={onProfileSelect} about={about} />
         </div>
 
@@ -253,8 +258,8 @@ function EmbeddedMobileApp({ onClientSelect, onProfileSelect, about }: EmbeddedP
   const [tab, setTab] = useState<MobileTab>('feed')
 
   return (
-    // h-full fills the flex-1 container above; relative so fixed children anchor here
-    <div className="h-full flex flex-col relative overflow-hidden">
+    // flex-1 fills the remaining space below IosStatusBar; relative so fixed children anchor here
+    <div className="flex-1 flex flex-col relative overflow-hidden">
       {tab === 'feed'    && <MobileFeed    onClientSelect={onClientSelect} onProfileSelect={onProfileSelect} />}
       {tab === 'search'  && <MobileSearch  onClientSelect={onClientSelect} />}
       {tab === 'reels'   && <MobileReels   onClientSelect={onClientSelect} onProfileSelect={onProfileSelect} />}
