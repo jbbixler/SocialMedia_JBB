@@ -22,12 +22,13 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
   const [storyIdx, setStoryIdx] = useState(0)
   const [paused, setPaused] = useState(false)
   const [progress, setProgress] = useState(0)
-  // For swipe animation: direction -1 = swipe right (prev), 1 = swipe left (next)
   const [slideDir, setSlideDir] = useState(0)
   const rafRef = useRef<number>(0)
   const startTimeRef = useRef<number>(0)
+  // Touch tracking
   const touchStartRef = useRef<{ x: number; y: number; t: number } | null>(null)
-  const dragXRef = useRef(0)
+  // Mouse tracking for desktop drag
+  const mouseDownRef = useRef<{ x: number; moved: boolean } | null>(null)
 
   const currentSet = storySets[clientIdx]
   const images = currentSet?.images ?? []
@@ -83,9 +84,20 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
     return () => cancelAnimationFrame(rafRef.current)
   }, [storyIdx, clientIdx, paused, goNext])
 
+  // ── Keyboard navigation ────────────────────────────────────────────────────
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')  goPrev()
+      else if (e.key === 'ArrowRight') goNext()
+      else if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [goPrev, goNext, onClose])
+
+  // ── Touch handlers (mobile) ───────────────────────────────────────────────
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() }
-    dragXRef.current = 0
     setPaused(true)
   }, [])
 
@@ -98,22 +110,65 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
     const dt = Date.now() - start.t
     touchStartRef.current = null
 
-    // Swipe down → close
     if (dy > 80 && Math.abs(dx) < 80) { onClose(); return }
 
-    // Horizontal swipe → switch brand
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
       goNextClient(dx < 0 ? 1 : -1)
       return
     }
 
-    // Quick tap → prev / next story within brand
     if (dt < 250 && Math.abs(dx) < 20 && Math.abs(dy) < 20) {
       const screenW = window.innerWidth
       if (e.changedTouches[0].clientX < screenW * 0.35) goPrev()
       else goNext()
     }
   }, [onClose, goNextClient, goPrev, goNext])
+
+  // ── Mouse handlers (desktop) ──────────────────────────────────────────────
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    // Don't hijack the close button
+    if ((e.target as HTMLElement).closest('button')) return
+    mouseDownRef.current = { x: e.clientX, moved: false }
+    setPaused(true)
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!mouseDownRef.current) return
+    if (Math.abs(e.clientX - mouseDownRef.current.x) > 6) {
+      mouseDownRef.current.moved = true
+    }
+  }, [])
+
+  const handleMouseUp = useCallback((e: React.MouseEvent) => {
+    setPaused(false)
+    const start = mouseDownRef.current
+    mouseDownRef.current = null
+    if (!start) return
+
+    const dx = e.clientX - start.x
+
+    // Horizontal drag → switch brand
+    if (start.moved && Math.abs(dx) > 50) {
+      goNextClient(dx < 0 ? 1 : -1)
+      return
+    }
+
+    // Click (no meaningful drag) → navigate within brand
+    if (Math.abs(dx) < 10) {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const relX = e.clientX - rect.left
+      if (relX < rect.width * 0.35) goPrev()
+      else goNext()
+    }
+  }, [goNextClient, goPrev, goNext])
+
+  // Cancel drag if mouse leaves
+  const handleMouseLeave = useCallback(() => {
+    if (mouseDownRef.current) {
+      mouseDownRef.current = null
+      setPaused(false)
+    }
+  }, [])
 
   if (!currentSet || images.length === 0) { onClose(); return null }
 
@@ -128,13 +183,18 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] bg-black flex flex-col overflow-hidden"
+      className="fixed inset-0 z-[200] bg-black flex flex-col overflow-hidden select-none"
+      style={{ cursor: 'pointer' }}
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Brand slide — animates on client switch */}
       <AnimatePresence mode="wait" custom={slideDir}>
@@ -170,12 +230,21 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
             </div>
             <span className="text-white text-[13px] font-semibold drop-shadow">{handle}</span>
             <span className="text-white/60 text-[12px]">Sponsored</span>
-            <button onClick={onClose} className="ml-auto p-1">
+            <button
+              onClick={onClose}
+              onMouseDown={e => e.stopPropagation()}
+              className="ml-auto p-1"
+              style={{ cursor: 'pointer' }}
+            >
               <svg className="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
           </div>
+
+          {/* Left / right tap zones — subtle visual hint on hover */}
+          <div className="absolute inset-y-0 left-0 w-[35%] z-20" style={{ cursor: 'w-resize' }} />
+          <div className="absolute inset-y-0 right-0 w-[65%] z-20" style={{ cursor: 'e-resize' }} />
 
           {/* Story image */}
           <AnimatePresence mode="wait">
@@ -190,6 +259,23 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
               transition={{ duration: 0.12 }}
             />
           </AnimatePresence>
+
+          {/* Brand navigation hint — shown when multiple brands available */}
+          {storySets.length > 1 && (
+            <div className="absolute bottom-8 inset-x-0 z-30 flex justify-center gap-1.5 pointer-events-none">
+              {storySets.map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === clientIdx ? '16px' : '5px',
+                    height: '5px',
+                    background: i === clientIdx ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </motion.div>
       </AnimatePresence>
     </motion.div>
