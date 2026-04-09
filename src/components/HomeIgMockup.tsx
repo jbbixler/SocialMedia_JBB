@@ -31,6 +31,44 @@ export default function HomeIgMockup() {
   const sentinelRef      = useRef<HTMLDivElement>(null)
   const frameRef         = useRef<HTMLDivElement>(null)
   const screenOverlayRef = useRef<HTMLDivElement>(null)
+  const storiesRef       = useRef<HTMLDivElement>(null)
+  const dragRef          = useRef<{ startX: number; scrollLeft: number; dragging: boolean }>({ startX: 0, scrollLeft: 0, dragging: false })
+
+  const onStoriesMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = storiesRef.current
+    if (!el) return
+    dragRef.current = { startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft, dragging: true }
+    el.style.cursor = 'grabbing'
+    el.style.userSelect = 'none'
+  }, [])
+
+  const onStoriesMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!dragRef.current.dragging) return
+    const el = storiesRef.current
+    if (!el) return
+    const x = e.pageX - el.offsetLeft
+    el.scrollLeft = dragRef.current.scrollLeft - (x - dragRef.current.startX)
+  }, [])
+
+  const onStoriesMouseUp = useCallback((e: React.MouseEvent) => {
+    const el = storiesRef.current
+    if (!el) return
+    // Suppress click if it was a real drag
+    if (Math.abs(e.pageX - el.offsetLeft - dragRef.current.startX + dragRef.current.scrollLeft - el.scrollLeft) > 4) {
+      e.stopPropagation()
+    }
+    dragRef.current.dragging = false
+    el.style.cursor = 'grab'
+    el.style.userSelect = ''
+  }, [])
+
+  const onStoriesMouseLeave = useCallback(() => {
+    const el = storiesRef.current
+    if (!el) return
+    dragRef.current.dragging = false
+    el.style.cursor = 'grab'
+    el.style.userSelect = ''
+  }, [])
 
 
   const [rendered, setRendered] = useState(100)
@@ -218,7 +256,15 @@ export default function HomeIgMockup() {
             </div>
 
             {/* Stories */}
-            <div className="flex-shrink-0 flex gap-3 px-4 py-3 bg-black border-b border-white/[0.07] overflow-x-auto">
+            <div
+              ref={storiesRef}
+              className="flex-shrink-0 flex gap-3 px-4 py-3 bg-black border-b border-white/[0.07] overflow-x-auto select-none"
+              style={{ scrollbarWidth: 'none', cursor: 'grab' }}
+              onMouseDown={onStoriesMouseDown}
+              onMouseMove={onStoriesMouseMove}
+              onMouseUp={onStoriesMouseUp}
+              onMouseLeave={onStoriesMouseLeave}
+            >
               {/* "Me" story — always first */}
               {about && (
                 <button
