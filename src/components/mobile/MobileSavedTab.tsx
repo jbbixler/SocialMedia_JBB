@@ -1,8 +1,13 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
+import MobilePost from './MobilePost'
+import type { Ad, Client } from '@/types'
+
+interface SavedAdItem { ad: Ad; client: Client; key: string }
 
 interface Message {
   role: 'user' | 'assistant'
@@ -21,6 +26,7 @@ export default function MobileSavedTab() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+  const [viewing, setViewing] = useState<SavedAdItem | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -185,13 +191,18 @@ export default function MobileSavedTab() {
             </div>
           ) : (
             <div className="columns-2 gap-2">
-              {saved.map(({ ad, client, key }) => (
-                <div key={key} className="break-inside-avoid mb-2 rounded-xl overflow-hidden" style={{ border: `1px solid ${borderColor}` }}>
-                  {ad.type === 'image' ? (
-                    <img src={ad.src} alt="" className="w-full block object-cover" loading="lazy" />
+              {saved.map((item) => (
+                <button
+                  key={item.key}
+                  onClick={() => setViewing(item)}
+                  className="break-inside-avoid mb-2 rounded-xl overflow-hidden w-full text-left"
+                  style={{ border: `1px solid ${borderColor}` }}
+                >
+                  {item.ad.type === 'image' ? (
+                    <img src={item.ad.src} alt="" className="w-full block object-cover" loading="lazy" />
                   ) : (
                     <video
-                      src={ad.src}
+                      src={item.ad.src}
                       muted
                       playsInline
                       preload="metadata"
@@ -204,15 +215,53 @@ export default function MobileSavedTab() {
                   )}
                   <div className="px-2 py-1.5">
                     <p className="text-[11px] font-semibold truncate" style={{ color: textColor }}>
-                      {client.igHandle || client.id}
+                      {item.client.igHandle || item.client.id}
                     </p>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {/* Full-screen post viewer */}
+      <AnimatePresence>
+        {viewing && (
+          <motion.div
+            className="fixed inset-0 z-[200] flex flex-col overflow-hidden"
+            style={{ background: bg }}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+          >
+            {/* Close bar */}
+            <div
+              className="flex-shrink-0 flex items-center gap-3 px-3 h-[44px] border-b"
+              style={{ borderColor, background: bg }}
+            >
+              <button onClick={() => setViewing(null)} className="flex items-center gap-1.5">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                <span className="text-[15px]" style={{ color: textColor }}>Saved</span>
+              </button>
+            </div>
+            {/* Post */}
+            <div className="flex-1 overflow-y-auto">
+              <MobilePost
+                ad={viewing.ad}
+                client={viewing.client}
+                postKey={viewing.key}
+                onAvatarClick={() => {}}
+                onContact={() => {}}
+                onShare={() => {}}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
