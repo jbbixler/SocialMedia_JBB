@@ -110,15 +110,11 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
 
   return (
     <>
+      {/* ── Header — lives OUTSIDE the scroll container so it never moves ── */}
       <div
-        className="flex-1 overflow-y-auto"
-        style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
+        className="flex-shrink-0 flex items-center justify-between px-4 h-[44px] relative"
+        style={{ background: bg, borderBottom: `1px solid ${borderColor}`, transition: 'background 0.4s ease' }}
       >
-        {/* Top bar — dark toggle left, name center, heart right */}
-        <div
-          className="sticky top-0 z-30 flex items-center justify-between px-4 h-[44px] border-b"
-          style={{ background: bg, borderColor, transition: 'background 0.4s ease' }}
-        >
           {/* Dark mode toggle */}
           <button onClick={toggleDark} className="w-8 h-8 flex items-center justify-center">
             {dark || hotPink ? (
@@ -161,8 +157,13 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
               )
             })()}
           </button>
-        </div>
+      </div>
 
+      {/* ── Scrollable feed content ── */}
+      <div
+        className="flex-1 overflow-y-auto"
+        style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
+      >
         {/* Stories */}
         <div
           ref={storiesRef}

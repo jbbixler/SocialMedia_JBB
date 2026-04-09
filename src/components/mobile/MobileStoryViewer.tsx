@@ -199,7 +199,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] flex flex-col overflow-hidden select-none"
+      className="absolute inset-0 z-[200] flex flex-col overflow-hidden select-none"
       style={{ cursor: 'pointer', background: bg, transition: 'background 0.3s ease' }}
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
