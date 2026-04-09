@@ -257,10 +257,21 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
 
         {/* Caption */}
         {ad.caption && (
-          <div className="px-3 pb-3 text-[13px] leading-snug" style={{ color: textColor }}>
+          <div className="px-3 pb-2 text-[13px] leading-snug" style={{ color: textColor }}>
             <span className="font-semibold mr-1">{handle}</span>{ad.caption}
           </div>
         )}
+
+        {/* CTA button */}
+        <div className="px-3 pb-3">
+          <button
+            onClick={onAvatarClick}
+            className="w-full py-2 rounded-lg text-[13px] font-semibold border"
+            style={{ borderColor, color: textColor, background: dark || hotPink ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)' }}
+          >
+            {cta}
+          </button>
+        </div>
       </article>
 
       {/* Comment sheet */}
