@@ -359,7 +359,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
                 onFocus={() => setInputFocused(true)}
                 onBlur={() => setInputFocused(false)}
                 onKeyDown={e => { if (e.key === 'Enter') sendComment() }}
-                placeholder={`Reply to ${handle}…`}
+                placeholder="Leave a comment…"
                 className="flex-1 bg-transparent outline-none px-4 py-2.5 text-[13px] text-white placeholder-white/50 w-full min-w-0"
                 style={{ cursor: 'text' }}
               />
