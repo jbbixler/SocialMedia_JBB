@@ -50,7 +50,7 @@ export default function MobileSearch({ onClientSelect }: Props) {
   const ugcVideos      = ugcClients.flatMap(c => c.ads.filter(a => a.type === 'video').map(ad => ({ ad, client: c })))
 
   return (
-    <div className="flex-1 overflow-y-auto bg-white" style={{ paddingBottom: 'calc(49px + env(safe-area-inset-bottom))' }}>
+    <div className="flex-1 overflow-y-auto bg-white" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
       {/* Search bar */}
       <div className="sticky top-0 z-30 bg-white px-4 pt-3 pb-2 border-b border-black/[0.06]">
         <div className="relative">

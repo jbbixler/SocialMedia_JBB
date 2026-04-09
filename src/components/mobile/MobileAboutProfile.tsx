@@ -12,7 +12,7 @@ export default function MobileAboutProfile({ about }: Props) {
 
   if (!about) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-white" style={{ paddingBottom: 'calc(49px + env(safe-area-inset-bottom))' }}>
+      <div className="flex-1 flex items-center justify-center bg-white" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
         <p className="text-[#8e8e8e] text-[14px]">Profile coming soon.</p>
       </div>
     )
@@ -24,7 +24,7 @@ export default function MobileAboutProfile({ about }: Props) {
   const totalMedia = about.media.length
 
   return (
-    <div className="flex-1 overflow-y-auto bg-white" style={{ paddingBottom: 'calc(49px + env(safe-area-inset-bottom))' }}>
+    <div className="flex-1 overflow-y-auto bg-white" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
       {/* Top bar */}
       <div
         className="sticky top-0 z-30 bg-white border-b border-black/[0.06] flex items-center justify-between px-4 h-[44px]"

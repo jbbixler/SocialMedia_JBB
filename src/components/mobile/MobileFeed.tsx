@@ -73,7 +73,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
     <>
       <div
         className="flex-1 overflow-y-auto"
-        style={{ background: bg, paddingBottom: 'calc(49px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
+        style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
       >
         {/* Top bar — dark toggle left, name center, heart right */}
         <div

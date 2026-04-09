@@ -116,7 +116,7 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
   }
 
   return (
-    <div ref={swipeRef} className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(49px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
+    <div ref={swipeRef} className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
       {/* Top bar */}
       <div className="sticky top-0 z-30 flex items-center gap-3 px-3 h-[44px] border-b" style={{ background: bg, borderColor }}>
         <button onClick={onBack} className="p-1 -ml-1">
@@ -406,7 +406,7 @@ function ClientPostFeed({ client, ads, startIndex, onBack, onProfileSelect }: {
         <span className="text-[15px] font-semibold" style={{ color: textColor }}>Posts</span>
       </div>
 
-      <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ paddingBottom: 'calc(49px + env(safe-area-inset-bottom))' }}>
+      <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
         {ads.map((ad, i) => (
           <div key={i} data-post-index={i} className="border-t" style={{ borderColor }}>
             <FeedPost ad={ad} client={client} index={i} onShare={handleShare} onContact={onProfileSelect} />

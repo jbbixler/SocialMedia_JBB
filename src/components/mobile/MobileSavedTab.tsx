@@ -135,7 +135,7 @@ export default function MobileSavedTab() {
   return (
     <div
       className="flex-1 flex flex-col overflow-hidden"
-      style={{ background: bg, paddingBottom: 'calc(49px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
+      style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}
     >
       {/* Top bar */}
       <div className="flex-shrink-0 flex items-center justify-center h-[44px] border-b" style={{ borderColor }}>

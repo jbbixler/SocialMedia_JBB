@@ -8,9 +8,10 @@ export type MobileTab = 'feed' | 'reels' | 'saved' | 'search' | 'profile'
 interface Props {
   tab: MobileTab
   onTab: (tab: MobileTab) => void
+  showIndicator?: boolean
 }
 
-export default function MobileNav({ tab, onTab }: Props) {
+export default function MobileNav({ tab, onTab, showIndicator = true }: Props) {
   const { dark, hotPink } = useTheme()
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const activeFill = hotPink ? '#fff' : dark ? '#fff' : '#1d1d1f'
@@ -92,13 +93,15 @@ export default function MobileNav({ tab, onTab }: Props) {
       </NavBtn>
       </div>
 
-      {/* Home indicator pill */}
-      <div aria-hidden className="flex justify-center pb-2 pt-1">
-        <div
-          className="rounded-full"
-          style={{ width: '134px', height: '5px', background: dark || hotPink ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.22)' }}
-        />
-      </div>
+      {/* Home indicator pill — only in the desktop phone mockup, not on real mobile */}
+      {showIndicator && (
+        <div aria-hidden className="flex justify-center pb-2 pt-1">
+          <div
+            className="rounded-full"
+            style={{ width: '134px', height: '5px', background: dark || hotPink ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.22)' }}
+          />
+        </div>
+      )}
     </nav>
   )
 }

@@ -71,7 +71,10 @@ function MobileAppInner({ about }: Props) {
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
 
   return (
-    <div className="flex flex-col h-[100dvh] overflow-hidden relative" style={{ background: bg, transition: 'background 0.4s ease' }}>
+    <div
+      className="flex flex-col h-[100dvh] overflow-hidden relative"
+      style={{ background: bg, transition: 'background 0.4s ease', paddingTop: 'env(safe-area-inset-top)' }}
+    >
       {hotPink && <MeteorShower />}
       {/* No AnimatePresence transition — instant tab switching like Instagram */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -100,7 +103,7 @@ function MobileAppInner({ about }: Props) {
         )}
       </div>
 
-      <MobileNav tab={tab} onTab={goTab} />
+      <MobileNav tab={tab} onTab={goTab} showIndicator={false} />
     </div>
   )
 }
