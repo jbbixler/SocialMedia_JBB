@@ -210,6 +210,7 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
     if (typeof window === 'undefined') return []
     try { return JSON.parse(localStorage.getItem(`comments_${reel.key}`) || '[]') } catch { return [] }
   })
+  const [copied, setCopied] = useState(false)
   const lastTapRef = useRef(0)
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
@@ -336,6 +337,24 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 40%, transparent 72%, rgba(0,0,0,0.28) 100%)' }}
       />
 
+      {/* Copied toast */}
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            className="absolute inset-x-0 z-50 flex justify-center pointer-events-none"
+            style={{ bottom: '120px' }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.18 }}
+          >
+            <div className="px-4 py-2 rounded-full text-[13px] font-medium text-white" style={{ background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(8px)' }}>
+              Link copied
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Right-side actions */}
       <div className="absolute right-3 z-20 flex flex-col items-center gap-5" style={{ bottom: '88px' }}>
         {/* Avatar */}
@@ -377,7 +396,18 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
         </button>
 
         {/* Share */}
-        <button onClick={() => copyToClipboard('https://jbradbixler.com/').catch(() => {})} className="flex flex-col items-center gap-1">
+        <button
+          onClick={() => {
+            copyToClipboard('https://jbradbixler.com/')
+              .then(() => {
+                haptic(20)
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+              })
+              .catch(() => {})
+          }}
+          className="flex flex-col items-center gap-1"
+        >
           <svg className="w-8 h-8 stroke-white" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
             <line x1="22" y1="2" x2="11" y2="13" />
             <polygon points="22 2 15 22 11 13 2 9 22 2" />
