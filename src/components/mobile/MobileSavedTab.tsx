@@ -71,18 +71,21 @@ const INITIAL_MESSAGE: Message = {
   content: "What are you looking to get done?",
 }
 
+const INACTIVITY_MS = 5 * 60 * 1000 // 5 minutes
+
 export default function MobileSavedTab() {
   const { saved } = useBookmarks()
   const { dark, hotPink } = useTheme()
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
   const [viewingIndex, setViewingIndex] = useState<number | null>(null)
   const feedOverlayRef = useRef<HTMLDivElement>(null)
   const swipeRef = useSwipeBack(() => setViewingIndex(null))
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const contactSentRef = useRef(false) // track if we already fired the contact-obtained send
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const cardBg = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#f5f5f7'
@@ -91,10 +94,31 @@ export default function MobileSavedTab() {
   const borderColor = dark || hotPink ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
   const inputBg = dark || hotPink ? '#1a1a1a' : '#efefef'
 
+  // Fire lead API silently — does not affect UI
+  const fireLead = useCallback((msgs: Message[]) => {
+    if (msgs.length <= 1) return // nothing to send if only the opening message
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: msgs }),
+    }).catch(() => {})
+  }, [])
+
+  // Reset/start the 5-min inactivity timer on every message exchange
+  const resetInactivityTimer = useCallback((msgs: Message[]) => {
+    if (inactivityTimer.current) clearTimeout(inactivityTimer.current)
+    inactivityTimer.current = setTimeout(() => {
+      fireLead(msgs)
+    }, INACTIVITY_MS)
+  }, [fireLead])
+
+  // Clear timer on unmount
   useEffect(() => {
-    // Skip initial mount — only auto-scroll when new messages are added
+    return () => { if (inactivityTimer.current) clearTimeout(inactivityTimer.current) }
+  }, [])
+
+  useEffect(() => {
     if (messages.length <= 1) return
-    // Scroll within the container directly — avoids propagating to the outer page
     const el = scrollContainerRef.current
     if (el) el.scrollTop = el.scrollHeight
   }, [messages])
@@ -107,7 +131,7 @@ export default function MobileSavedTab() {
     setMessages(updated)
     setInput('')
     setLoading(true)
-    haptic(30) // sent
+    haptic(30)
 
     try {
       const res = await fetch('/api/chat', {
@@ -118,34 +142,22 @@ export default function MobileSavedTab() {
       const data = await res.json()
       const finalMessages = [...updated, { role: 'assistant' as const, content: data.content ?? "Something went wrong. Try again." }]
       setMessages(finalMessages)
-      haptic([20, 30, 20]) // received
+      haptic([20, 30, 20])
 
-      // Auto-send lead when Claude signals it has what it needs
-      if (data.shouldSend) {
-        setSent(true)
-        fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: finalMessages }),
-        }).catch(() => {})
+      // Send lead immediately when Claude signals contact info obtained (once per session)
+      if (data.shouldSend && !contactSentRef.current) {
+        contactSentRef.current = true
+        fireLead(finalMessages)
       }
+
+      // Reset inactivity timer — will fire after 5 min of silence
+      resetInactivityTimer(finalMessages)
     } catch {
       setMessages(m => [...m, { role: 'assistant', content: "Something went wrong. Try again in a moment." }])
     } finally {
       setLoading(false)
     }
-  }, [input, loading, messages])
-
-  const sendLead = useCallback(async () => {
-    setSent(true)
-    try {
-      await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages }),
-      })
-    } catch {}
-  }, [messages])
+  }, [input, loading, messages, fireLead, resetInactivityTimer])
 
   return (
     <div
@@ -199,50 +211,32 @@ export default function MobileSavedTab() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input row */}
-          {!sent ? (
-            <div className="flex gap-2 items-end">
-              <input
-                type="text"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && sendMessage()}
-                placeholder="Message…"
-                className="flex-1 rounded-full px-4 py-2 text-[14px] outline-none"
-                style={{ background: inputBg, color: textColor, border: `1px solid ${borderColor}` }}
-              />
-              <button
-                onClick={sendMessage}
-                disabled={!input.trim() || loading}
-                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ background: input.trim() ? (hotPink ? '#fff' : '#0095f6') : 'transparent', transition: 'background 0.2s' }}
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                  stroke={input.trim() ? (hotPink ? '#3d4e28' : '#fff') : subColor}
-                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                >
-                  <line x1="22" y1="2" x2="11" y2="13" />
-                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
-              </button>
-            </div>
-          ) : null}
-
-          {/* Manual send fallback — appears after a few exchanges if not auto-sent */}
-          {messages.length >= 7 && !sent && (
+          {/* Input row — always active */}
+          <div className="flex gap-2 items-end">
+            <input
+              type="text"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && sendMessage()}
+              placeholder="Message…"
+              className="flex-1 rounded-full px-4 py-2 text-[14px] outline-none"
+              style={{ background: inputBg, color: textColor, border: `1px solid ${borderColor}` }}
+            />
             <button
-              onClick={sendLead}
-              className="w-full mt-3 py-2.5 rounded-full text-[13px] font-semibold"
-              style={{ background: hotPink ? '#fff' : '#0095f6', color: hotPink ? '#3d4e28' : '#fff' }}
+              onClick={sendMessage}
+              disabled={!input.trim() || loading}
+              className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+              style={{ background: input.trim() ? (hotPink ? '#fff' : '#0095f6') : 'transparent', transition: 'background 0.2s' }}
             >
-              Send to James
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                stroke={input.trim() ? (hotPink ? '#3d4e28' : '#fff') : subColor}
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
             </button>
-          )}
-          {sent && (
-            <p className="text-center text-[13px] mt-3 font-medium" style={{ color: subColor }}>
-              Sent. James will follow up.
-            </p>
-          )}
+          </div>
         </div>
 
         {/* Divider */}

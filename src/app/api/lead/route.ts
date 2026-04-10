@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         from: 'Portfolio Bot <onboarding@resend.dev>',
         to: TO_EMAIL,
-        subject: `🎯 New lead${email ? ` — ${email}` : phone ? ` — ${phone}` : ''}`,
+        subject: `🎯 New lead${email ? `: ${email}` : phone ? `: ${phone}` : ''}`,
         html,
       }),
     })
