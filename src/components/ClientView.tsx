@@ -6,6 +6,7 @@ import { usePortfolio } from '@/context/PortfolioContext'
 import type { Client, Ad } from '@/types'
 import IgMockup from './IgMockup'
 import Lightbox from './Lightbox'
+import LazyVideo from './LazyVideo'
 
 const pageVariants = {
   hidden: { opacity: 0 },
@@ -255,10 +256,9 @@ function AdThumb({ ad, index, onClick }: { ad: Ad; index: number; onClick: () =>
           <img src={ad.src} alt="" loading="lazy" className="w-full h-full object-cover block" />
         ) : (
           <>
-            <video
+            <LazyVideo
               src={ad.src}
               muted
-              preload="metadata"
               playsInline
               className="w-full h-full object-cover block"
               onLoadedMetadata={e => {

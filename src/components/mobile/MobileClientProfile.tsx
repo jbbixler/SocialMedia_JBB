@@ -6,6 +6,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { copyToClipboard } from '@/lib/clipboard'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
+import LazyVideo from '../LazyVideo'
 import type { Client, Ad } from '@/types'
 
 // Swipe-right-to-go-back gesture — applies directly to element via ref
@@ -529,7 +530,7 @@ function FeedPost({ ad, client, index, onShare, onContact }: { ad: Ad; client: C
           <img src={ad.src} alt="" className="w-full block object-cover" loading="lazy" />
         ) : (
           <>
-            <video ref={videoRef} src={ad.src} muted loop playsInline preload="metadata" className="w-full block object-cover" />
+            <LazyVideo videoRef={videoRef} src={ad.src} muted loop playsInline className="w-full block object-cover" />
             <button onClick={e => { e.stopPropagation(); const v = videoRef.current; if (!v) return; v.muted = !v.muted; setMuted(v.muted) }}
               className="absolute bottom-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/55 flex items-center justify-center">
               {muted ? (
@@ -619,7 +620,7 @@ function GridThumb({ ad, onClick, isReel }: { ad: Ad; onClick: () => void; isRee
         <img src={ad.src} alt="" className="w-full h-full object-cover" loading="lazy" />
       ) : (
         <>
-          <video ref={videoRef} src={ad.src} muted playsInline preload="metadata" className="w-full h-full object-cover"
+          <LazyVideo videoRef={videoRef} src={ad.src} muted playsInline className="w-full h-full object-cover"
             onLoadedMetadata={e => { const v = e.currentTarget; v.currentTime = v.duration > 5 ? 5 : v.duration * 0.5 }} />
           <div className="absolute top-1.5 right-1.5">
             <svg className="w-4 h-4 fill-white drop-shadow" viewBox="0 0 24 24">

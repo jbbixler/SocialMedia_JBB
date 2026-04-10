@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import LazyVideo from './LazyVideo'
 import type { Ad, Client } from '@/types'
 
 interface Props {
@@ -173,7 +174,7 @@ export default function IgPost({ ad, client, adIndex, isInitial, dark = true, co
           <img src={ad.src} alt="" className="w-full h-full object-cover block" loading="lazy" />
         ) : (
           <>
-            <video ref={videoRef} src={ad.src} muted loop playsInline preload="metadata" className="w-full h-full object-cover block" />
+            <LazyVideo videoRef={videoRef} src={ad.src} muted loop playsInline className="w-full h-full object-cover block" />
             <button
               onClick={toggleMute}
               className="absolute bottom-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/60 flex items-center justify-center"

@@ -7,6 +7,7 @@ import { copyToClipboard } from '@/lib/clipboard'
 import { haptic } from '@/lib/haptic'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
+import LazyVideo from '../LazyVideo'
 import type { Ad, Client } from '@/types'
 
 interface Props {
@@ -181,7 +182,7 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
             <img src={ad.src} alt="" className="w-full block object-cover" loading="lazy" />
           ) : (
             <>
-              <video ref={videoRef} src={ad.src} muted loop playsInline preload="metadata" className="w-full block object-cover" />
+              <LazyVideo videoRef={videoRef} src={ad.src} muted loop playsInline className="w-full block object-cover" />
               <button
                 onClick={toggleMute}
                 className="absolute bottom-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/55 flex items-center justify-center"

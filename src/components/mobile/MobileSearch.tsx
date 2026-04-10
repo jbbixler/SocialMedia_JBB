@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { usePortfolio } from '@/context/PortfolioContext'
 import { useTheme } from '@/context/DarkModeContext'
+import LazyVideo from '../LazyVideo'
 import type { Client, Ad } from '@/types'
 
 interface AssetWithClient { ad: Ad; client: Client }
@@ -203,10 +204,10 @@ function AssetThumb({ ad, onClick, cardBg }: { ad: Ad; onClick: () => void; card
         <img src={ad.src} alt="" className="w-full h-full object-cover" loading="lazy" />
       ) : (
         <>
-          <video
-            ref={videoRef}
+          <LazyVideo
+            videoRef={videoRef}
             src={ad.src}
-            muted playsInline preload="metadata"
+            muted playsInline
             className="w-full h-full object-cover"
             onLoadedMetadata={e => {
               const v = e.currentTarget
@@ -235,10 +236,10 @@ function UgcThumb({ ad, onClick, cardBg }: { ad: Ad; onClick: () => void; cardBg
       className="relative aspect-square overflow-hidden block w-full"
       style={{ background: cardBg, display: show ? 'block' : 'none' }}
     >
-      <video
-        ref={videoRef}
+      <LazyVideo
+        videoRef={videoRef}
         src={ad.src}
-        muted playsInline preload="metadata"
+        muted playsInline
         className="w-full h-full object-cover"
         onLoadedMetadata={e => {
           const v = e.currentTarget

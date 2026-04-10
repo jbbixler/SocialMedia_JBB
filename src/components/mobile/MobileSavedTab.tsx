@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
 import MobilePost from './MobilePost'
+import LazyVideo from '../LazyVideo'
 import { haptic } from '@/lib/haptic'
 import type { Ad, Client } from '@/types'
 
@@ -272,11 +273,10 @@ export default function MobileSavedTab() {
                   {item.ad.type === 'image' ? (
                     <img src={item.ad.src} alt="" className="w-full block object-cover" loading="lazy" />
                   ) : (
-                    <video
+                    <LazyVideo
                       src={item.ad.src}
                       muted
                       playsInline
-                      preload="metadata"
                       className="w-full block object-cover"
                       onLoadedMetadata={e => {
                         const v = e.currentTarget

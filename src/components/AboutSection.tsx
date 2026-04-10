@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import type { About } from '@/types'
+import LazyVideo from './LazyVideo'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -121,10 +122,9 @@ export default function AboutSection({ about }: { about: About }) {
                 {item.type === 'image' ? (
                   <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover block" />
                 ) : (
-                  <video
+                  <LazyVideo
                     src={item.src}
                     muted
-                    preload="metadata"
                     playsInline
                     className="w-full h-full object-cover block"
                     onLoadedMetadata={e => {
