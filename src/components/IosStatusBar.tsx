@@ -22,7 +22,7 @@ function StatusTime({ dark }: { dark: boolean }) {
   )
 }
 
-function StatusIcons({ dark }: { dark: boolean }) {
+function StatusIcons({ dark, batteryPct }: { dark: boolean; batteryPct: number }) {
   const c = dark ? '#fff' : '#000'
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -39,7 +39,7 @@ function StatusIcons({ dark }: { dark: boolean }) {
       </svg>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
         <div style={{ width: '25px', height: '12px', border: `1.5px solid ${c}`, borderRadius: '3.5px', padding: '1.5px' }}>
-          <div style={{ width: '80%', height: '100%', background: c, borderRadius: '1.5px' }} />
+          <div style={{ width: `${batteryPct}%`, height: '100%', background: c, borderRadius: '1.5px', transition: 'width 0.3s ease' }} />
         </div>
         <div style={{ width: '2px', height: '5px', background: c, borderRadius: '0 1px 1px 0', opacity: 0.4 }} />
       </div>
@@ -47,13 +47,15 @@ function StatusIcons({ dark }: { dark: boolean }) {
   )
 }
 
-export default function IosStatusBar({ dark = true, hotPink = false }: { dark?: boolean; hotPink?: boolean }) {
+export default function IosStatusBar({ dark = true, hotPink = false, heartCount = 0 }: { dark?: boolean; hotPink?: boolean; heartCount?: number }) {
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const light = dark || hotPink
+  // 0 taps = 80%; 1-69 taps fills from ~1% to 100%
+  const batteryPct = heartCount === 0 ? 80 : Math.round((heartCount / 69) * 100)
   return (
     <div className="flex-shrink-0 flex items-end justify-between px-7 pb-1.5" style={{ height: '59px', background: bg, transition: 'background 0.3s ease' }}>
       <StatusTime dark={light} />
-      <StatusIcons dark={light} />
+      <StatusIcons dark={light} batteryPct={batteryPct} />
     </div>
   )
 }
