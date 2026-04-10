@@ -39,6 +39,7 @@ export interface Client {
   website?: string
   description: string
   summary?: ClientSummary
+  kpi?: { value: string; label: string }
   services: string[]
   cta?: string       // CTA button label for the IG feed (defaults to 'Learn More')
   brandType?: string // e.g. 'E-Commerce', 'Lead Generation', 'Consumer Services'

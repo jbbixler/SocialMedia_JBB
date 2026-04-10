@@ -138,7 +138,7 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
           </div>
           <div className="flex-1 flex items-center justify-around pt-2">
             <Stat label="Posts" value={totalPosts} dark={dark || hotPink} />
-            <Stat label="Work" value="Full" dark={dark || hotPink} />
+            <Stat label={client.kpi?.label ?? 'Work'} value={client.kpi?.value ?? 'Full'} dark={dark || hotPink} />
             <Stat label="Since" value="2025" dark={dark || hotPink} />
           </div>
         </div>
