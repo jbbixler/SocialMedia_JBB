@@ -10,18 +10,17 @@ import AboutSection from './AboutSection'
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-  exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } },
+  exit: { opacity: 0, transition: { duration: 0.45, ease: 'easeInOut' } },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 26 } },
+  hidden: { opacity: 0, y: 16 },
+  show:   { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 200, damping: 28 } },
 }
 
-// Phone wrapper keeps full opacity on exit so layoutId can animate position smoothly
 const phoneVariant = {
-  hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 26 } },
+  hidden: { opacity: 0 },
+  show:   { opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
   exit:   { opacity: 1 },
 }
 

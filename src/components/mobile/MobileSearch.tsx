@@ -111,7 +111,7 @@ export default function MobileSearch({ onClientSelect }: Props) {
           /* ── Default: brand row + full asset grid (paginated) ── */
           <>
             <BrandGrid clients={clients} onClientSelect={handleClientSelect} cardBg={cardBg} textColor={textColor} subColor={subColor} gridGap={gridGap} />
-            <SectionLabel subColor={subColor}>All Work</SectionLabel>
+            <SectionLabel subColor={subColor}>Selected Work</SectionLabel>
             <div className="grid grid-cols-3 gap-[1.5px]" style={{ background: gridGap }}>
               {visibleAssets.map(({ ad, client }, i) => (
                 <AssetThumb key={i} ad={ad} cardBg={cardBg} onClick={() => handleClientSelect(client)} />

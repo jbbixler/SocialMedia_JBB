@@ -238,7 +238,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
               exit={{ opacity: 0 }}
               transition={{ duration: 0.12 }}
             >
-              <img src={ad.src} alt="" className="w-full h-full object-contain" />
+              <img src={ad.src} alt="" className="w-full h-full object-cover" />
             </motion.div>
           </AnimatePresence>
 

@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import type { About } from '@/types'
-import LazyVideo from './LazyVideo'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -10,8 +9,6 @@ const fadeUp = {
 }
 
 export default function AboutSection({ about }: { about: About }) {
-  const hasMedia = about.media.length > 0
-
   return (
     <motion.div
       id="about-section"
@@ -106,38 +103,6 @@ export default function AboutSection({ about }: { about: About }) {
         </div>
       </div>
 
-      {/* Media grid — shown only if media exists */}
-      {hasMedia && (
-        <div className="mt-6">
-          <p className="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-[#86868b] mb-4">
-            Creative Highlights
-          </p>
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3">
-            {about.media.map((item, i) => (
-              <div
-                key={i}
-                className="break-inside-avoid mb-3 rounded-xl overflow-hidden bg-white border border-black/[0.06]"
-                style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}
-              >
-                {item.type === 'image' ? (
-                  <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover block" />
-                ) : (
-                  <LazyVideo
-                    src={item.src}
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover block"
-                    onLoadedMetadata={e => {
-                      const v = e.currentTarget
-                      v.currentTime = v.duration > 5 ? 5 : v.duration * 0.5
-                    }}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </motion.div>
   )
 }

@@ -10,13 +10,13 @@ import LazyVideo from './LazyVideo'
 
 const pageVariants = {
   hidden: { opacity: 0 },
-  show:   { opacity: 1, transition: { duration: 0.3, ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.05 } },
-  exit:   { opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } },
+  show:   { opacity: 1, transition: { duration: 0.5, ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.04 } },
+  exit:   { opacity: 0, transition: { duration: 0.35, ease: 'easeInOut' } },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show:   { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  show:   { opacity: 1, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
 function getContrastColor(hex: string): string {
@@ -182,7 +182,7 @@ export default function ClientView({ client }: { client: Client }) {
               </p>
               <div className="columns-2 md:columns-3 lg:columns-4 gap-3">
                 {client.ads.map((ad, i) => (
-                  <AdThumb key={i} ad={ad} index={i} onClick={() => setLightboxIndex(i)} />
+                  <AdThumb key={i} ad={ad} onClick={() => setLightboxIndex(i)} />
                 ))}
               </div>
             </motion.div>
@@ -242,7 +242,7 @@ function ToggleBtn({ showWorks, onClick, bg, text }: { showWorks: boolean; onCli
   )
 }
 
-function AdThumb({ ad, index, onClick }: { ad: Ad; index: number; onClick: () => void }) {
+function AdThumb({ ad, onClick }: { ad: Ad; onClick: () => void }) {
   return (
     <motion.div
       className="break-inside-avoid mb-3 rounded-xl overflow-hidden cursor-pointer relative group bg-white border border-black/[0.06]"

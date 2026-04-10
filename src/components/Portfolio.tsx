@@ -36,7 +36,7 @@ function PortfolioInner() {
   if (isMobile) return <MobileApp about={about} />
 
   return (
-    <AnimatePresence mode="sync">
+    <AnimatePresence mode="wait">
       {state.view === 'home' && (
         <HomeView key="home" clients={clients} about={about} />
       )}
