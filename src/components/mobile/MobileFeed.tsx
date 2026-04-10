@@ -171,7 +171,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
         <div
           ref={storiesRef}
           className="flex gap-4 px-4 py-3 overflow-x-auto border-b select-none"
-          style={{ scrollbarWidth: 'none', borderColor, cursor: 'grab' }}
+          style={{ scrollbarWidth: 'none', background: bg, borderColor, cursor: 'grab', transition: 'background 0.4s ease' }}
           onMouseDown={onStoriesMouseDown}
           onMouseMove={onStoriesMouseMove}
           onMouseUp={onStoriesMouseUp}
