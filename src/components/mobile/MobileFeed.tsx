@@ -77,6 +77,9 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   const textColor = dark || hotPink ? '#fff' : '#1d1d1f'
   const borderColor = dark || hotPink ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'
   const subColor = dark || hotPink ? 'rgba(255,255,255,0.5)' : '#8e8e8e'
+  const storyRing = hotPink
+    ? 'linear-gradient(45deg,#ff1493,#ff69b4,#ff0080,#c71585)'
+    : 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'
 
   useEffect(() => {
     const pairs: AdWithClient[] = []
@@ -184,7 +187,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
               <div className="relative w-[62px] h-[62px]">
                 <div
                   className="w-full h-full rounded-full p-[2.5px]"
-                  style={{ background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
+                  style={{ background: storyRing }}
                 >
                   <div
                     className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center"
@@ -212,7 +215,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             >
               <div
                 className="w-[62px] h-[62px] rounded-full p-[2.5px]"
-                style={{ background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
+                style={{ background: storyRing }}
               >
                 <div
                   className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center"
@@ -238,7 +241,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
               >
                 <div
                   className="w-[62px] h-[62px] rounded-full p-[2.5px]"
-                  style={{ background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
+                  style={{ background: storyRing }}
                 >
                   <div
                     className="w-full h-full rounded-full overflow-hidden border-2 flex items-center justify-center"
