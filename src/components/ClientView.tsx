@@ -30,11 +30,8 @@ function getContrastColor(hex: string): string {
 export default function ClientView({ client }: { client: Client }) {
   const { dispatch, goToAbout } = usePortfolio()
   const [showWorks, setShowWorks] = useState(false)
-  const [descExpanded, setDescExpanded] = useState(false)
-  const [descOverflows, setDescOverflows] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const gridRef = useRef<HTMLDivElement>(null)
-  const descRef = useRef<HTMLDivElement>(null)
 
   const btnBg   = client.color || '#1d1d1f'
   const btnText = getContrastColor(btnBg)
@@ -43,12 +40,6 @@ export default function ClientView({ client }: { client: Client }) {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
   }, [])
 
-  // Detect whether description text overflows its clamped container
-  useEffect(() => {
-    const el = descRef.current
-    if (!el) return
-    setDescOverflows(el.scrollHeight > el.clientHeight + 2)
-  }, [client.description])
 
   const handleToggle = useCallback(() => {
     setShowWorks(v => {
@@ -120,63 +111,30 @@ export default function ClientView({ client }: { client: Client }) {
           {/* Description column — stretches to phone height, pins services+btn at bottom */}
           <motion.div variants={itemVariants} className="flex-1 max-w-xl flex flex-col min-h-0">
 
-            {/* Portfolio summary — structured sections */}
+            {/* Portfolio summary — structured sections, always fully visible */}
             {client.summary ? (
-              <div className="relative mb-6">
-                <div
-                  ref={descRef}
-                  className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
-                  style={{ maxHeight: descExpanded ? '2000px' : '11rem' }}
-                >
-                  {([
-                    { label: 'Overview',     text: client.summary.overview },
-                    { label: 'Role',         text: client.summary.role },
-                    { label: 'Challenge',    text: client.summary.challenge },
-                    { label: 'Creative',     text: client.summary.creative },
-                    { label: 'Performance',  text: client.summary.performance },
-                    client.summary.volume ? { label: 'Volume & Budget', text: client.summary.volume } : null,
-                  ] as Array<{ label: string; text: string } | null>)
-                    .filter((x): x is { label: string; text: string } => x !== null)
-                    .map(({ label, text }) => (
-                      <div key={label} className="mb-4">
-                        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.09em] text-[#86868b] mb-1">{label}</p>
-                        <p className="text-[0.88rem] leading-[1.75] text-[#6e6e73]">{text}</p>
-                      </div>
-                    ))
-                  }
-                </div>
-
-                {!descExpanded && descOverflows && (
-                  <div className="absolute bottom-0 left-0 right-0">
-                    <div className="h-10 bg-gradient-to-t from-[#f5f5f7] to-transparent pointer-events-none" />
-                    <button
-                      onClick={() => setDescExpanded(true)}
-                      className="text-[0.78rem] font-medium text-[#6e6e73] hover:text-[#1d1d1f] transition-colors pt-0.5"
-                    >
-                      Continue reading ↓
-                    </button>
-                  </div>
-                )}
-
-                {descExpanded && (
-                  <button
-                    onClick={() => setDescExpanded(false)}
-                    className="text-[0.78rem] font-medium text-[#6e6e73] hover:text-[#1d1d1f] transition-colors mt-1 block"
-                  >
-                    Show less ↑
-                  </button>
-                )}
+              <div className="mb-6 flex flex-col gap-4">
+                {([
+                  { label: 'Overview',       text: client.summary.overview },
+                  { label: 'Role',           text: client.summary.role },
+                  { label: 'Challenge',      text: client.summary.challenge },
+                  { label: 'Creative',       text: client.summary.creative },
+                  { label: 'Performance',    text: client.summary.performance },
+                  client.summary.volume ? { label: 'Volume & Budget', text: client.summary.volume } : null,
+                ] as Array<{ label: string; text: string } | null>)
+                  .filter((x): x is { label: string; text: string } => x !== null)
+                  .map(({ label, text }) => (
+                    <div key={label}>
+                      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.09em] text-[#86868b] mb-1">{label}</p>
+                      <p className="text-[0.88rem] leading-[1.75] text-[#6e6e73]">{text}</p>
+                    </div>
+                  ))
+                }
               </div>
             ) : client.description && client.description !== 'Coming soon' && (
-              <div className="relative mb-6">
-                <div
-                  ref={descRef}
-                  className="text-[0.95rem] leading-[1.85] text-[#6e6e73] whitespace-pre-line overflow-hidden transition-[max-height] duration-300 ease-in-out"
-                  style={{ maxHeight: descExpanded ? '1000px' : '11rem' }}
-                >
-                  {client.description}
-                </div>
-              </div>
+              <p className="text-[0.95rem] leading-[1.85] text-[#6e6e73] whitespace-pre-line mb-6">
+                {client.description}
+              </p>
             )}
 
             {/* Spacer — pushes services + button to the bottom */}
