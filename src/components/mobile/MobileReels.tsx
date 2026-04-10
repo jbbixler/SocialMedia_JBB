@@ -430,8 +430,8 @@ function ReelSlide({ reel, index, inWindow, muted, mutedRef, onActive, onToggleM
               onClick={() => setShowComment(false)}
             />
             <motion.div
-              className="fixed bottom-0 inset-x-0 z-[101] rounded-t-2xl p-5 pb-8"
-              style={{ background: '#1c1c1e' }}
+              className="fixed inset-x-0 z-[101] rounded-t-2xl p-5"
+              style={{ background: '#1c1c1e', bottom: 0, paddingBottom: 'calc(68px + env(safe-area-inset-bottom) + 12px)' }}
               initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', stiffness: 340, damping: 32 }}
             >
