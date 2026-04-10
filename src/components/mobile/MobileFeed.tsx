@@ -236,8 +236,10 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             </button>
           )}
 
-          {/* Client stories — only shown if they have 9:16 statics */}
-          {storySets.map((set, i) => (
+          {/* Client stories — about set is covered by the "Me" bubble above */}
+          {storySets.map((set, i) => {
+            if (set.client.id === 'about') return null
+            return (
             <button
               key={set.client.id}
               onClick={() => { if (!storyDragRef.current.moved) { setStoryClientIdx(i); setStoryOpen(true) } }}
@@ -258,7 +260,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
                 {set.client.igHandle || set.client.id}
               </span>
             </button>
-          ))}
+          )})}
 
           {/* Clients without 9:16 statics — tap goes to client profile */}
           {clients

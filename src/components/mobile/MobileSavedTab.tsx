@@ -85,6 +85,12 @@ export default function MobileSavedTab() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (viewingIndex === null || !feedOverlayRef.current) return
+    const el = feedOverlayRef.current.children[viewingIndex] as HTMLElement | undefined
+    if (el) feedOverlayRef.current.scrollTop = el.offsetTop
+  }, [viewingIndex])
   const contactSentRef = useRef(false) // track if we already fired the contact-obtained send
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
@@ -321,11 +327,8 @@ export default function MobileSavedTab() {
               className="flex-1 overflow-y-auto"
               style={{ background: bg }}
             >
-              {saved.map((item, idx) => (
-                <div
-                  key={item.key}
-                  ref={idx === viewingIndex ? (el) => { el?.scrollIntoView() } : undefined}
-                >
+              {saved.map((item) => (
+                <div key={item.key}>
                   <MobilePost
                     ad={item.ad}
                     client={item.client}

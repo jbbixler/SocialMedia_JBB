@@ -188,7 +188,8 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
   const handle    = currentSet.client.igHandle || currentSet.client.id
   const storyKey  = `story-${currentSet.client.id}-${storyIdx}`
   const bookmarked = isSaved(storyKey)
-  const ctaHref = currentSet.client.website || ''
+  const isPersonal = currentSet.client.id === 'about'
+  const ctaHref = isPersonal ? '' : (currentSet.client.website || '')
   const ctaLabel = currentSet.client.cta || 'Learn More'
 
   const variants = {
@@ -224,19 +225,21 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           transition={{ duration: 0.28, ease: [0.32, 0, 0.67, 0] }}
           className="absolute inset-0"
         >
-          {/* Story image — anchored to top */}
+          {/* Colored background */}
+          <div className="absolute inset-0" style={{ background: currentSet.client.color || '#1c1c1e' }} />
+
+          {/* Story image — vertically centered */}
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={`${clientIdx}-${storyIdx}`}
-              src={ad.src}
-              alt=""
-              className="absolute left-0 right-0 w-full"
-              style={{ top: 0, height: 'auto' }}
+              className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.12 }}
-            />
+            >
+              <img src={ad.src} alt="" className="w-full h-full object-contain" />
+            </motion.div>
           </AnimatePresence>
 
           {/* ── Top scrim — ensures brand header is always legible ─────────── */}
@@ -273,7 +276,7 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
                 <img src={currentSet.client.igAvatar || currentSet.client.logo} alt={handle} className="w-full h-full object-contain" />
               </div>
               <span className="text-white text-[13px] font-semibold drop-shadow">{handle}</span>
-              <span className="text-white/60 text-[12px]">Sponsored</span>
+              {currentSet.client.id !== 'about' && <span className="text-white/60 text-[12px]">Sponsored</span>}
             </button>
             <button
               data-no-nav

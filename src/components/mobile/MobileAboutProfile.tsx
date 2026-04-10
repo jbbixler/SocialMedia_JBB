@@ -16,6 +16,13 @@ export default function MobileAboutProfile({ about }: Props) {
   const [viewingIndex, setViewingIndex] = useState<number | null>(null)
   const feedRef = useRef<HTMLDivElement>(null)
 
+  // Scroll the overlay feed to the tapped post without touching outer page scroll
+  useEffect(() => {
+    if (viewingIndex === null || !feedRef.current) return
+    const el = feedRef.current.children[viewingIndex] as HTMLElement | undefined
+    if (el) feedRef.current.scrollTop = el.offsetTop
+  }, [viewingIndex])
+
   const bg          = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const textColor   = dark || hotPink ? '#fff' : '#1d1d1f'
   const subColor    = dark || hotPink ? 'rgba(255,255,255,0.55)' : '#8e8e8e'
@@ -243,10 +250,7 @@ export default function MobileAboutProfile({ about }: Props) {
             {/* Scrollable posts — jump to tapped index */}
             <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ background: bg }}>
               {about.media.map((item, idx) => (
-                <div
-                  key={idx}
-                  ref={idx === viewingIndex ? el => { el?.scrollIntoView() } : undefined}
-                >
+                <div key={idx}>
                   <MobilePost
                     ad={item as Ad}
                     client={aboutClient}
