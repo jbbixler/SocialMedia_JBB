@@ -7,6 +7,7 @@ import { copyToClipboard } from '@/lib/clipboard'
 import { useBookmarks } from '@/context/BookmarkContext'
 import { useTheme } from '@/context/DarkModeContext'
 import LazyVideo from '../LazyVideo'
+import MobileStoryViewer from './MobileStoryViewer'
 import type { Client, Ad } from '@/types'
 
 // Swipe-right-to-go-back gesture — applies directly to element via ref
@@ -80,15 +81,22 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
   const [reelsViewerIndex, setReelsViewerIndex] = useState<number | null>(null)
   const swipeRef = useSwipeBack(onBack)
 
+  const [storyOpen, setStoryOpen] = useState(false)
+
   const handle = client.igHandle || client.id
   // Reels: 9:16 videos only
   const reelAds = client.ads.filter(ad => ad.ratio === '9:16' && ad.type === 'video')
+  // Stories: 9:16 static images only
+  const storyImages = client.ads.filter(ad => ad.type === 'image' && ad.ratio === '9:16')
   const totalPosts = client.ads.length
 
   const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const textColor = dark || hotPink ? '#fff' : '#1d1d1f'
   const subColor = dark || hotPink ? 'rgba(255,255,255,0.5)' : '#8e8e8e'
   const borderColor = dark || hotPink ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'
+  const storyRing = hotPink
+    ? 'linear-gradient(45deg,#ff1493,#ff69b4,#ff0080,#c71585)'
+    : 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'
 
   // Reels viewer (full-screen) for this client's videos
   if (reelsViewerIndex !== null) {
@@ -117,7 +125,8 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
   }
 
   return (
-    <div ref={swipeRef} className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
+    <div ref={swipeRef} className="flex-1 relative overflow-hidden flex flex-col">
+    <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.4s ease' }}>
       {/* Top bar */}
       <div className="sticky top-0 z-30 flex items-center gap-3 px-3 h-[44px] border-b" style={{ background: bg, borderColor }}>
         <button onClick={onBack} className="p-1 -ml-1">
@@ -133,9 +142,23 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
       {/* Profile header */}
       <div className="px-4 pt-4 pb-3">
         <div className="flex items-start gap-5">
-          <div className="w-[86px] h-[86px] rounded-full flex-shrink-0 overflow-hidden border flex items-center justify-center" style={{ background: client.color || '#27272a', borderColor }}>
-            <img src={client.igAvatar || client.logo} alt={handle} className="w-full h-full object-contain" />
-          </div>
+          <button
+            className="flex-shrink-0 rounded-full focus:outline-none"
+            onClick={() => storyImages.length > 0 && setStoryOpen(true)}
+            style={{ cursor: storyImages.length > 0 ? 'pointer' : 'default' }}
+          >
+            <div
+              className="w-[86px] h-[86px] rounded-full p-[2.5px]"
+              style={{ background: storyImages.length > 0 ? storyRing : borderColor }}
+            >
+              <div
+                className="w-full h-full rounded-full overflow-hidden border-[3px] flex items-center justify-center"
+                style={{ background: client.color || '#27272a', borderColor: bg }}
+              >
+                <img src={client.igAvatar || client.logo} alt={handle} className="w-full h-full object-contain" />
+              </div>
+            </div>
+          </button>
           <div className="flex-1 flex items-center justify-around pt-2">
             <Stat label="Posts" value={totalPosts} dark={dark || hotPink} />
             <Stat label={client.kpi?.label ?? 'Work'} value={client.kpi?.value ?? 'Full'} dark={dark || hotPink} />
@@ -225,6 +248,18 @@ export default function MobileClientProfile({ client, onBack, onClientSelect, on
           ))}
         </div>
       )}
+    </div>
+
+    {/* Story viewer overlay */}
+    <AnimatePresence>
+      {storyOpen && storyImages.length > 0 && (
+        <MobileStoryViewer
+          storySets={[{ client, images: storyImages }]}
+          initialClientIndex={0}
+          onClose={() => setStoryOpen(false)}
+        />
+      )}
+    </AnimatePresence>
     </div>
   )
 }
