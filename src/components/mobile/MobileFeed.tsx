@@ -120,10 +120,24 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
     setTimeout(() => setShowCopied(false), 2000)
   }, [])
 
-  // Build story sets — 9:16 static images only per client
-  const storySets = clients
-    .map(c => ({ client: c, images: c.ads.filter(a => a.type === 'image' && a.ratio === '9:16') }))
-    .filter(s => s.images.length > 0)
+  // Build story sets — about person first, then clients (9:16 statics only)
+  const aboutStorySet = about && about.media.filter(m => m.type === 'image').length > 0
+    ? [{
+        client: {
+          id: 'about', name: about.name, logo: about.avatar, igAvatar: about.avatar,
+          color: about.color, igHandle: about.handle, website: about.website,
+          description: about.bio, services: about.services, ads: about.media as Ad[],
+        } as Client,
+        images: about.media.filter(m => m.type === 'image') as Ad[],
+      }]
+    : []
+
+  const storySets = [
+    ...aboutStorySet,
+    ...clients
+      .map(c => ({ client: c, images: c.ads.filter(a => a.type === 'image' && a.ratio === '9:16') }))
+      .filter(s => s.images.length > 0),
+  ]
 
   const visible = allAds.slice(0, rendered)
 
@@ -193,10 +207,10 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
           onMouseUp={onStoriesMouseUp}
           onMouseLeave={onStoriesMouseLeave}
         >
-          {/* "Me" story — navigates to profile */}
+          {/* "Me" story — opens story viewer if about has images, else navigates to profile */}
           {about && (
             <button
-              onClick={() => { if (!storyDragRef.current.moved) onProfileSelect() }}
+              onClick={() => { if (!storyDragRef.current.moved) { if (aboutStorySet.length > 0) { setStoryClientIdx(0); setStoryOpen(true) } else { onProfileSelect() } } }}
               className="flex flex-col items-center gap-1.5 flex-shrink-0"
               title={about.name}
             >
@@ -310,7 +324,7 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
             storySets={storySets}
             initialClientIndex={storyClientIdx}
             onClose={() => { setStoryClientIdx(null); setStoryOpen(false) }}
-            onClientSelect={(client) => { setStoryClientIdx(null); setStoryOpen(false); onClientSelect(client) }}
+            onClientSelect={(client) => { setStoryClientIdx(null); setStoryOpen(false); client.id === 'about' ? onProfileSelect() : onClientSelect(client) }}
           />
         )}
       </AnimatePresence>
