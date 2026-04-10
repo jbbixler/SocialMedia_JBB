@@ -2181,7 +2181,7 @@
     "handle": "jbradbixler",
     "avatar": "https://res.cloudinary.com/dwrvp3dmf/image/upload/f_auto,q_auto/portfolio/assets/about/Logo/IMG_5235_Instagram",
     "logo": "https://res.cloudinary.com/dwrvp3dmf/image/upload/f_auto,q_auto/portfolio/assets/about/Logo/IMG_5235_Instagram",
-    "bio": "Coming soon",
+    "bio": "Let's get in touch!",
     "website": "https://jbradbixler.com/",
     "role": "Visionary",
     "color": "#1d1d1f",
@@ -2196,6 +2196,82 @@
       "Editorial",
       "Management"
     ],
-    "media": []
+    "media": [
+      {
+        "type": "image",
+        "src": "/assets/about/media/70380394009__88CCB85A-CF14-419D-9A1C-6DC5BB8750A4.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_0529.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_1513.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_1552.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_1938.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_2688.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_3511.jpg",
+        "ratio": "4:5"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_5217.jpg",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_6326.jpg",
+        "ratio": "4:5"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/C77A4416-1CDE-4AF8-B1F8-134B6639127E.JPG",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/DSCF0030.JPG",
+        "ratio": "1:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/DSCF0279.JPG",
+        "ratio": "1.91:1"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_3067.JPG",
+        "ratio": "4:5"
+      },
+      {
+        "type": "image",
+        "src": "/assets/about/media/IMG_7688.JPG",
+        "ratio": "9:16"
+      },
+      {
+        "type": "video",
+        "src": "/assets/about/media/IMG_4698.mp4",
+        "ratio": "1.91:1"
+      }
+    ]
   }
 }
