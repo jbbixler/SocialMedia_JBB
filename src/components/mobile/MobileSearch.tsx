@@ -60,9 +60,9 @@ export default function MobileSearch({ onClientSelect }: Props) {
   const ugcVideos      = ugcClients.flatMap(c => c.ads.filter(a => a.type === 'video').map(ad => ({ ad, client: c })))
 
   return (
-    <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.3s ease' }}>
-      {/* Search bar */}
-      <div className="sticky top-0 z-30 px-4 pt-3 pb-2 border-b" style={{ background: bg, borderColor }}>
+    <>
+      {/* Search bar — outside scroll container so it's flush with status bar */}
+      <div className="flex-shrink-0 px-4 pt-3 pb-2 border-b" style={{ background: bg, borderColor }}>
         <div className="relative">
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke={subColor}>
             <circle cx="10.5" cy="10.5" r="7.5" /><line x1="21" y1="21" x2="15.8" y2="15.8" />
@@ -77,6 +77,7 @@ export default function MobileSearch({ onClientSelect }: Props) {
           />
         </div>
       </div>
+      <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.3s ease' }}>
 
       {/* ── No-query state: brand grid + random asset grid ── */}
       {!q && (
@@ -146,7 +147,8 @@ export default function MobileSearch({ onClientSelect }: Props) {
           )}
         </>
       )}
-    </div>
+      </div>
+    </>
   )
 }
 

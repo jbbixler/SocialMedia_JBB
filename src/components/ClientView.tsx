@@ -120,18 +120,32 @@ export default function ClientView({ client }: { client: Client }) {
           {/* Description column — stretches to phone height, pins services+btn at bottom */}
           <motion.div variants={itemVariants} className="flex-1 max-w-xl flex flex-col min-h-0">
 
-            {/* Description text — scrollable region, collapses when too long */}
-            {client.description && (
+            {/* Portfolio summary — structured sections */}
+            {client.summary ? (
               <div className="relative mb-6">
                 <div
                   ref={descRef}
-                  className="text-[0.95rem] leading-[1.85] text-[#6e6e73] whitespace-pre-line overflow-hidden transition-[max-height] duration-300 ease-in-out"
-                  style={{ maxHeight: descExpanded ? '1000px' : '11rem' }}
+                  className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
+                  style={{ maxHeight: descExpanded ? '2000px' : '11rem' }}
                 >
-                  {client.description}
+                  {([
+                    { label: 'Overview',     text: client.summary.overview },
+                    { label: 'Role',         text: client.summary.role },
+                    { label: 'Challenge',    text: client.summary.challenge },
+                    { label: 'Creative',     text: client.summary.creative },
+                    { label: 'Performance',  text: client.summary.performance },
+                    client.summary.volume ? { label: 'Volume & Budget', text: client.summary.volume } : null,
+                  ] as Array<{ label: string; text: string } | null>)
+                    .filter((x): x is { label: string; text: string } => x !== null)
+                    .map(({ label, text }) => (
+                      <div key={label} className="mb-4">
+                        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.09em] text-[#86868b] mb-1">{label}</p>
+                        <p className="text-[0.88rem] leading-[1.75] text-[#6e6e73]">{text}</p>
+                      </div>
+                    ))
+                  }
                 </div>
 
-                {/* Gradient fade + expand trigger */}
                 {!descExpanded && descOverflows && (
                   <div className="absolute bottom-0 left-0 right-0">
                     <div className="h-10 bg-gradient-to-t from-[#f5f5f7] to-transparent pointer-events-none" />
@@ -144,7 +158,6 @@ export default function ClientView({ client }: { client: Client }) {
                   </div>
                 )}
 
-                {/* Collapse trigger */}
                 {descExpanded && (
                   <button
                     onClick={() => setDescExpanded(false)}
@@ -153,6 +166,16 @@ export default function ClientView({ client }: { client: Client }) {
                     Show less ↑
                   </button>
                 )}
+              </div>
+            ) : client.description && client.description !== 'Coming soon' && (
+              <div className="relative mb-6">
+                <div
+                  ref={descRef}
+                  className="text-[0.95rem] leading-[1.85] text-[#6e6e73] whitespace-pre-line overflow-hidden transition-[max-height] duration-300 ease-in-out"
+                  style={{ maxHeight: descExpanded ? '1000px' : '11rem' }}
+                >
+                  {client.description}
+                </div>
               </div>
             )}
 

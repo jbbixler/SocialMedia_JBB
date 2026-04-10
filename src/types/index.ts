@@ -20,6 +20,15 @@ export interface About {
   media: Ad[]         // images/videos in the about section
 }
 
+export interface ClientSummary {
+  overview: string
+  role: string
+  challenge: string
+  creative: string
+  performance: string
+  volume?: string
+}
+
 export interface Client {
   id: string
   name: string
@@ -29,6 +38,7 @@ export interface Client {
   igHandle: string
   website?: string
   description: string
+  summary?: ClientSummary
   services: string[]
   cta?: string       // CTA button label for the IG feed (defaults to 'Learn More')
   brandType?: string // e.g. 'E-Commerce', 'Lead Generation', 'Consumer Services'
