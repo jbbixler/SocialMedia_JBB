@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/context/DarkModeContext'
 import MobilePost from './MobilePost'
+import MobileStoryViewer from './MobileStoryViewer'
 import type { About, Client, Ad } from '@/types'
 
 interface Props {
@@ -14,6 +15,7 @@ export default function MobileAboutProfile({ about }: Props) {
   const { dark, hotPink } = useTheme()
   const [descExpanded, setDescExpanded] = useState(false)
   const [viewingIndex, setViewingIndex] = useState<number | null>(null)
+  const [storyOpen, setStoryOpen] = useState(false)
   const feedRef = useRef<HTMLDivElement>(null)
 
   // Scroll the overlay feed to the tapped post without touching outer page scroll
@@ -30,6 +32,9 @@ export default function MobileAboutProfile({ about }: Props) {
   const cardBg      = hotPink ? 'rgba(255,255,255,0.15)' : dark ? '#111' : '#efefef'
   const gridGap     = dark || hotPink ? '#222' : '#f0f0f0'
   const linkColor   = dark || hotPink ? 'rgba(255,255,255,0.7)' : '#00376b'
+  const storyRing   = hotPink
+    ? 'linear-gradient(45deg,#ff1493,#ff69b4,#ff0080,#c71585)'
+    : 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'
 
   if (!about) {
     return (
@@ -84,10 +89,13 @@ export default function MobileAboutProfile({ about }: Props) {
       <div className="px-4 pt-5 pb-3">
         <div className="flex items-start gap-5">
           {/* Avatar with green active dot */}
-          <div className="relative flex-shrink-0">
+          <button
+            className="relative flex-shrink-0"
+            onClick={() => setStoryOpen(true)}
+          >
             <div
               className="w-[86px] h-[86px] rounded-full p-[2.5px]"
-              style={{ background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}
+              style={{ background: storyRing }}
             >
               <div
                 className="w-full h-full rounded-full overflow-hidden flex items-center justify-center"
@@ -101,7 +109,7 @@ export default function MobileAboutProfile({ about }: Props) {
               </div>
             </div>
             <span className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-[#22c55e]" style={{ border: `2px solid ${bg}` }} />
-          </div>
+          </button>
 
           {/* Stats */}
           <div className="flex-1 flex items-center justify-around pt-3">
@@ -264,6 +272,18 @@ export default function MobileAboutProfile({ about }: Props) {
               ))}
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Story viewer — opens when avatar tapped */}
+      <AnimatePresence>
+        {storyOpen && (
+          <MobileStoryViewer
+            storySets={[{ client: aboutClient, images: about.media.filter(m => m.type === 'image') as Ad[] }]}
+            initialClientIndex={0}
+            onClose={() => setStoryOpen(false)}
+            onClientSelect={() => setStoryOpen(false)}
+          />
         )}
       </AnimatePresence>
     </div>
