@@ -295,22 +295,6 @@ export default function MobileStoryViewer({ storySets, initialClientIndex, onClo
           <div className="absolute inset-y-0 left-0 w-[35%] z-20" style={{ cursor: 'w-resize' }} />
           <div className="absolute inset-y-0 right-0 w-[65%] z-20" style={{ cursor: 'e-resize' }} />
 
-          {/* Brand dots */}
-          {storySets.length > 1 && (
-            <div className="absolute bottom-[128px] inset-x-0 z-30 flex justify-center gap-1.5 pointer-events-none">
-              {storySets.map((_, i) => (
-                <div
-                  key={i}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: i === clientIdx ? '16px' : '5px',
-                    height: '5px',
-                    background: i === clientIdx ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
-                  }}
-                />
-              ))}
-            </div>
-          )}
         </motion.div>
       </AnimatePresence>
 
