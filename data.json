@@ -2179,8 +2179,8 @@
   "about": {
     "name": "James Bradley",
     "handle": "jbradbixler",
-    "avatar": "https://res.cloudinary.com/dwrvp3dmf/image/upload/f_auto,q_auto/portfolio/assets/about/Logo/IMG_5235_Instagram",
-    "logo": "https://res.cloudinary.com/dwrvp3dmf/image/upload/f_auto,q_auto/portfolio/assets/about/Logo/IMG_5235_Instagram",
+    "avatar": "/assets/about/Logo/BRAD_symbol.png",
+    "logo": "/assets/about/Logo/BRAD_symbol.png",
     "bio": "Let's get in touch!",
     "website": "https://jbradbixler.com/",
     "role": "Visionary",
