@@ -47,11 +47,13 @@ function StatusIcons({ dark }: { dark: boolean }) {
   )
 }
 
-export default function IosStatusBar({ dark = true }: { dark?: boolean }) {
+export default function IosStatusBar({ dark = true, hotPink = false }: { dark?: boolean; hotPink?: boolean }) {
+  const bg = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
+  const light = dark || hotPink
   return (
-    <div className="flex-shrink-0 flex items-end justify-between px-7 pb-1.5" style={{ height: '59px', background: dark ? '#000' : '#fff', transition: 'background 0.3s ease' }}>
-      <StatusTime dark={dark} />
-      <StatusIcons dark={dark} />
+    <div className="flex-shrink-0 flex items-end justify-between px-7 pb-1.5" style={{ height: '59px', background: bg, transition: 'background 0.3s ease' }}>
+      <StatusTime dark={light} />
+      <StatusIcons dark={light} />
     </div>
   )
 }
