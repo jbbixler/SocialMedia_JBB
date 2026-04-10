@@ -13,7 +13,7 @@ interface Props {
   onProfileSelect: () => void
 }
 
-interface AdWithClient { ad: Ad; client: Client; key: string }
+interface AdWithClient { ad: Ad; client: Client; key: string; personal?: boolean }
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -84,6 +84,22 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
   useEffect(() => {
     const pairs: AdWithClient[] = []
     clients.forEach(c => c.ads.forEach((ad, i) => pairs.push({ ad, client: c, key: `${c.id}-${i}` })))
+    // Mix in about section media as personal posts
+    if (about) {
+      const aboutClient: Client = {
+        id: 'about',
+        name: about.name,
+        logo: about.avatar,
+        igAvatar: about.avatar,
+        color: about.color,
+        igHandle: about.handle,
+        website: about.website,
+        description: about.bio,
+        services: about.services,
+        ads: about.media as Ad[],
+      }
+      about.media.forEach((item, i) => pairs.push({ ad: item as Ad, client: aboutClient, key: `about-${i}`, personal: true }))
+    }
     setAllAds(shuffle(pairs))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -258,15 +274,16 @@ export default function MobileFeed({ onClientSelect, onProfileSelect }: Props) {
         </div>
 
         {/* Feed posts */}
-        {visible.map(({ ad, client, key }) => (
+        {visible.map(({ ad, client, key, personal }) => (
           <MobilePost
             key={key}
             ad={ad}
             client={client}
             postKey={key}
-            onAvatarClick={() => onClientSelect(client)}
+            onAvatarClick={personal ? onProfileSelect : () => onClientSelect(client)}
             onContact={onProfileSelect}
             onShare={handleShare}
+            personal={personal}
           />
         ))}
         {rendered < allAds.length && <div ref={sentinelRef} className="h-4" />}

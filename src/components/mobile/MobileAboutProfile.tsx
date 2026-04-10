@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/context/DarkModeContext'
-import type { About } from '@/types'
+import MobilePost from './MobilePost'
+import type { About, Client, Ad } from '@/types'
 
 interface Props {
   about: About | null
@@ -11,6 +13,8 @@ interface Props {
 export default function MobileAboutProfile({ about }: Props) {
   const { dark, hotPink } = useTheme()
   const [descExpanded, setDescExpanded] = useState(false)
+  const [viewingIndex, setViewingIndex] = useState<number | null>(null)
+  const feedRef = useRef<HTMLDivElement>(null)
 
   const bg          = hotPink ? '#ff69b4' : dark ? '#000' : '#fff'
   const textColor   = dark || hotPink ? '#fff' : '#1d1d1f'
@@ -33,8 +37,22 @@ export default function MobileAboutProfile({ about }: Props) {
   const bio = about.bio
   const totalMedia = about.media.length
 
+  const aboutClient: Client = {
+    id: 'about',
+    name: about.name,
+    logo: about.avatar,
+    igAvatar: about.avatar,
+    color: about.color,
+    igHandle: about.handle,
+    website: about.website,
+    description: about.bio,
+    services: about.services,
+    ads: about.media as Ad[],
+  }
+
   return (
-    <div className="flex-1 overflow-y-auto" style={{ background: bg, paddingBottom: 'calc(68px + env(safe-area-inset-bottom))', transition: 'background 0.3s ease' }}>
+    <div className="flex-1 relative overflow-hidden flex flex-col" style={{ background: bg, transition: 'background 0.3s ease' }}>
+    <div className="flex-1 overflow-y-auto" style={{ paddingBottom: 'calc(68px + env(safe-area-inset-bottom))' }}>
       {/* Top bar */}
       <div
         className="sticky top-0 z-30 border-b flex items-center justify-between px-4 h-[44px]"
@@ -159,7 +177,12 @@ export default function MobileAboutProfile({ about }: Props) {
           </div>
           <div className="grid grid-cols-3 gap-[1.5px]" style={{ background: gridGap }}>
             {about.media.map((item, i) => (
-              <div key={i} className="relative aspect-square overflow-hidden" style={{ background: cardBg }}>
+              <button
+                key={i}
+                className="relative aspect-square overflow-hidden block w-full"
+                style={{ background: cardBg }}
+                onClick={() => setViewingIndex(i)}
+              >
                 {item.type === 'image' ? (
                   <img src={item.src} alt="" className="w-full h-full object-cover" loading="lazy" />
                 ) : (
@@ -182,7 +205,7 @@ export default function MobileAboutProfile({ about }: Props) {
                     </div>
                   </>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </>
@@ -195,6 +218,50 @@ export default function MobileAboutProfile({ about }: Props) {
           <p className="text-[13px]" style={{ color: subColor }}>Coming soon</p>
         </div>
       )}
+    </div>
+
+      {/* Full-screen post viewer — slides up when grid item tapped */}
+      <AnimatePresence>
+        {viewingIndex !== null && (
+          <motion.div
+            className="absolute inset-0 z-[100] flex flex-col overflow-hidden"
+            style={{ background: bg }}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+          >
+            {/* Header */}
+            <div className="flex-shrink-0 flex items-center gap-3 px-3 h-[44px] border-b" style={{ borderColor, background: bg }}>
+              <button onClick={() => setViewingIndex(null)} className="flex items-center gap-1.5">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                <span className="text-[15px]" style={{ color: textColor }}>Posts</span>
+              </button>
+            </div>
+            {/* Scrollable posts — jump to tapped index */}
+            <div ref={feedRef} className="flex-1 overflow-y-auto" style={{ background: bg }}>
+              {about.media.map((item, idx) => (
+                <div
+                  key={idx}
+                  ref={idx === viewingIndex ? el => { el?.scrollIntoView() } : undefined}
+                >
+                  <MobilePost
+                    ad={item as Ad}
+                    client={aboutClient}
+                    postKey={`about-${idx}`}
+                    onAvatarClick={() => setViewingIndex(null)}
+                    onContact={() => {}}
+                    onShare={() => {}}
+                    personal
+                  />
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

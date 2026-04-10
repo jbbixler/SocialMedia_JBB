@@ -17,9 +17,10 @@ interface Props {
   onAvatarClick: () => void
   onContact: () => void
   onShare: () => void
+  personal?: boolean
 }
 
-export default function MobilePost({ ad, client, postKey, onAvatarClick, onContact, onShare }: Props) {
+export default function MobilePost({ ad, client, postKey, onAvatarClick, onContact, onShare, personal }: Props) {
   const postRef  = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
@@ -129,7 +130,7 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
             <button onClick={onAvatarClick} className="text-[13px] font-semibold leading-tight block text-left" style={{ color: textColor }}>
               {handle}
             </button>
-            <span className="text-[11px]" style={{ color: subColor }}>Sponsored</span>
+            {!personal && <span className="text-[11px]" style={{ color: subColor }}>Sponsored</span>}
           </div>
           {/* Three dots */}
           <div className="relative">
@@ -223,16 +224,18 @@ export default function MobilePost({ ad, client, postKey, onAvatarClick, onConta
           </AnimatePresence>
         </div>
 
-        {/* CTA button */}
-        <div className="px-3 pt-2">
-          <button
-            onClick={onAvatarClick}
-            className="w-full py-2 rounded-lg text-[13px] font-semibold border"
-            style={{ borderColor: '#0095f6', color: '#fff', background: '#0095f6' }}
-          >
-            {cta}
-          </button>
-        </div>
+        {/* CTA button — hidden for personal posts */}
+        {!personal && (
+          <div className="px-3 pt-2">
+            <button
+              onClick={onAvatarClick}
+              className="w-full py-2 rounded-lg text-[13px] font-semibold border"
+              style={{ borderColor: '#0095f6', color: '#fff', background: '#0095f6' }}
+            >
+              {cta}
+            </button>
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex items-center justify-between px-3 pt-2 pb-1">
