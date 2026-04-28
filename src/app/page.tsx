@@ -1,6 +1,5 @@
-import { clients, about } from '@/lib/data'
-import Portfolio from '@/components/Portfolio'
+import HomePage from '@/components/HomePage'
 
 export default function Page() {
-  return <Portfolio clients={clients} about={about} />
+  return <HomePage />
 }

@@ -1,5 +1,5 @@
 {
-  "name": "ad-portfolio",
+  "name": "brad-contact-page",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.86.1",
+    "@types/three": "^0.183.1",
     "framer-motion": "^11.3.0",
     "next": "^14.2.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@types/node": "^20",

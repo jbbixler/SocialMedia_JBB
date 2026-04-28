@@ -16,3 +16,4 @@ public/assets/clients/**/*.mov
 public/assets/clients/**/*.MP4
 public/assets/clients/**/*.MOV
 public/assets/clients/**/*.webm
+.vercel

@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Ad Portfolio',
-  description: 'Social media advertising portfolio',
+  title: 'James Bradley Bixler',
+  description: 'Contact James Bradley Bixler',
 }
 
 export const viewport: Viewport = {
@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-[#f5f5f7] text-[#1d1d1f] font-sans antialiased">
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>
