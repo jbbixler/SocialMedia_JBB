@@ -137,7 +137,7 @@ export default function MobileLightbox({ ads, startIndex, client, onClose, onCli
             className="w-full h-full flex items-center justify-center"
           >
             {ad.type === 'image' ? (
-              <img src={ad.src} alt="" className="max-w-full max-h-full object-contain" />
+              <img src={ad.src} alt="" className="max-w-full max-h-full object-contain" loading="lazy" />
             ) : (
               <video
                 ref={videoRef}
