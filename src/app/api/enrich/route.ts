@@ -41,9 +41,11 @@ export async function POST(req: NextRequest) {
       tavilySearch(`${lead.company} marketing campaigns social media strategy brand`),
     ])
 
-    const prompt = `You are a B2B sales intelligence researcher building a dossier on an inbound lead for James Bradley, a paid social creative director.
+    const prompt = `You are a B2B sales intelligence researcher building a dossier on an inbound lead for a marketing agency.
 
 Below are live web search results about this person and their company. Use them as your primary source of truth. Fill in gaps with your own knowledge only where search results are silent.
+
+Write all intelligence output in second person — say "you" and "your agency" instead of any specific name. The output will be read directly by the agency receiving this lead.
 
 ---
 LEAD DETAILS:
@@ -81,9 +83,9 @@ Using the above, return ONLY a valid JSON object (no markdown, no code blocks) w
   },
   "intelligence": {
     "lead_score": 8,
-    "lead_score_reason": "why this lead scores this way based on budget signals, fit with James's work, and urgency",
-    "recommended_angle": "exactly how James should pitch to this specific person given their role, company context, and stated reason for inquiry",
-    "talking_points": ["specific hook tied to something real about their brand", "another concrete angle", "a third"],
+    "lead_score_reason": "why this lead scores this way based on budget signals, fit, and urgency — written as 'you should prioritize this because...'",
+    "recommended_angle": "exactly how you should pitch to this specific person given their role, company context, and stated reason for inquiry — use 'you' throughout",
+    "talking_points": ["specific hook tied to something real about their brand — written as advice to you", "another concrete angle", "a third"],
     "estimated_budget": "estimate with reasoning based on company size and marketing sophistication",
     "urgency": "low/medium/high with specific reasoning"
   }
