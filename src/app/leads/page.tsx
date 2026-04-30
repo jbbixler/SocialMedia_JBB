@@ -186,12 +186,12 @@ function parseCSV(text: string): Lead[] {
     headers.forEach((h, idx) => { row[h] = values[idx] || '' })
     return {
       id: `lead-${i}-${Date.now()}`,
-      name: row.name || '',
-      email: row.email || '',
-      phone: row.phone || '',
-      company: row.company || '',
-      role: row.role || row.title || row.position || '',
-      reason: row.reason || row.message || row.inquiry || '',
+      name: row.name || row['full name'] || row['full_name'] || '',
+      email: row.email || row['work email'] || row['work_email'] || row['email address'] || '',
+      phone: row.phone || row['phone number'] || row['phone_number'] || row['mobile'] || '',
+      company: row.company || row['company name'] || row['company_name'] || row['organization'] || '',
+      role: row.role || row.title || row.position || row['job title'] || row['job_title'] || '',
+      reason: row.reason || row.message || row.inquiry || row.notes || row.comments || '',
       status: 'new' as LeadStatus,
     }
   }).filter(l => l.name)
