@@ -569,7 +569,7 @@ function CleanAvatar({ name }: { name: string }) {
   const letters = parts.length >= 2 ? parts[0][0] + parts[parts.length - 1][0] : parts[0].slice(0, 2)
   const hue = (name.charCodeAt(0) * 37 + (name.charCodeAt(1) || 0) * 13) % 360
   return (
-    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold text-white shrink-0" style={{ background: `hsl(${hue}, 60%, 50%)` }}>
+    <div className="w-12 h-12 rounded-full flex items-center justify-center text-base font-semibold text-white shrink-0" style={{ background: `hsl(${hue}, 60%, 50%)` }}>
       {letters.toUpperCase()}
     </div>
   )
@@ -583,7 +583,7 @@ function CleanScore({ score }: { score: number }) {
       <div className="flex-1 rounded-full h-2 bg-gray-100 overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, background: color }} />
       </div>
-      <span className="text-sm font-bold tabular-nums w-10 text-right" style={{ color }}>{score}/10</span>
+      <span className="text-base font-bold tabular-nums w-10 text-right" style={{ color }}>{score}/10</span>
     </div>
   )
 }
@@ -599,7 +599,7 @@ function CleanStatus({ status }: { status: LeadStatus }) {
   return (
     <div className="flex items-center gap-1.5">
       <div className="w-2 h-2 rounded-full" style={{ background: dot, animation: status === 'enriching' ? 'pulse 1.2s ease-in-out infinite' : 'none' }} />
-      <span className="text-sm font-medium" style={{ color: text }}>{label}</span>
+      <span className="text-base font-medium" style={{ color: text }}>{label}</span>
     </div>
   )
 }
@@ -613,7 +613,7 @@ function CleanUrgency({ urgency }: { urgency: string }) {
     label: isHigh ? 'High Urgency' : isMed ? 'Medium Urgency' : 'Low Urgency',
   }
   return (
-    <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: map.bg, color: map.text }}>{map.label}</span>
+    <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ background: map.bg, color: map.text }}>{map.label}</span>
   )
 }
 
@@ -628,24 +628,24 @@ function CleanDashboard(p: DashProps) {
         {/* Header */}
         <div className="px-8 py-5 flex items-center justify-between gap-4 shrink-0 bg-white" style={{ borderBottom: '1px solid #e5e5ea' }}>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight" style={{ color: '#1d1d1f' }}>Lead Intelligence</h1>
-            <p className="text-base mt-0.5" style={{ color: '#8e8e93' }}>Upload a CSV to research inbound leads</p>
+            <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#1d1d1f' }}>Lead Intelligence</h1>
+            <p className="text-lg mt-0.5" style={{ color: '#8e8e93' }}>Upload a CSV to research inbound leads</p>
           </div>
           <div className="flex items-center gap-3">
             {/* Theme toggle */}
-            <button onClick={p.onToggle} className="text-sm font-medium px-4 py-2 rounded-full transition-all" style={{ color: '#1d1d1f', background: '#f2f2f7', border: 'none' }}
+            <button onClick={p.onToggle} className="text-base font-medium px-5 py-2.5 rounded-full transition-all" style={{ color: '#1d1d1f', background: '#f2f2f7', border: 'none' }}
               onMouseEnter={e => { (e.target as HTMLElement).style.background = '#e5e5ea' }}
               onMouseLeave={e => { (e.target as HTMLElement).style.background = '#f2f2f7' }}>
               Cyber UI
             </button>
             {p.leads.length > 0 && p.stats.pending > 0 && (
-              <button onClick={p.onEnrichAll} className="text-sm font-semibold px-5 py-2 rounded-full text-white transition-all" style={{ background: '#007AFF' }}
+              <button onClick={p.onEnrichAll} className="text-base font-semibold px-6 py-2.5 rounded-full text-white transition-all" style={{ background: '#007AFF' }}
                 onMouseEnter={e => { (e.target as HTMLElement).style.background = '#0071e3' }}
                 onMouseLeave={e => { (e.target as HTMLElement).style.background = '#007AFF' }}>
                 Research All ({p.stats.pending})
               </button>
             )}
-            <button onClick={() => p.fileRef.current?.click()} className="text-sm font-semibold px-5 py-2 rounded-full transition-all" style={{ color: '#007AFF', background: '#f0f7ff', border: 'none' }}
+            <button onClick={() => p.fileRef.current?.click()} className="text-base font-semibold px-6 py-2.5 rounded-full transition-all" style={{ color: '#007AFF', background: '#f0f7ff', border: 'none' }}
               onMouseEnter={e => { (e.target as HTMLElement).style.background = '#dff0ff' }}
               onMouseLeave={e => { (e.target as HTMLElement).style.background = '#f0f7ff' }}>
               {p.leads.length ? 'Load New CSV' : 'Import CSV'}
@@ -663,8 +663,8 @@ function CleanDashboard(p: DashProps) {
               { label: 'Pending', value: p.stats.pending, color: '#ff9f0a' },
             ].map((s, i) => (
               <div key={s.label} className="px-8 py-5" style={{ borderRight: i < 2 ? '1px solid #e5e5ea' : 'none' }}>
-                <div className="text-4xl font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
-                <div className="text-base mt-1" style={{ color: '#8e8e93' }}>{s.label}</div>
+                <div className="text-5xl font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
+                <div className="text-lg mt-1" style={{ color: '#8e8e93' }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -698,7 +698,7 @@ function CleanDashboard(p: DashProps) {
               <thead className="sticky top-0 z-10 bg-white" style={{ borderBottom: '1px solid #e5e5ea' }}>
                 <tr>
                   {['Lead', 'Company', 'Role', 'Reason', 'Status', ''].map(h => (
-                    <th key={h} className="text-left px-8 py-4 text-sm font-semibold" style={{ color: '#8e8e93' }}>{h}</th>
+                    <th key={h} className="text-left px-8 py-4 text-base font-semibold" style={{ color: '#8e8e93' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -714,14 +714,14 @@ function CleanDashboard(p: DashProps) {
                         <div className="flex items-center gap-3">
                           <CleanAvatar name={lead.name} />
                           <div>
-                            <div className="text-lg font-semibold" style={{ color: '#1d1d1f' }}>{lead.name}</div>
-                            <div className="text-sm" style={{ color: '#8e8e93' }}>{lead.email}</div>
+                            <div className="text-xl font-semibold" style={{ color: '#1d1d1f' }}>{lead.name}</div>
+                            <div className="text-base" style={{ color: '#8e8e93' }}>{lead.email}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-4 text-lg font-medium" style={{ color: '#1d1d1f' }}>{lead.company}</td>
-                      <td className="px-8 py-4 text-base" style={{ color: '#8e8e93' }}>{lead.role}</td>
-                      <td className="px-8 py-4 max-w-[260px]"><p className="text-base truncate" style={{ color: '#8e8e93' }}>{lead.reason}</p></td>
+                      <td className="px-8 py-4 text-xl font-medium" style={{ color: '#1d1d1f' }}>{lead.company}</td>
+                      <td className="px-8 py-4 text-lg" style={{ color: '#8e8e93' }}>{lead.role}</td>
+                      <td className="px-8 py-4 max-w-[260px]"><p className="text-lg truncate" style={{ color: '#8e8e93' }}>{lead.reason}</p></td>
                       <td className="px-8 py-4"><CleanStatus status={lead.status} /></td>
                       <td className="px-8 py-4">
                         {(lead.status === 'new' || lead.status === 'error') && (
@@ -756,8 +756,8 @@ function CleanDashboard(p: DashProps) {
             <div className="flex items-center gap-4 min-w-0">
               <CleanAvatar name={p.selected.name} />
               <div className="min-w-0">
-                <div className="text-xl font-bold truncate" style={{ color: '#1d1d1f' }}>{p.selected.name}</div>
-                <div className="text-base" style={{ color: '#8e8e93' }}>{p.selected.role} at {p.selected.company}</div>
+                <div className="text-2xl font-bold truncate" style={{ color: '#1d1d1f' }}>{p.selected.name}</div>
+                <div className="text-lg" style={{ color: '#8e8e93' }}>{p.selected.role} at {p.selected.company}</div>
               </div>
             </div>
             <button onClick={() => p.onSelect(null)} className="w-8 h-8 rounded-full flex items-center justify-center transition-colors" style={{ background: '#f2f2f7' }}
@@ -773,9 +773,9 @@ function CleanDashboard(p: DashProps) {
           <div className="flex-1 overflow-y-auto">
             {/* Inquiry */}
             <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>Their Inquiry</p>
-              <p className="text-lg leading-relaxed" style={{ color: '#1d1d1f' }}>{p.selected.reason}</p>
-              <div className="flex gap-5 mt-4 text-base" style={{ color: '#8e8e93' }}>
+              <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>Their Inquiry</p>
+              <p className="text-xl leading-relaxed" style={{ color: '#1d1d1f' }}>{p.selected.reason}</p>
+              <div className="flex gap-5 mt-4 text-lg" style={{ color: '#8e8e93' }}>
                 <span>{p.selected.email}</span>
                 <span>{p.selected.phone}</span>
               </div>
@@ -783,9 +783,9 @@ function CleanDashboard(p: DashProps) {
 
             {currentLead.status === 'new' && (
               <div className="flex flex-col items-center justify-center py-16 px-8 text-center gap-5">
-                <p className="text-xl font-medium" style={{ color: '#1d1d1f' }}>No research yet</p>
-                <p className="text-base" style={{ color: '#8e8e93' }}>Click Research to pull intelligence on this lead.</p>
-                <button onClick={() => p.onEnrich(p.selected!)} className="text-base font-semibold px-8 py-3 rounded-full text-white transition-all" style={{ background: '#007AFF' }}
+                <p className="text-2xl font-medium" style={{ color: '#1d1d1f' }}>No research yet</p>
+                <p className="text-lg" style={{ color: '#8e8e93' }}>Click Research to pull intelligence on this lead.</p>
+                <button onClick={() => p.onEnrich(p.selected!)} className="text-lg font-semibold px-8 py-3 rounded-full text-white transition-all" style={{ background: '#007AFF' }}
                   onMouseEnter={e => { (e.target as HTMLElement).style.background = '#0071e3' }}
                   onMouseLeave={e => { (e.target as HTMLElement).style.background = '#007AFF' }}>
                   Research This Lead
@@ -796,8 +796,8 @@ function CleanDashboard(p: DashProps) {
             {currentLead.status === 'enriching' && (
               <div className="flex flex-col items-center justify-center py-16 gap-4">
                 <div className="w-10 h-10 rounded-full border-2 border-blue-100 border-t-blue-500 animate-spin" />
-                <p className="text-lg font-medium" style={{ color: '#1d1d1f' }}>Researching {p.selected.name.split(' ')[0]}...</p>
-                <p className="text-base" style={{ color: '#8e8e93' }}>{p.selected.company}</p>
+                <p className="text-xl font-medium" style={{ color: '#1d1d1f' }}>Researching {p.selected.name.split(' ')[0]}...</p>
+                <p className="text-lg" style={{ color: '#8e8e93' }}>{p.selected.company}</p>
               </div>
             )}
 
@@ -813,29 +813,29 @@ function CleanDashboard(p: DashProps) {
                 {/* Score */}
                 <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
                   <div className="flex items-center justify-between mb-4">
-                    <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#8e8e93' }}>Lead Score</p>
+                    <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: '#8e8e93' }}>Lead Score</p>
                     <CleanUrgency urgency={selectedData.intelligence.urgency} />
                   </div>
                   <CleanScore score={selectedData.intelligence.lead_score} />
-                  <p className="text-base mt-3 leading-relaxed" style={{ color: '#6e6e73' }}>{selectedData.intelligence.lead_score_reason}</p>
+                  <p className="text-lg mt-3 leading-relaxed" style={{ color: '#6e6e73' }}>{selectedData.intelligence.lead_score_reason}</p>
                 </div>
 
                 {/* Pitch angle */}
                 <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>How to Pitch</p>
-                  <p className="text-lg leading-relaxed" style={{ color: '#1d1d1f' }}>{selectedData.intelligence.recommended_angle}</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>How to Pitch</p>
+                  <p className="text-xl leading-relaxed" style={{ color: '#1d1d1f' }}>{selectedData.intelligence.recommended_angle}</p>
                 </div>
 
                 {/* Talking points */}
                 <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#8e8e93' }}>Talking Points</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: '#8e8e93' }}>Talking Points</p>
                   <ul className="space-y-3">
                     {selectedData.intelligence.talking_points.map((pt, i) => (
                       <li key={i} className="flex gap-3">
                         <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: '#f0f7ff' }}>
                           <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#007AFF' }} />
                         </div>
-                        <span className="text-base leading-relaxed" style={{ color: '#1d1d1f' }}>{pt}</span>
+                        <span className="text-lg leading-relaxed" style={{ color: '#1d1d1f' }}>{pt}</span>
                       </li>
                     ))}
                   </ul>
@@ -843,31 +843,31 @@ function CleanDashboard(p: DashProps) {
 
                 {/* Person */}
                 <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>About {p.selected.name.split(' ')[0]}</p>
-                  <p className="text-base leading-relaxed mb-3" style={{ color: '#1d1d1f' }}>{selectedData.person.bio}</p>
-                  <p className="text-base leading-relaxed" style={{ color: '#6e6e73' }}>{selectedData.person.background}</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>About {p.selected.name.split(' ')[0]}</p>
+                  <p className="text-lg leading-relaxed mb-3" style={{ color: '#1d1d1f' }}>{selectedData.person.bio}</p>
+                  <p className="text-lg leading-relaxed" style={{ color: '#6e6e73' }}>{selectedData.person.background}</p>
                   {selectedData.person.social_presence && (
-                    <p className="text-base mt-3 leading-relaxed" style={{ color: '#8e8e93' }}>{selectedData.person.social_presence}</p>
+                    <p className="text-lg mt-3 leading-relaxed" style={{ color: '#8e8e93' }}>{selectedData.person.social_presence}</p>
                   )}
                 </div>
 
                 {/* Company */}
                 <div className="px-8 py-6" style={{ borderBottom: '1px solid #f2f2f7' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>{p.selected.company}</p>
-                  <p className="text-base leading-relaxed mb-5" style={{ color: '#1d1d1f' }}>{selectedData.company.description}</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: '#8e8e93' }}>{p.selected.company}</p>
+                  <p className="text-lg leading-relaxed mb-5" style={{ color: '#1d1d1f' }}>{selectedData.company.description}</p>
 
                   <div className="grid grid-cols-2 gap-5 mb-5">
                     {[{ label: 'Brand Voice', val: selectedData.company.brand_voice }, { label: 'Target Audience', val: selectedData.company.target_audience }].map(f => (
                       <div key={f.label}>
                         <p className="text-sm font-semibold mb-1" style={{ color: '#8e8e93' }}>{f.label}</p>
-                        <p className="text-base" style={{ color: '#1d1d1f' }}>{f.val}</p>
+                        <p className="text-lg" style={{ color: '#1d1d1f' }}>{f.val}</p>
                       </div>
                     ))}
                   </div>
 
                   <div className="mb-5">
                     <p className="text-sm font-semibold mb-1" style={{ color: '#8e8e93' }}>Marketing Focus</p>
-                    <p className="text-base leading-relaxed" style={{ color: '#1d1d1f' }}>{selectedData.company.marketing_focus}</p>
+                    <p className="text-lg leading-relaxed" style={{ color: '#1d1d1f' }}>{selectedData.company.marketing_focus}</p>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-5">
@@ -881,7 +881,7 @@ function CleanDashboard(p: DashProps) {
                       <p className="text-sm font-semibold mb-3" style={{ color: '#8e8e93' }}>Recent Campaigns</p>
                       <ul className="space-y-2">
                         {selectedData.company.recent_campaigns.map((c, i) => (
-                          <li key={i} className="text-base leading-relaxed pl-4" style={{ color: '#1d1d1f', borderLeft: '2px solid #e5e5ea' }}>{c}</li>
+                          <li key={i} className="text-lg leading-relaxed pl-4" style={{ color: '#1d1d1f', borderLeft: '2px solid #e5e5ea' }}>{c}</li>
                         ))}
                       </ul>
                     </div>
@@ -890,8 +890,8 @@ function CleanDashboard(p: DashProps) {
 
                 {/* Budget */}
                 <div className="px-8 py-6">
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#8e8e93' }}>Budget Estimate</p>
-                  <p className="text-xl font-semibold" style={{ color: '#1d1d1f' }}>{selectedData.intelligence.estimated_budget}</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: '#8e8e93' }}>Budget Estimate</p>
+                  <p className="text-2xl font-semibold" style={{ color: '#1d1d1f' }}>{selectedData.intelligence.estimated_budget}</p>
                 </div>
               </div>
             )}
@@ -907,7 +907,7 @@ function CleanDashboard(p: DashProps) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function LeadsDashboard() {
-  const [theme, setTheme] = useState<Theme>('cyber')
+  const [theme, setTheme] = useState<Theme>('clean')
   const [leads, setLeads] = useState<Lead[]>([])
   const [enriched, setEnriched] = useState<Record<string, EnrichedData>>({})
   const [selected, setSelected] = useState<Lead | null>(null)
